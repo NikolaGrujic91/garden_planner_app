@@ -12,13 +12,18 @@ class TilesGrid extends StatelessWidget {
     return Consumer<PlansStore>(builder: (context, plansStore, child) {
       final Plan selectedPlan = plansStore.plans[plansStore.selectedPlanIndex];
       final int columns = selectedPlan.columns;
+      final int rows = selectedPlan.rows;
       final int itemCount = selectedPlan.columns * selectedPlan.rows;
       final UnmodifiableListView<Tile> tiles = selectedPlan.tiles;
+
+      // Calculate aspect ratio in order to make all grid cells always visible properly
+      var size = MediaQuery.of(context).size;
+      var aspectRatio = (size.width / columns) / ((size.height - 56) / rows);
 
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
-          childAspectRatio: 1.5,
+          childAspectRatio: aspectRatio,
         ),
         itemCount: itemCount,
         itemBuilder: (context, index) {

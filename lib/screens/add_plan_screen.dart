@@ -86,8 +86,8 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
               height: 20.0,
             ),
             PreviewGridView(
-              width: _columns,
-              height: _rows,
+              columns: _columns,
+              rows: _rows,
             ),
           ],
         ),
