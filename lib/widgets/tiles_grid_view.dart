@@ -30,6 +30,7 @@ class TilesGrid extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(0.5),
             child: ListTile(
+              leading: Icon(tiles[index].icon),
               title: Text('${tiles[index].plantName}\n${tiles[index].plantedDate}'),
               tileColor: tiles[index].tileColor,
               onTap: () async {
