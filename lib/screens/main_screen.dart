@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            Navigator.pushNamed(context, AddPlanScreen.id);
+            Navigator.pushReplacementNamed(context, AddPlanScreen.id);
           },
           tooltip: 'Add garden',
           backgroundColor: kFloatingActionButtonColor,

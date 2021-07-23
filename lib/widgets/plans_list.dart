@@ -42,7 +42,7 @@ class PlansList extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               plansStore.setSelectedPlanIndex(index);
-                              Navigator.pushNamed(context, EditPlanScreen.id);
+                              Navigator.pushReplacementNamed(context, EditPlanScreen.id);
                             },
                             icon: const Icon(Icons.edit),
                             tooltip: 'Edit garden',
@@ -51,7 +51,7 @@ class PlansList extends StatelessWidget {
                       ),
                       onTap: () {
                         plansStore.setSelectedPlanIndex(index);
-                        Navigator.pushNamed(context, TilesScreen.id);
+                        Navigator.pushReplacementNamed(context, TilesScreen.id);
                       },
                     ),
                   );

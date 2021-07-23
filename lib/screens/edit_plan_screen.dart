@@ -39,6 +39,12 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kAppBarBackgroundColor,
+            leading: new IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, MainScreen.id);
+              },
+              icon: new Icon(Icons.arrow_back_ios),
+            ),
             title: Text('Edit $_name'),
             actions: [
               SaveIconButton(
@@ -155,6 +161,6 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
     var plansStore = Provider.of<PlansStore>(context, listen: false);
     plansStore.updatePlan(name: _name, rows: _rows, columns: _columns);
     await plansStore.savePlans();
-    Navigator.pushNamed(context, MainScreen.id);
+    Navigator.pushReplacementNamed(context, MainScreen.id);
   }
 }

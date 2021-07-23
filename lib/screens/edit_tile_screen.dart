@@ -41,6 +41,12 @@ class _EditTileScreenState extends State<EditTileScreen> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kAppBarBackgroundColor,
+            leading: new IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, TilesScreen.id);
+              },
+              icon: new Icon(Icons.arrow_back_ios),
+            ),
             title: Text('Edit tile'),
             actions: [
               SaveIconButton(
@@ -138,6 +144,6 @@ class _EditTileScreenState extends State<EditTileScreen> {
     var plansStore = Provider.of<PlansStore>(context, listen: false);
     plansStore.updateTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
     await plansStore.savePlans();
-    Navigator.pushNamed(context, TilesScreen.id);
+    Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
 }

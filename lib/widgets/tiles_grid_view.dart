@@ -35,7 +35,7 @@ class TilesGrid extends StatelessWidget {
               tileColor: tiles[index].tileColor,
               onTap: () async {
                 plansStore.setSelectedTileIndex(index);
-                Navigator.pushNamed(context, EditTileScreen.id);
+                Navigator.pushReplacementNamed(context, EditTileScreen.id);
               },
             ),
           );

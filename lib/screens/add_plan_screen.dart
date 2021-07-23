@@ -26,6 +26,12 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kAppBarBackgroundColor,
+        leading: new IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, MainScreen.id);
+          },
+          icon: new Icon(Icons.arrow_back_ios),
+        ),
         title: const Text('Add Garden'),
         actions: [
           SaveIconButton(
@@ -141,6 +147,6 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
     var plansStore = Provider.of<PlansStore>(context, listen: false);
     plansStore.addPlan(plan);
     await plansStore.savePlans();
-    Navigator.pushNamed(context, MainScreen.id);
+    Navigator.pushReplacementNamed(context, MainScreen.id);
   }
 }
