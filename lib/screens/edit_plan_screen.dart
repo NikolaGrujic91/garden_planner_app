@@ -48,81 +48,84 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
               ),
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Garden name',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextFieldBordered(
-                  text: _name,
-                  hintText: 'Name',
-                  callback: _setName,
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const Text(
-                  'Garden size',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  children: [
-                    TextFieldBorderedNumeric(
-                      text: _columns.toString(),
-                      hintText: 'Columns',
-                      callback: this._setColumns,
+          body: Container(
+            color: kBackgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                    'Garden name',
+                    style: TextStyle(
+                      fontSize: 18.0,
                     ),
-                    const SizedBox(
-                      width: 20.0,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFieldBordered(
+                    text: _name,
+                    hintText: 'Name',
+                    callback: _setName,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Text(
+                    'Garden size',
+                    style: TextStyle(
+                      fontSize: 18.0,
                     ),
-                    const Text(
-                      'X',
-                      style: TextStyle(
-                        fontSize: 18.0,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    children: [
+                      TextFieldBorderedNumeric(
+                        text: _columns.toString(),
+                        hintText: 'Columns',
+                        callback: this._setColumns,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 20.0,
-                    ),
-                    TextFieldBorderedNumeric(
-                      text: _rows.toString(),
-                      hintText: 'Rows',
-                      callback: this._setRows,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const Text(
-                  'Preview',
-                  style: TextStyle(
-                    fontSize: 18.0,
+                      const SizedBox(
+                        width: 20.0,
+                      ),
+                      const Text(
+                        'X',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20.0,
+                      ),
+                      TextFieldBorderedNumeric(
+                        text: _rows.toString(),
+                        hintText: 'Rows',
+                        callback: this._setRows,
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                PreviewGridView(
-                  columns: _columns,
-                  rows: _rows,
-                ),
-              ],
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Text(
+                    'Preview',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  PreviewGridView(
+                    columns: _columns,
+                    rows: _rows,
+                  ),
+                ],
+              ),
             ),
           ),
         );
