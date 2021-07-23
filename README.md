@@ -11,6 +11,6 @@ Tasks:
 - Edit tiles - long press opens dialog to change tile type
 - drag and drop on edit tiles screen
 - Zoom grid
-- Directly go back, no stack
+- DONE - Directly go back, no stack
 - Set new icons
 - Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
