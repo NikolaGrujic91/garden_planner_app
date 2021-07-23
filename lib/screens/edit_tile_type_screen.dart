@@ -10,14 +10,14 @@ import '../model/plan.dart';
 import '../model/tile.dart';
 import '../utils/constants.dart';
 
-class EditTileScreen extends StatefulWidget {
-  static const String id = 'edit_tile_screen';
+class EditTileTypeScreen extends StatefulWidget {
+  static const String id = 'edit_tile_type_screen';
 
   @override
-  _EditTileScreenState createState() => _EditTileScreenState();
+  _EditTileTypeScreenState createState() => _EditTileTypeScreenState();
 }
 
-class _EditTileScreenState extends State<EditTileScreen> {
+class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   TileType _tileType = TileType.plant;
   String _plantName = '';
   String _plantedDate = '';
@@ -107,7 +107,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
                         width: _plantedDate.isEmpty ? 0.0 : 20.0,
                       ),
                       DatePicker(
-                        restorationId: EditTileScreen.id,
+                        restorationId: EditTileTypeScreen.id,
                         callback: _setPlantedDate,
                         initialDate: _plantedDate,
                       ),

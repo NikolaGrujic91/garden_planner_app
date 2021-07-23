@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:collection';
-import '../screens/edit_tile_screen.dart';
+import '../screens/edit_tile_type_screen.dart';
 import '../model/tile.dart';
 import '../model/plan.dart';
 import '../model/plans_store.dart';
@@ -35,7 +35,7 @@ class TilesGrid extends StatelessWidget {
               tileColor: tiles[index].tileColor,
               onTap: () async {
                 plansStore.setSelectedTileIndex(index);
-                Navigator.pushReplacementNamed(context, EditTileScreen.id);
+                Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
               },
             ),
           );
