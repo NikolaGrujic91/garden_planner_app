@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'tiles_screen.dart';
 import '../widgets/save_icon_button.dart';
+import '../widgets/text_field_bordered.dart';
+import '../widgets/date_picker.dart';
 import '../model/plans_store.dart';
 import '../model/enums.dart';
 import '../model/plan.dart';
 import '../model/tile.dart';
 import '../utils/constants.dart';
 
-class EditTileTypeScreen extends StatefulWidget {
-  static const String id = 'edit_tile_type_screen';
+class EditTilePlantsScreen extends StatefulWidget {
+  static const String id = 'edit_tile_plants_screen';
 
   @override
-  _EditTileTypeScreenState createState() => _EditTileTypeScreenState();
+  _EditTilePlantsScreenState createState() => _EditTilePlantsScreenState();
 }
 
-class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
+class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   TileType _tileType = TileType.plant;
   String _plantName = '';
   String _plantedDate = '';
@@ -45,7 +47,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
               },
               icon: new Icon(Icons.arrow_back_ios),
             ),
-            title: Text('Edit tile type'),
+            title: Text('Edit tile plants'),
             actions: [
               SaveIconButton(
                 callback: () async {
@@ -58,29 +60,32 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                RadioListTile<TileType>(
-                  title: const Text('Plant'),
-                  value: TileType.plant,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
+                Visibility(
+                  visible: _tileType == TileType.plant,
+                  child: TextFieldBordered(
+                    text: _plantName,
+                    hintText: 'Plant name',
+                    callback: _setPlantName,
+                  ),
                 ),
-                RadioListTile<TileType>(
-                  title: const Text('Home'),
-                  value: TileType.home,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
+                const SizedBox(
+                  height: 20.0,
                 ),
-                RadioListTile<TileType>(
-                  title: const Text('Path'),
-                  value: TileType.path,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
-                ),
-                RadioListTile<TileType>(
-                  title: const Text('None'),
-                  value: TileType.none,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
+                Visibility(
+                  visible: _tileType == TileType.plant,
+                  child: Row(
+                    children: [
+                      Text(_plantedDate),
+                      SizedBox(
+                        width: _plantedDate.isEmpty ? 0.0 : 20.0,
+                      ),
+                      DatePicker(
+                        restorationId: EditTilePlantsScreen.id,
+                        callback: _setPlantedDate,
+                        initialDate: _plantedDate,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -90,9 +95,15 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
     );
   }
 
-  void _setTileType(TileType? type) {
+  void _setPlantName(String plantName) {
     setState(() {
-      _tileType = type!;
+      _plantName = plantName;
+    });
+  }
+
+  void _setPlantedDate(String plantedDate) {
+    setState(() {
+      _plantedDate = plantedDate;
     });
   }
 

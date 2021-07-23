@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:collection';
 import '../screens/edit_tile_type_screen.dart';
+import '../screens/edit_tile_plants_screen.dart';
 import '../model/tile.dart';
 import '../model/plan.dart';
 import '../model/plans_store.dart';
@@ -33,9 +34,13 @@ class TilesGrid extends StatelessWidget {
               leading: Icon(tiles[index].icon),
               title: Text('${tiles[index].plantName}\n${tiles[index].plantedDate}'),
               tileColor: tiles[index].tileColor,
-              onTap: () async {
+              onLongPress: () async {
                 plansStore.setSelectedTileIndex(index);
                 Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
+              },
+              onTap: () async {
+                plansStore.setSelectedTileIndex(index);
+                Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
               },
             ),
           );

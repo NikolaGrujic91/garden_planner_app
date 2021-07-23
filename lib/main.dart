@@ -6,6 +6,7 @@ import 'screens/add_plan_screen.dart';
 import 'screens/edit_plan_screen.dart';
 import 'screens/tiles_screen.dart';
 import 'screens/edit_tile_type_screen.dart';
+import 'screens/edit_tile_plants_screen.dart';
 
 void main() {
   runApp(GardenPlannerApp());
@@ -26,6 +27,7 @@ class GardenPlannerApp extends StatelessWidget {
           EditPlanScreen.id: (context) => EditPlanScreen(),
           TilesScreen.id: (context) => TilesScreen(),
           EditTileTypeScreen.id: (context) => EditTileTypeScreen(),
+          EditTilePlantsScreen.id: (context) => EditTilePlantsScreen(),
         },
       ),
     );
