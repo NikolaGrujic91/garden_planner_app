@@ -6,6 +6,7 @@ import '../screens/edit_tile_plants_screen.dart';
 import '../model/tile.dart';
 import '../model/plan.dart';
 import '../model/plans_store.dart';
+import '../model/enums.dart';
 
 class TilesGrid extends StatelessWidget {
   @override
@@ -39,8 +40,10 @@ class TilesGrid extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
               },
               onTap: () async {
-                plansStore.setSelectedTileIndex(index);
-                Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
+                if (tiles[index].type == TileType.plant) {
+                  plansStore.setSelectedTileIndex(index);
+                  Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
+                }
               },
             ),
           );
