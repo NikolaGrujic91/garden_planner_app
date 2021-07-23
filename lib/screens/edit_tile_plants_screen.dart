@@ -56,38 +56,41 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               ),
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Visibility(
-                  visible: _tileType == TileType.plant,
-                  child: TextFieldBordered(
-                    text: _plantName,
-                    hintText: 'Plant name',
-                    callback: _setPlantName,
+          body: Container(
+            color: kBackgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Visibility(
+                    visible: _tileType == TileType.plant,
+                    child: TextFieldBordered(
+                      text: _plantName,
+                      hintText: 'Plant name',
+                      callback: _setPlantName,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Visibility(
-                  visible: _tileType == TileType.plant,
-                  child: Row(
-                    children: [
-                      Text(_plantedDate),
-                      SizedBox(
-                        width: _plantedDate.isEmpty ? 0.0 : 20.0,
-                      ),
-                      DatePicker(
-                        restorationId: EditTilePlantsScreen.id,
-                        callback: _setPlantedDate,
-                        initialDate: _plantedDate,
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 20.0,
                   ),
-                ),
-              ],
+                  Visibility(
+                    visible: _tileType == TileType.plant,
+                    child: Row(
+                      children: [
+                        Text(_plantedDate),
+                        SizedBox(
+                          width: _plantedDate.isEmpty ? 0.0 : 20.0,
+                        ),
+                        DatePicker(
+                          restorationId: EditTilePlantsScreen.id,
+                          callback: _setPlantedDate,
+                          initialDate: _plantedDate,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

@@ -54,35 +54,50 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
               ),
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                RadioListTile<TileType>(
-                  title: const Text('Plant'),
-                  value: TileType.plant,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
-                ),
-                RadioListTile<TileType>(
-                  title: const Text('Home'),
-                  value: TileType.home,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
-                ),
-                RadioListTile<TileType>(
-                  title: const Text('Path'),
-                  value: TileType.path,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
-                ),
-                RadioListTile<TileType>(
-                  title: const Text('None'),
-                  value: TileType.none,
-                  groupValue: _tileType,
-                  onChanged: _setTileType,
-                ),
-              ],
+          body: Container(
+            color: kBackgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Material(
+                    child: RadioListTile<TileType>(
+                      title: const Text('Plant'),
+                      value: TileType.plant,
+                      groupValue: _tileType,
+                      onChanged: _setTileType,
+                      tileColor: kBackgroundColor,
+                    ),
+                  ),
+                  Material(
+                    child: RadioListTile<TileType>(
+                      title: const Text('Home'),
+                      value: TileType.home,
+                      groupValue: _tileType,
+                      onChanged: _setTileType,
+                      tileColor: kBackgroundColor,
+                    ),
+                  ),
+                  Material(
+                    child: RadioListTile<TileType>(
+                      title: const Text('Path'),
+                      value: TileType.path,
+                      groupValue: _tileType,
+                      onChanged: _setTileType,
+                      tileColor: kBackgroundColor,
+                    ),
+                  ),
+                  Material(
+                    child: RadioListTile<TileType>(
+                      title: const Text('None'),
+                      value: TileType.none,
+                      groupValue: _tileType,
+                      onChanged: _setTileType,
+                      tileColor: kBackgroundColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
