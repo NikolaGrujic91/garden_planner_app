@@ -1,7 +1,16 @@
 # garden-planner-app
 
 Tasks:
-1. add border around tiles
-2. set correct app name in caption title on mac and windows
-3. set color scheme
-4. set app icon for all platforms
+- add border around tiles
+- set correct app name in caption title on mac and windows
+- set color scheme
+- set app icon for all platforms
+- extend tiles to store 4 plants
+- 4 types of plants (trees, fruits, vegetables, flowers)
+- Edit tiles - short press opens dialog to change plants information
+- Edit tiles - long press opens dialog to change tile type
+- drag and drop on edit tiles screen
+- Zoom grid
+- Directly go back, no stack
+- Set new icons
+- Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
