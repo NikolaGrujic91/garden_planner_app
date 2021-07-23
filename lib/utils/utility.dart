@@ -47,10 +47,10 @@ Color tileTypeToTileColor(TileType type) {
     case TileType.none:
       return Colors.black;
     case TileType.plant:
-      return Colors.lightGreen;
+      return Color.fromARGB(255, 146, 163, 116);
     case TileType.home:
-      return Colors.red.shade400;
+      return Color.fromARGB(255, 134, 134, 134);
     case TileType.path:
-      return Colors.grey;
+      return Color.fromARGB(255, 139, 122, 95);
   }
 }

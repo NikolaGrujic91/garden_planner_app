@@ -8,6 +8,7 @@ import '../model/plans_store.dart';
 import '../model/enums.dart';
 import '../model/plan.dart';
 import '../model/tile.dart';
+import '../utils/constants.dart';
 
 class EditTileScreen extends StatefulWidget {
   static const String id = 'edit_tile_screen';
@@ -39,6 +40,7 @@ class _EditTileScreenState extends State<EditTileScreen> {
       builder: (context, plansStore, child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: kAppBarBackgroundColor,
             title: Text('Edit tile'),
             actions: [
               SaveIconButton(

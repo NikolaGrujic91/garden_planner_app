@@ -7,6 +7,7 @@ import '../widgets/text_field_bordered_numeric.dart';
 import '../widgets/text_field_bordered.dart';
 import '../widgets/preview_grid_view.dart';
 import '../screens/main_screen.dart';
+import '../utils/constants.dart';
 
 class EditPlanScreen extends StatefulWidget {
   static const String id = 'edit_plan_screen';
@@ -37,6 +38,7 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
       builder: (context, plansStore, child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: kAppBarBackgroundColor,
             title: Text('Edit $_name'),
             actions: [
               SaveIconButton(
@@ -52,6 +54,15 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const Text(
+                  'Garden name',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
                 TextFieldBordered(
                   text: _name,
                   hintText: 'Name',
@@ -75,6 +86,15 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
                       text: _columns.toString(),
                       hintText: 'Columns',
                       callback: this._setColumns,
+                    ),
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    const Text(
+                      'X',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
                     ),
                     const SizedBox(
                       width: 20.0,

@@ -20,7 +20,7 @@ class PreviewGridView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(0.5),
             child: ListTile(
-              tileColor: Colors.green,
+              tileColor: Color.fromARGB(255, 82, 118, 82),
             ),
           );
         }),

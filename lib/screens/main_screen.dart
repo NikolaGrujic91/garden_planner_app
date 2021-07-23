@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_plan_screen.dart';
 import '../widgets/plans_list.dart';
+import '../utils/constants.dart';
 
 class MainScreen extends StatelessWidget {
   static const String id = 'main_screen';
@@ -9,13 +10,15 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Plans'),
+          backgroundColor: kAppBarBackgroundColor,
+          title: Text('Gardens'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.pushNamed(context, AddPlanScreen.id);
           },
-          tooltip: 'Add plan',
+          tooltip: 'Add garden',
+          backgroundColor: kFloatingActionButtonColor,
           child: Icon(Icons.add),
         ),
         body: Column(

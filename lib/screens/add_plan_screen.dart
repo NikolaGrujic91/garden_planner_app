@@ -7,6 +7,7 @@ import '../widgets/text_field_bordered_numeric.dart';
 import '../widgets/text_field_bordered.dart';
 import '../widgets/preview_grid_view.dart';
 import '../screens/main_screen.dart';
+import '../utils/constants.dart';
 
 class AddPlanScreen extends StatefulWidget {
   static const String id = 'add_plan_screen';
@@ -16,7 +17,7 @@ class AddPlanScreen extends StatefulWidget {
 }
 
 class _AddPlanScreenState extends State<AddPlanScreen> {
-  String _name = 'New Plan';
+  String _name = 'New Garden';
   int _columns = 5;
   int _rows = 5;
 
@@ -24,7 +25,8 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Plan'),
+        backgroundColor: kAppBarBackgroundColor,
+        title: const Text('Add Garden'),
         actions: [
           SaveIconButton(
             callback: () async {
@@ -39,6 +41,15 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Text(
+              'Garden name',
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
             TextFieldBordered(
               text: _name,
               hintText: 'Name',
@@ -62,6 +73,15 @@ class _AddPlanScreenState extends State<AddPlanScreen> {
                   text: _columns.toString(),
                   hintText: 'Columns',
                   callback: this._setColumns,
+                ),
+                const SizedBox(
+                  width: 20.0,
+                ),
+                const Text(
+                  'X',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
                 ),
                 const SizedBox(
                   width: 20.0,

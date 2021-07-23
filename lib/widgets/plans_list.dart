@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../screens/edit_plan_screen.dart';
 import '../screens/tiles_screen.dart';
 import '../model/plans_store.dart';
+import '../utils/constants.dart';
 
 class PlansList extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -15,41 +16,47 @@ class PlansList extends StatelessWidget {
           child: Scrollbar(
             isAlwaysShown: true,
             controller: _scrollController,
-            child: ListView.builder(
-              controller: _scrollController,
-              padding: EdgeInsets.all(10.0),
-              itemCount: plansStore.plans.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Icon(Icons.grid_4x4),
-                  title: Text(plansStore.plans[index].name),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          plansStore.setSelectedPlanIndex(index);
-                          await _showDeleteDialog(context);
-                        },
-                        icon: const Icon(Icons.delete),
-                        tooltip: 'Delete plan',
+            child: Container(
+              color: kBackgroundColor,
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: EdgeInsets.all(10.0),
+                itemCount: plansStore.plans.length,
+                itemBuilder: (context, index) {
+                  return Material(
+                    child: ListTile(
+                      tileColor: kBackgroundColor,
+                      leading: Icon(Icons.grid_4x4),
+                      title: Text(plansStore.plans[index].name),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              plansStore.setSelectedPlanIndex(index);
+                              await _showDeleteDialog(context);
+                            },
+                            icon: const Icon(Icons.delete),
+                            tooltip: 'Delete garden',
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              plansStore.setSelectedPlanIndex(index);
+                              Navigator.pushNamed(context, EditPlanScreen.id);
+                            },
+                            icon: const Icon(Icons.edit),
+                            tooltip: 'Edit garden',
+                          )
+                        ],
                       ),
-                      IconButton(
-                        onPressed: () {
-                          plansStore.setSelectedPlanIndex(index);
-                          Navigator.pushNamed(context, EditPlanScreen.id);
-                        },
-                        icon: const Icon(Icons.edit),
-                        tooltip: 'Edit plan',
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    plansStore.setSelectedPlanIndex(index);
-                    Navigator.pushNamed(context, TilesScreen.id);
-                  },
-                );
-              },
+                      onTap: () {
+                        plansStore.setSelectedPlanIndex(index);
+                        Navigator.pushNamed(context, TilesScreen.id);
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         );
