@@ -7,8 +7,8 @@ Tasks:
 - set app icon for all platforms
 - extend tiles to store 4 plants
 - 4 types of plants (trees, fruits, vegetables, flowers)
-- Edit tiles - short press opens dialog to change plants information
-- Edit tiles - long press opens dialog to change tile type
+- DONE - Edit tiles - short press opens dialog to change plants information
+- DONE - Edit tiles - long press opens dialog to change tile type
 - drag and drop on edit tiles screen
 - Zoom grid
 - DONE - Directly go back, no stack
