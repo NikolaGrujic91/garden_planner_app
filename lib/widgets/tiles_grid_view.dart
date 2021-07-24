@@ -22,32 +22,36 @@ class TilesGrid extends StatelessWidget {
       var size = MediaQuery.of(context).size;
       var aspectRatio = (size.width / columns) / ((size.height - 56) / rows);
 
-      return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: columns,
-          childAspectRatio: aspectRatio,
-        ),
-        itemCount: itemCount,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(0.5),
-            child: ListTile(
-              leading: Icon(tiles[index].icon),
-              title: Text('${tiles[index].plantName}\n${tiles[index].plantedDate}'),
-              tileColor: tiles[index].tileColor,
-              onLongPress: () async {
-                plansStore.setSelectedTileIndex(index);
-                Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
-              },
-              onTap: () async {
-                if (tiles[index].type == TileType.plant) {
+      return InteractiveViewer(
+        minScale: 0.1,
+        maxScale: 2.0,
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns,
+            childAspectRatio: aspectRatio,
+          ),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(0.5),
+              child: ListTile(
+                leading: Icon(tiles[index].icon),
+                title: Text('${tiles[index].plantName}\n${tiles[index].plantedDate}'),
+                tileColor: tiles[index].tileColor,
+                onLongPress: () async {
                   plansStore.setSelectedTileIndex(index);
-                  Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
-                }
-              },
-            ),
-          );
-        },
+                  Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
+                },
+                onTap: () async {
+                  if (tiles[index].type == TileType.plant) {
+                    plansStore.setSelectedTileIndex(index);
+                    Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
+                  }
+                },
+              ),
+            );
+          },
+        ),
       );
     });
   }
