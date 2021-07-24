@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 import '../model/enums.dart';
 
 String tileTypeToString(TileType type) {
@@ -45,12 +46,12 @@ IconData tileTypeToIconData(TileType type) {
 Color tileTypeToTileColor(TileType type) {
   switch (type) {
     case TileType.none:
-      return Colors.black;
+      return kTileNoneColor;
     case TileType.plant:
-      return Color.fromARGB(255, 146, 163, 116);
+      return kTilePlantColor;
     case TileType.home:
-      return Color.fromARGB(255, 134, 134, 134);
+      return kTileHomeColor;
     case TileType.path:
-      return Color.fromARGB(255, 139, 122, 95);
+      return kTilePathColor;
   }
 }
