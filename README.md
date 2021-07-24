@@ -1,7 +1,7 @@
 # garden-planner-app
 
 Tasks:
-- add border around tiles
+- DONE - add border around home tiles
 - set correct app name in caption title on mac and windows
 - set color scheme
 - set app icon for all platforms
