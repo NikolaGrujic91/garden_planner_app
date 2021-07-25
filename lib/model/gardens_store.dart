@@ -44,7 +44,7 @@ class GardensStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateGarden({required String name, required int rows, required int columns}) {
+  void updateSelectedGarden({required String name, required int rows, required int columns}) {
     _gardens[_selectedGardenIndex].name = name;
     _gardens[_selectedGardenIndex].rows = rows;
     _gardens[_selectedGardenIndex].columns = columns;
@@ -52,7 +52,7 @@ class GardensStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTile({required TileType type, required String plantName, required String plantedDate}) {
+  void updateSelectedTile({required TileType type, required String plantName, required String plantedDate}) {
     _gardens[_selectedGardenIndex].updateTile(index: selectedTileIndex, type: type, plantName: plantName, plantedDate: plantedDate);
     notifyListeners();
   }

@@ -112,7 +112,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
+    gardensStore.updateSelectedTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }

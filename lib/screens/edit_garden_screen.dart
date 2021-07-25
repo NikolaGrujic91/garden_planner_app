@@ -159,7 +159,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateGarden(name: _name, rows: _rows, columns: _columns);
+    gardensStore.updateSelectedGarden(name: _name, rows: _rows, columns: _columns);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, MainScreen.id);
   }
