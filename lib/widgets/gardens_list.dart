@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../screens/edit_plan_screen.dart';
+import '../screens/edit_garden_screen.dart';
 import '../screens/tiles_screen.dart';
-import '../model/plans_store.dart';
+import '../model/gardens_store.dart';
 import '../utils/constants.dart';
 
-class PlansList extends StatelessWidget {
+class GardensList extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlansStore>(
-      builder: (context, plansStore, child) {
+    return Consumer<GardensStore>(
+      builder: (context, gardensStore, child) {
         return Expanded(
           child: Scrollbar(
             isAlwaysShown: true,
@@ -21,19 +21,19 @@ class PlansList extends StatelessWidget {
               child: ListView.builder(
                 controller: _scrollController,
                 padding: EdgeInsets.all(10.0),
-                itemCount: plansStore.plans.length,
+                itemCount: gardensStore.gardens.length,
                 itemBuilder: (context, index) {
                   return Material(
                     child: ListTile(
                       tileColor: kBackgroundColor,
                       leading: Icon(Icons.grid_4x4),
-                      title: Text(plansStore.plans[index].name),
+                      title: Text(gardensStore.gardens[index].name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
                             onPressed: () async {
-                              plansStore.setSelectedPlanIndex(index);
+                              gardensStore.setSelectedGardenIndex(index);
                               await _showDeleteDialog(context);
                             },
                             icon: const Icon(Icons.delete),
@@ -41,8 +41,8 @@ class PlansList extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {
-                              plansStore.setSelectedPlanIndex(index);
-                              Navigator.pushReplacementNamed(context, EditPlanScreen.id);
+                              gardensStore.setSelectedGardenIndex(index);
+                              Navigator.pushReplacementNamed(context, EditGardenScreen.id);
                             },
                             icon: const Icon(Icons.edit),
                             tooltip: 'Edit garden',
@@ -50,7 +50,7 @@ class PlansList extends StatelessWidget {
                         ],
                       ),
                       onTap: () {
-                        plansStore.setSelectedPlanIndex(index);
+                        gardensStore.setSelectedGardenIndex(index);
                         Navigator.pushReplacementNamed(context, TilesScreen.id);
                       },
                     ),
@@ -69,14 +69,14 @@ class PlansList extends StatelessWidget {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return Consumer<PlansStore>(
-          builder: (context, plansStore, child) {
+        return Consumer<GardensStore>(
+          builder: (context, gardensStore, child) {
             return AlertDialog(
               title: Text('Confirm delete'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('Delete the plan \"${plansStore.plans[plansStore.selectedPlanIndex].name}\"?'),
+                    Text('Delete the garden \"${gardensStore.gardens[gardensStore.selectedGardenIndex].name}\"?'),
                   ],
                 ),
               ),
@@ -84,8 +84,8 @@ class PlansList extends StatelessWidget {
                 TextButton(
                   child: const Text('Delete'),
                   onPressed: () async {
-                    plansStore.removePlan(plansStore.plans[plansStore.selectedPlanIndex]);
-                    await plansStore.savePlans();
+                    gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+                    await gardensStore.saveGardens();
                     Navigator.of(context).pop();
                   },
                 ),

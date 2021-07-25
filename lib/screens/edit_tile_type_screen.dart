@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'tiles_screen.dart';
 import '../widgets/save_icon_button.dart';
-import '../model/plans_store.dart';
+import '../model/gardens_store.dart';
 import '../model/enums.dart';
-import '../model/plan.dart';
+import '../model/garden.dart';
 import '../model/tile.dart';
 import '../utils/constants.dart';
 
@@ -24,9 +24,9 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   void initState() {
     super.initState();
 
-    var plansStore = Provider.of<PlansStore>(context, listen: false);
-    Plan selectedPlan = plansStore.plans[plansStore.selectedPlanIndex];
-    Tile selectedTile = selectedPlan.tiles[plansStore.selectedTileIndex];
+    var gardensStore = Provider.of<GardensStore>(context, listen: false);
+    Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
+    Tile selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
     _tileType = selectedTile.type;
     _plantName = selectedTile.plantName;
     _plantedDate = selectedTile.plantedDate;
@@ -34,8 +34,8 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlansStore>(
-      builder: (context, plansStore, child) {
+    return Consumer<GardensStore>(
+      builder: (context, gardensStore, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kAppBarBackgroundColor,
@@ -49,7 +49,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
             actions: [
               SaveIconButton(
                 callback: () async {
-                  await _updateTile();
+                  await _save();
                 },
               ),
             ],
@@ -111,10 +111,10 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
     });
   }
 
-  Future<void> _updateTile() async {
-    var plansStore = Provider.of<PlansStore>(context, listen: false);
-    plansStore.updateTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
-    await plansStore.savePlans();
+  Future<void> _save() async {
+    var gardensStore = Provider.of<GardensStore>(context, listen: false);
+    gardensStore.updateTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
+    await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
 }

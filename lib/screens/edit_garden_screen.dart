@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/plan.dart';
-import '../model/plans_store.dart';
+import '../model/garden.dart';
+import '../model/gardens_store.dart';
 import '../widgets/save_icon_button.dart';
 import '../widgets/text_field_bordered_numeric.dart';
 import '../widgets/text_field_bordered.dart';
@@ -9,15 +9,15 @@ import '../widgets/preview_grid_view.dart';
 import '../screens/main_screen.dart';
 import '../utils/constants.dart';
 
-class EditPlanScreen extends StatefulWidget {
-  static const String id = 'edit_plan_screen';
+class EditGardenScreen extends StatefulWidget {
+  static const String id = 'edit_garden_screen';
 
   @override
-  _EditPlanScreenState createState() => _EditPlanScreenState();
+  _EditGardenScreenState createState() => _EditGardenScreenState();
 }
 
-class _EditPlanScreenState extends State<EditPlanScreen> {
-  String _name = 'New Plan';
+class _EditGardenScreenState extends State<EditGardenScreen> {
+  String _name = 'Edit Garden';
   int _columns = 5;
   int _rows = 5;
 
@@ -25,17 +25,17 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
   void initState() {
     super.initState();
 
-    var plansStore = Provider.of<PlansStore>(context, listen: false);
-    Plan selectedPlan = plansStore.plans[plansStore.selectedPlanIndex];
-    _name = selectedPlan.name;
-    _columns = selectedPlan.columns;
-    _rows = selectedPlan.rows;
+    var gardensStore = Provider.of<GardensStore>(context, listen: false);
+    Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
+    _name = selectedGarden.name;
+    _columns = selectedGarden.columns;
+    _rows = selectedGarden.rows;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlansStore>(
-      builder: (context, plansStore, child) {
+    return Consumer<GardensStore>(
+      builder: (context, gardensStore, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kAppBarBackgroundColor,
@@ -49,7 +49,7 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
             actions: [
               SaveIconButton(
                 callback: () async {
-                  await _updatePlan();
+                  await _save();
                 },
               ),
             ],
@@ -157,10 +157,10 @@ class _EditPlanScreenState extends State<EditPlanScreen> {
     });
   }
 
-  Future<void> _updatePlan() async {
-    var plansStore = Provider.of<PlansStore>(context, listen: false);
-    plansStore.updatePlan(name: _name, rows: _rows, columns: _columns);
-    await plansStore.savePlans();
+  Future<void> _save() async {
+    var gardensStore = Provider.of<GardensStore>(context, listen: false);
+    gardensStore.updateGarden(name: _name, rows: _rows, columns: _columns);
+    await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, MainScreen.id);
   }
 }

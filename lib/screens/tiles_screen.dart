@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/plans_store.dart';
+import '../model/gardens_store.dart';
 import '../widgets/tiles_grid_view.dart';
 import '../screens/main_screen.dart';
 import '../utils/constants.dart';
@@ -10,7 +10,7 @@ class TilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlansStore>(builder: (context, plansStore, child) {
+    return Consumer<GardensStore>(builder: (context, gardensStore, child) {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: kAppBarBackgroundColor,
@@ -20,7 +20,7 @@ class TilesScreen extends StatelessWidget {
             },
             icon: new Icon(Icons.arrow_back_ios),
           ),
-          title: Text(plansStore.plans[plansStore.selectedPlanIndex].name),
+          title: Text(gardensStore.gardens[gardensStore.selectedGardenIndex].name),
         ),
         body: TilesGrid(),
       );

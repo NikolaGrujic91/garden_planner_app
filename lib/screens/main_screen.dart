@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'add_plan_screen.dart';
-import '../widgets/plans_list.dart';
+import 'add_garden_screen.dart';
+import '../widgets/gardens_list.dart';
 import '../utils/constants.dart';
 
 class MainScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            Navigator.pushReplacementNamed(context, AddPlanScreen.id);
+            Navigator.pushReplacementNamed(context, AddGardenScreen.id);
           },
           tooltip: 'Add garden',
           backgroundColor: kFloatingActionButtonColor,
@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            PlansList(),
+            GardensList(),
           ],
         ));
   }

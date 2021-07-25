@@ -2,20 +2,20 @@ import 'dart:collection';
 import 'enums.dart';
 import 'tile.dart';
 
-class Plan {
+class Garden {
   String _name = '';
   int _rows = 0;
   int _columns = 0;
   List<Tile> _tiles = <Tile>[];
 
-  Plan({required String name, required int rows, required int columns}) {
+  Garden({required String name, required int rows, required int columns}) {
     _name = name;
     _rows = rows;
     _columns = columns;
     _createTiles();
   }
 
-  Plan.fromJson(Map<String, dynamic> json)
+  Garden.fromJson(Map<String, dynamic> json)
       : _name = json['name'],
         _rows = json['rows'],
         _columns = json['columns'],
