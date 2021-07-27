@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/gardens_store.dart';
+import '../widgets/tiles_bottom_bar.dart';
 import '../widgets/tiles_grid_view.dart';
 import '../screens/main_screen.dart';
 import '../utils/constants.dart';
@@ -23,6 +24,7 @@ class TilesScreen extends StatelessWidget {
           title: Text(gardensStore.gardens[gardensStore.selectedGardenIndex].name),
         ),
         body: TilesGrid(),
+        bottomNavigationBar: TilesBottomBar(),
       );
     });
   }

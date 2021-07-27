@@ -42,7 +42,7 @@ class Garden {
           continue;
         }
 
-        _tiles.add(Tile(type: TileType.plant, plantName: '', plantedDate: ''));
+        _tiles.add(Tile(type: TileType.plant));
       }
     }
 
@@ -54,16 +54,18 @@ class Garden {
     }
   }
 
-  void updateTile({required int index, required TileType type, required String plantName, required String plantedDate}) {
+  void updateTileType({required int index, required TileType type}) {
     _tiles[index].type = type;
-    _tiles[index].plantName = plantName;
-    _tiles[index].plantedDate = plantedDate;
+  }
+
+  void addTilePlant({required int tileIndex, required PlantType plantType}) {
+    _tiles[tileIndex].addPlant(plantType: plantType);
   }
 
   void _createTiles() {
     for (int row = 0; row < _rows; row++) {
       for (int column = 0; column < _columns; column++) {
-        _tiles.add(Tile(type: TileType.plant, plantName: '', plantedDate: ''));
+        _tiles.add(Tile(type: TileType.plant));
       }
     }
   }

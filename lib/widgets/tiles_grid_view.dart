@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'dart:collection';
 import '../screens/edit_tile_type_screen.dart';
 import '../screens/edit_tile_plants_screen.dart';
+import '../model/plant.dart';
 import '../model/tile.dart';
 import '../model/garden.dart';
 import '../model/gardens_store.dart';
 import '../model/enums.dart';
 import '../utils/constants.dart';
+import '../utils/utility.dart';
 
 class TilesGrid extends StatelessWidget {
   @override
@@ -21,7 +23,7 @@ class TilesGrid extends StatelessWidget {
 
       // Calculate aspect ratio in order to make all grid cells always visible properly
       var size = MediaQuery.of(context).size;
-      var aspectRatio = (size.width / columns) / ((size.height - 56) / rows);
+      var aspectRatio = (size.width / columns) / ((size.height - 56 - 50) / rows);
 
       return InteractiveViewer(
         minScale: 0.1,
@@ -38,6 +40,7 @@ class TilesGrid extends StatelessWidget {
             bool drawLeftBorder = (index - 1) >= 0 && tiles[index - 1].type != TileType.home;
             bool drawRightBorder = (index + 1) < tiles.length && tiles[index + 1].type != TileType.home;
             bool isHomeTile = tiles[index].type == TileType.home;
+            bool isPlantTile = tiles[index].type == TileType.plant;
 
             return Container(
               decoration: isHomeTile
@@ -62,28 +65,100 @@ class TilesGrid extends StatelessWidget {
                       ),
                     )
                   : null,
-              child: Padding(
-                padding: const EdgeInsets.all(0.5),
-                child: ListTile(
-                  leading: Icon(tiles[index].icon),
-                  title: Text('${tiles[index].plantName}\n${tiles[index].plantedDate}'),
-                  tileColor: tiles[index].tileColor,
-                  onLongPress: () async {
-                    gardensStore.setSelectedTileIndex(index);
-                    Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
-                  },
-                  onTap: () async {
-                    if (tiles[index].type == TileType.plant) {
-                      gardensStore.setSelectedTileIndex(index);
-                      Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
-                    }
-                  },
-                ),
-              ),
+              child: isPlantTile
+                  ? TileGridViewCellDragTarget(
+                      tiles: tiles,
+                      index: index,
+                      gardensStore: gardensStore,
+                    )
+                  : TileGridViewCell(
+                      tiles: tiles,
+                      index: index,
+                      gardensStore: gardensStore,
+                    ),
             );
           },
         ),
       );
     });
+  }
+}
+
+class TileGridViewCellDragTarget extends StatelessWidget {
+  const TileGridViewCellDragTarget({
+    Key? key,
+    required this.tiles,
+    required this.index,
+    required this.gardensStore,
+  }) : super(key: key);
+
+  final UnmodifiableListView<Tile> tiles;
+  final int index;
+  final GardensStore gardensStore;
+
+  @override
+  Widget build(BuildContext context) {
+    return DragTarget(
+      builder: (context, candidateData, rejectedData) {
+        return TileGridViewCell(
+          tiles: tiles,
+          index: index,
+          gardensStore: gardensStore,
+        );
+      },
+      onWillAccept: (data) {
+        return true;
+      },
+      onAccept: (data) async {
+        PlantType plantType = stringToPlantType(data.toString());
+        gardensStore.addPlant(tileIndex: index, plantType: plantType);
+        await gardensStore.saveGardens();
+        print(data);
+      },
+    );
+  }
+}
+
+class TileGridViewCell extends StatelessWidget {
+  const TileGridViewCell({
+    Key? key,
+    required this.tiles,
+    required this.index,
+    required this.gardensStore,
+  }) : super(key: key);
+
+  final UnmodifiableListView<Tile> tiles;
+  final int index;
+  final GardensStore gardensStore;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> plantIcons = <Widget>[];
+
+    for (Plant plant in tiles[index].plants) {
+      plantIcons.add(Icon(plantTypeToIconData(plant.type)));
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(0.5),
+      child: ListTile(
+        leading: Icon(tiles[index].icon),
+        title: Wrap(
+          spacing: 12, // space between two icons
+          children: plantIcons,
+        ),
+        tileColor: tiles[index].tileColor,
+        onLongPress: () async {
+          gardensStore.setSelectedTileIndex(index);
+          Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
+        },
+        onTap: () async {
+          if (tiles[index].type == TileType.plant && tiles[index].plants.length > 0) {
+            gardensStore.setSelectedTileIndex(index);
+            Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
+          }
+        },
+      ),
+    );
   }
 }

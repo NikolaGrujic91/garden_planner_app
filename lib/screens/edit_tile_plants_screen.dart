@@ -8,7 +8,9 @@ import '../model/gardens_store.dart';
 import '../model/enums.dart';
 import '../model/garden.dart';
 import '../model/tile.dart';
+import '../model/plant.dart';
 import '../utils/constants.dart';
+import '../utils/utility.dart';
 
 class EditTilePlantsScreen extends StatefulWidget {
   static const String id = 'edit_tile_plants_screen';
@@ -18,9 +20,12 @@ class EditTilePlantsScreen extends StatefulWidget {
 }
 
 class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
-  TileType _tileType = TileType.plant;
-  String _plantName = '';
-  String _plantedDate = '';
+  late Tile _selectedTile;
+  List<String> _plantsNames = <String>[];
+  List<String> _plantedDates = <String>[];
+  List<PlantType> _plantsTypes = <PlantType>[];
+  List<String> _plantsTypesString = <String>[];
+  List<String> _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
 
   @override
   void initState() {
@@ -28,10 +33,14 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
     Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
-    Tile selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
-    _tileType = selectedTile.type;
-    _plantName = selectedTile.plantName;
-    _plantedDate = selectedTile.plantedDate;
+    _selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
+
+    for (Plant plant in _selectedTile.plants) {
+      _plantsNames.add(plant.name);
+      _plantedDates.add(plant.plantedDate);
+      _plantsTypes.add(plant.type);
+      _plantsTypesString.add(plantTypeToString(plant.type));
+    }
   }
 
   @override
@@ -47,7 +56,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               },
               icon: new Icon(Icons.arrow_back_ios),
             ),
-            title: Text('Edit tile plants'),
+            title: Text('Edit plants'),
             actions: [
               SaveIconButton(
                 callback: () async {
@@ -58,39 +67,64 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
           ),
           body: Container(
             color: kBackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Visibility(
-                    visible: _tileType == TileType.plant,
-                    child: TextFieldBordered(
-                      text: _plantName,
-                      hintText: 'Plant name',
-                      callback: _setPlantName,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Visibility(
-                    visible: _tileType == TileType.plant,
-                    child: Row(
-                      children: [
-                        Text(_plantedDate),
-                        SizedBox(
-                          width: _plantedDate.isEmpty ? 0.0 : 20.0,
+            child: ListView.builder(
+              itemCount: _selectedTile.plants.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      DropdownButton<String>(
+                        value: _plantsTypesString[index],
+                        icon: const Icon(kDropdownArrow),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(
+                          color: kDropdownText,
                         ),
-                        DatePicker(
-                          restorationId: EditTilePlantsScreen.id,
-                          callback: _setPlantedDate,
-                          initialDate: _plantedDate,
+                        underline: Container(
+                          height: 2,
+                          color: kDropdownUnderline,
                         ),
-                      ],
-                    ),
+                        onChanged: (String? newValue) {
+                          _setPlantType(newValue!, index);
+                        },
+                        items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      Expanded(
+                        child: TextFieldBordered(
+                          text: _plantsNames[index],
+                          hintText: 'Plant name',
+                          callback: _setPlantName,
+                          index: index,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      Text(_plantedDates[index]),
+                      SizedBox(
+                        width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
+                      ),
+                      DatePicker(
+                        restorationId: EditTilePlantsScreen.id,
+                        callback: (String newValue) {
+                          _setPlantedDate(newValue, index);
+                        },
+                        initialDate: _plantedDates[index],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         );
@@ -98,21 +132,28 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     );
   }
 
-  void _setPlantName(String plantName) {
+  void _setPlantType(String plantType, int index) {
     setState(() {
-      _plantName = plantName;
+      _plantsTypesString[index] = plantType;
+      _plantsTypes[index] = stringToPlantType(_plantsTypesString[index]);
     });
   }
 
-  void _setPlantedDate(String plantedDate) {
+  void _setPlantName(String plantName, int index) {
     setState(() {
-      _plantedDate = plantedDate;
+      _plantsNames[index] = plantName;
+    });
+  }
+
+  void _setPlantedDate(String plantedDate, int index) {
+    setState(() {
+      _plantedDates[index] = plantedDate;
     });
   }
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
+    gardensStore.updateSelectedTilePlants(plantsNames: _plantsNames, plantedDates: _plantedDates, plantsTypes: _plantsTypes);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }

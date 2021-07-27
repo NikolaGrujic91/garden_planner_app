@@ -28,8 +28,6 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
     Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
     Tile selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
     _tileType = selectedTile.type;
-    _plantName = selectedTile.plantName;
-    _plantedDate = selectedTile.plantedDate;
   }
 
   @override
@@ -62,7 +60,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                 children: [
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text('Plant'),
+                      title: const Text(kPlant),
                       value: TileType.plant,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -71,7 +69,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text('Home'),
+                      title: const Text(kHome),
                       value: TileType.home,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -80,7 +78,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text('Path'),
+                      title: const Text(kPath),
                       value: TileType.path,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -89,7 +87,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text('None'),
+                      title: const Text(kNone),
                       value: TileType.none,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -113,7 +111,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTile(type: _tileType, plantName: _plantName, plantedDate: _plantedDate);
+    gardensStore.updateSelectedTileType(type: _tileType);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }

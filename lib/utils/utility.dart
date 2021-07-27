@@ -5,25 +5,25 @@ import '../model/enums.dart';
 String tileTypeToString(TileType type) {
   switch (type) {
     case TileType.none:
-      return 'None';
+      return kNone;
     case TileType.plant:
-      return 'Plant';
+      return kPlant;
     case TileType.home:
-      return 'Home';
+      return kHome;
     case TileType.path:
-      return 'Path';
+      return kPath;
   }
 }
 
 TileType stringToTileType(String value) {
   switch (value) {
-    case 'None':
+    case kNone:
       return TileType.none;
-    case 'Plant':
+    case kPlant:
       return TileType.plant;
-    case 'Home':
+    case kHome:
       return TileType.home;
-    case 'Path':
+    case kPath:
       return TileType.path;
     default:
       return TileType.none;
@@ -53,5 +53,46 @@ Color tileTypeToTileColor(TileType type) {
       return kTileHomeColor;
     case TileType.path:
       return kTilePathColor;
+  }
+}
+
+String plantTypeToString(PlantType type) {
+  switch (type) {
+    case PlantType.tree:
+      return kTree;
+    case PlantType.fruit:
+      return kFruit;
+    case PlantType.vegetable:
+      return kVegetable;
+    case PlantType.flower:
+      return kFlower;
+  }
+}
+
+PlantType stringToPlantType(String value) {
+  switch (value) {
+    case kTree:
+      return PlantType.tree;
+    case kFruit:
+      return PlantType.fruit;
+    case kVegetable:
+      return PlantType.vegetable;
+    case kFlower:
+      return PlantType.flower;
+    default:
+      return PlantType.tree;
+  }
+}
+
+IconData plantTypeToIconData(PlantType type) {
+  switch (type) {
+    case PlantType.tree:
+      return kTreeIcon;
+    case PlantType.fruit:
+      return kFruitIcon;
+    case PlantType.vegetable:
+      return kVegetableIcon;
+    case PlantType.flower:
+      return kFlowerIcon;
   }
 }

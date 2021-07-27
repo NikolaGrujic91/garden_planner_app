@@ -52,9 +52,18 @@ class GardensStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSelectedTile({required TileType type, required String plantName, required String plantedDate}) {
-    _gardens[_selectedGardenIndex].updateTile(index: selectedTileIndex, type: type, plantName: plantName, plantedDate: plantedDate);
+  void updateSelectedTileType({required TileType type}) {
+    _gardens[_selectedGardenIndex].updateTileType(index: _selectedTileIndex, type: type);
     notifyListeners();
+  }
+
+  void updateSelectedTilePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes}) {
+    _gardens[_selectedGardenIndex].tiles[_selectedTileIndex].updatePlants(plantsNames: plantsNames, plantedDates: plantedDates, plantsTypes: plantsTypes);
+    notifyListeners();
+  }
+
+  void addPlant({required int tileIndex, required PlantType plantType}) {
+    _gardens[_selectedGardenIndex].tiles[tileIndex].addPlant(plantType: plantType);
   }
 
   Future<void> saveGardens() async {

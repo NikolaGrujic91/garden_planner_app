@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
+import 'dart:collection';
 import 'enums.dart';
+import 'plant.dart';
 import '../utils/utility.dart';
 
 class Tile {
   TileType _type = TileType.none;
-  String _plantName = '';
-  String _plantedDate = '';
+  List<Plant> _plants = <Plant>[];
 
   IconData _icon = Icons.api;
   Color _tileColor = Colors.black;
 
-  Tile({required TileType type, required String plantName, required String plantedDate}) {
+  Tile({required TileType type}) {
     _type = type;
-    _plantName = plantName;
-    _plantedDate = plantedDate;
-
     _icon = tileTypeToIconData(_type);
     _tileColor = tileTypeToTileColor(_type);
   }
 
   Tile.fromJson(Map<String, dynamic> json)
       : _type = stringToTileType(json['type']),
-        _plantName = json['plantName'],
-        _plantedDate = json['plantedDate'] {
+        _plants = (json['plants'] as List).map((i) => Plant.fromJson(i)).toList() {
     _icon = tileTypeToIconData(_type);
     _tileColor = tileTypeToTileColor(_type);
   }
 
-  Map<String, dynamic> toJson() => {'type': tileTypeToString(_type), 'plantName': _plantName, 'plantedDate': _plantedDate};
+  Map<String, dynamic> toJson() => {'type': tileTypeToString(_type), 'plants': _plants};
 
   TileType get type => _type;
-  String get plantName => _plantName;
-  String get plantedDate => _plantedDate;
+  UnmodifiableListView<Plant> get plants => UnmodifiableListView(_plants);
   IconData get icon => _icon;
   Color get tileColor => _tileColor;
 
@@ -41,6 +37,25 @@ class Tile {
     _tileColor = tileTypeToTileColor(_type);
   }
 
-  set plantName(String value) => _plantName = value;
-  set plantedDate(String value) => _plantedDate = value;
+  void updatePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes}) {
+    int plantsLength = _plants.length;
+
+    if (plantsLength != plantsNames.length || plantsLength != plantedDates.length || plantsLength != plantsTypes.length) {
+      return;
+    }
+
+    for (int i = 0; i < plantsLength; i++) {
+      _updatePlant(index: i, plantType: plantsTypes[i], plantName: plantsNames[i], plantedDate: plantedDates[i]);
+    }
+  }
+
+  void _updatePlant({required int index, required PlantType plantType, required String plantName, required String plantedDate}) {
+    _plants[index].type = plantType;
+    _plants[index].name = plantName;
+    _plants[index].plantedDate = plantedDate;
+  }
+
+  void addPlant({required PlantType plantType}) {
+    _plants.add(Plant(type: plantType));
+  }
 }
