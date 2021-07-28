@@ -8,7 +8,7 @@ Tasks:
 - DONE - extend tiles to store 4 plants (trees, fruits, vegetables, flowers)
 - DONE - drag and drop on edit tiles screen
 - Delete plants in Edit Plants screen
-- Move IconData and color from tile class
+- DONE - Move IconData and color from tile class
 - DONE - Edit tiles - short press opens dialog to change plants information
 - DONE - Edit tiles - long press opens dialog to change tile type
 - DONE - Zoom and pan grid
