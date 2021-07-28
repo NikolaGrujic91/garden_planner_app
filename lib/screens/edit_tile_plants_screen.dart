@@ -54,7 +54,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, TilesScreen.id);
               },
-              icon: new Icon(Icons.arrow_back_ios),
+              icon: new Icon(kBackIcon),
             ),
             title: Text('Edit plants'),
             actions: [

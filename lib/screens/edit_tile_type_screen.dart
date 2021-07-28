@@ -41,7 +41,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, TilesScreen.id);
               },
-              icon: new Icon(Icons.arrow_back_ios),
+              icon: new Icon(kBackIcon),
             ),
             title: Text('Edit tile type'),
             actions: [

@@ -19,7 +19,7 @@ class TilesScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacementNamed(context, MainScreen.id);
             },
-            icon: new Icon(Icons.arrow_back_ios),
+            icon: new Icon(kBackIcon),
           ),
           title: Text(gardensStore.gardens[gardensStore.selectedGardenIndex].name),
         ),

@@ -30,7 +30,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
           onPressed: () {
             Navigator.pushReplacementNamed(context, MainScreen.id);
           },
-          icon: new Icon(Icons.arrow_back_ios),
+          icon: new Icon(kBackIcon),
         ),
         title: const Text('Add Garden'),
         actions: [

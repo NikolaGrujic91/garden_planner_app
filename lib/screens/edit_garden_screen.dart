@@ -43,7 +43,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, MainScreen.id);
               },
-              icon: new Icon(Icons.arrow_back_ios),
+              icon: new Icon(kBackIcon),
             ),
             title: Text('Edit $_name'),
             actions: [

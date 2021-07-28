@@ -6,6 +6,7 @@ const Color kFloatingActionButtonColor = Color.fromARGB(255, 205, 173, 14);
 
 const Color kBackgroundColor = Color.fromARGB(255, 219, 219, 219);
 
+const IconData kBackIcon = Icons.arrow_back_ios;
 const IconData kDeleteIcon = Icons.delete;
 const IconData kEditIcon = Icons.edit;
 
