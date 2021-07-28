@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/garden.dart';
 import '../model/gardens_store.dart';
-import '../widgets/save_icon_button.dart';
+import '../widgets/base_app_bar.dart';
 import '../widgets/text_field_bordered_numeric.dart';
 import '../widgets/text_field_bordered.dart';
 import '../widgets/preview_grid_view.dart';
@@ -37,22 +37,11 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
     return Consumer<GardensStore>(
       builder: (context, gardensStore, child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: kAppBarBackgroundColor,
-            leading: new IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, MainScreen.id);
-              },
-              icon: new Icon(kBackIcon),
-            ),
-            title: Text('Edit $_name'),
-            actions: [
-              SaveIconButton(
-                callback: () async {
-                  await _save();
-                },
-              ),
-            ],
+          appBar: BaseAppBar(
+            backScreenID: MainScreen.id,
+            title: 'Edit $_name',
+            saveCallback: _save,
+            appBar: AppBar(),
           ),
           body: Container(
             color: kBackgroundColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'tiles_screen.dart';
-import '../widgets/save_icon_button.dart';
+import '../widgets/base_app_bar.dart';
 import '../model/gardens_store.dart';
 import '../model/enums.dart';
 import '../model/garden.dart';
@@ -17,8 +17,6 @@ class EditTileTypeScreen extends StatefulWidget {
 
 class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   TileType _tileType = TileType.plant;
-  String _plantName = '';
-  String _plantedDate = '';
 
   @override
   void initState() {
@@ -35,22 +33,11 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
     return Consumer<GardensStore>(
       builder: (context, gardensStore, child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: kAppBarBackgroundColor,
-            leading: new IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, TilesScreen.id);
-              },
-              icon: new Icon(kBackIcon),
-            ),
-            title: Text('Edit tile type'),
-            actions: [
-              SaveIconButton(
-                callback: () async {
-                  await _save();
-                },
-              ),
-            ],
+          appBar: BaseAppBar(
+            backScreenID: TilesScreen.id,
+            title: 'Edit tile type',
+            saveCallback: _save,
+            appBar: AppBar(),
           ),
           body: Container(
             color: kBackgroundColor,
