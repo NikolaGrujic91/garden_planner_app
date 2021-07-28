@@ -36,7 +36,7 @@ class GardensList extends StatelessWidget {
                               gardensStore.setSelectedGardenIndex(index);
                               await _showDeleteDialog(context);
                             },
-                            icon: const Icon(Icons.delete),
+                            icon: const Icon(kDeleteIcon),
                             tooltip: 'Delete garden',
                           ),
                           IconButton(
@@ -44,7 +44,7 @@ class GardensList extends StatelessWidget {
                               gardensStore.setSelectedGardenIndex(index);
                               Navigator.pushReplacementNamed(context, EditGardenScreen.id);
                             },
-                            icon: const Icon(Icons.edit),
+                            icon: const Icon(kEditIcon),
                             tooltip: 'Edit garden',
                           )
                         ],

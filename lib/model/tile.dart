@@ -44,4 +44,8 @@ class Tile {
   void addPlant({required PlantType plantType}) {
     _plants.add(Plant(type: plantType));
   }
+
+  void removePlant({required int index}) {
+    _plants.removeAt(index);
+  }
 }

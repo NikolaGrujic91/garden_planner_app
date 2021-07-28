@@ -66,6 +66,10 @@ class GardensStore extends ChangeNotifier {
     _gardens[_selectedGardenIndex].tiles[tileIndex].addPlant(plantType: plantType);
   }
 
+  void removePlant({required int index}) {
+    _gardens[_selectedGardenIndex].tiles[_selectedTileIndex].removePlant(index: index);
+  }
+
   Future<void> saveGardens() async {
     try {
       File file = await _trySaveGardens();

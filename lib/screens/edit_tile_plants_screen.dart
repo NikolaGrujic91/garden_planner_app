@@ -121,6 +121,16 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                         },
                         initialDate: _plantedDates[index],
                       ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await _showDeleteDialog(context, index);
+                        },
+                        icon: const Icon(kDeleteIcon),
+                        tooltip: 'Delete plant',
+                      ),
                     ],
                   ),
                 );
@@ -156,5 +166,51 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     gardensStore.updateSelectedTilePlants(plantsNames: _plantsNames, plantedDates: _plantedDates, plantsTypes: _plantsTypes);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
+  }
+
+  Future<void> _showDeleteDialog(BuildContext context, int index) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return Consumer<GardensStore>(
+          builder: (context, gardensStore, child) {
+            return AlertDialog(
+              title: Text('Confirm delete'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Delete'),
+                  onPressed: () async {
+                    gardensStore.removePlant(index: index);
+                    await gardensStore.saveGardens();
+                    Navigator.of(context).pop();
+
+                    setState(() {
+                      _plantsNames.removeAt(index);
+                      _plantedDates.removeAt(index);
+                      _plantsTypes.removeAt(index);
+                      _plantsTypesString.removeAt(index);
+                    });
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }

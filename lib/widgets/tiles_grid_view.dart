@@ -47,20 +47,20 @@ class TilesGrid extends StatelessWidget {
                   ? BoxDecoration(
                       border: Border(
                         top: BorderSide(
-                          width: drawTopBorder ? kHomeTileBorderWidth : 0.0,
-                          color: drawTopBorder ? kHomeTileBorderColor : Colors.white,
+                          width: drawTopBorder ? kTileHomeBorderWidth : 0.0,
+                          color: drawTopBorder ? kTileHomeBorderColor : Colors.white,
                         ),
                         bottom: BorderSide(
-                          width: drawBottomBorder ? kHomeTileBorderWidth : 0.0,
-                          color: drawBottomBorder ? kHomeTileBorderColor : Colors.white,
+                          width: drawBottomBorder ? kTileHomeBorderWidth : 0.0,
+                          color: drawBottomBorder ? kTileHomeBorderColor : Colors.white,
                         ),
                         left: BorderSide(
-                          width: drawLeftBorder ? kHomeTileBorderWidth : 0.0,
-                          color: drawLeftBorder ? kHomeTileBorderColor : Colors.white,
+                          width: drawLeftBorder ? kTileHomeBorderWidth : 0.0,
+                          color: drawLeftBorder ? kTileHomeBorderColor : Colors.white,
                         ),
                         right: BorderSide(
-                          width: drawRightBorder ? kHomeTileBorderWidth : 0.0,
-                          color: drawRightBorder ? kHomeTileBorderColor : Colors.white,
+                          width: drawRightBorder ? kTileHomeBorderWidth : 0.0,
+                          color: drawRightBorder ? kTileHomeBorderColor : Colors.white,
                         ),
                       ),
                     )
