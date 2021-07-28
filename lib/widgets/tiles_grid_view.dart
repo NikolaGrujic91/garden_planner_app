@@ -23,7 +23,7 @@ class TilesGrid extends StatelessWidget {
 
       // Calculate aspect ratio in order to make all grid cells always visible properly
       var size = MediaQuery.of(context).size;
-      var aspectRatio = (size.width / columns) / ((size.height - 56 - 50) / rows);
+      var aspectRatio = (size.width / columns) / ((size.height - 56 - 56) / rows);
 
       return InteractiveViewer(
         minScale: 0.1,
@@ -142,12 +142,12 @@ class TileGridViewCell extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(0.5),
       child: ListTile(
-        leading: Icon(tiles[index].icon),
+        leading: Icon(tileTypeToIconData(tiles[index].type)),
         title: Wrap(
           spacing: 12, // space between two icons
           children: plantIcons,
         ),
-        tileColor: tiles[index].tileColor,
+        tileColor: tileTypeToTileColor(tiles[index].type),
         onLongPress: () async {
           gardensStore.setSelectedTileIndex(index);
           Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);

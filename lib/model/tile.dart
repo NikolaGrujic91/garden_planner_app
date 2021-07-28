@@ -8,34 +8,20 @@ class Tile {
   TileType _type = TileType.none;
   List<Plant> _plants = <Plant>[];
 
-  IconData _icon = Icons.api;
-  Color _tileColor = Colors.black;
-
   Tile({required TileType type}) {
     _type = type;
-    _icon = tileTypeToIconData(_type);
-    _tileColor = tileTypeToTileColor(_type);
   }
 
   Tile.fromJson(Map<String, dynamic> json)
       : _type = stringToTileType(json['type']),
-        _plants = (json['plants'] as List).map((i) => Plant.fromJson(i)).toList() {
-    _icon = tileTypeToIconData(_type);
-    _tileColor = tileTypeToTileColor(_type);
-  }
+        _plants = (json['plants'] as List).map((i) => Plant.fromJson(i)).toList();
 
   Map<String, dynamic> toJson() => {'type': tileTypeToString(_type), 'plants': _plants};
 
   TileType get type => _type;
   UnmodifiableListView<Plant> get plants => UnmodifiableListView(_plants);
-  IconData get icon => _icon;
-  Color get tileColor => _tileColor;
 
-  set type(TileType value) {
-    _type = value;
-    _icon = tileTypeToIconData(_type);
-    _tileColor = tileTypeToTileColor(_type);
-  }
+  set type(TileType value) => _type = value;
 
   void updatePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes}) {
     int plantsLength = _plants.length;
