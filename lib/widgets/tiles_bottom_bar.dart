@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 
-class TilesBottomBar extends StatelessWidget {
+class TilesBottomBar extends StatefulWidget {
   const TilesBottomBar({
     Key? key,
   }) : super(key: key);
 
   @override
+  _TilesBottomBarState createState() => _TilesBottomBarState();
+}
+
+class _TilesBottomBarState extends State<TilesBottomBar> {
+  int _currentIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: _currentIndex,
+      onTap: _onTap,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Draggable(
@@ -52,5 +61,11 @@ class TilesBottomBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onTap(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
