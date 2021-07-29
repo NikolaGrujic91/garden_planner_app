@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'tiles_screen.dart';
-import '../widgets/base_app_bar.dart';
-import '../model/gardens_store.dart';
+
 import '../model/enums.dart';
 import '../model/garden.dart';
+import '../model/gardens_store.dart';
 import '../model/tile.dart';
 import '../utils/constants.dart';
+import '../widgets/base_app_bar.dart';
+import 'tiles_screen.dart';
 
 class EditTileTypeScreen extends StatefulWidget {
   static const String id = 'edit_tile_type_screen';

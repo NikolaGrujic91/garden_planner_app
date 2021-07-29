@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../model/garden.dart';
 import '../model/gardens_store.dart';
-import '../widgets/base_app_bar.dart';
-import '../widgets/text_field_bordered_numeric.dart';
-import '../widgets/text_field_bordered.dart';
-import '../widgets/preview_grid_view.dart';
 import '../screens/main_screen.dart';
 import '../utils/constants.dart';
+import '../widgets/base_app_bar.dart';
+import '../widgets/preview_grid_view.dart';
+import '../widgets/text_field_bordered.dart';
+import '../widgets/text_field_bordered_numeric.dart';
 
 class EditGardenScreen extends StatefulWidget {
   static const String id = 'edit_garden_screen';

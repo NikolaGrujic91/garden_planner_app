@@ -1,5 +1,5 @@
-import 'enums.dart';
 import '../utils/utility.dart';
+import 'enums.dart';
 
 class Plant {
   PlantType _type = PlantType.tree;

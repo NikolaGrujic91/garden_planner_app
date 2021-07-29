@@ -1,13 +1,15 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:collection';
-import '../screens/edit_tile_type_screen.dart';
-import '../screens/edit_tile_plants_screen.dart';
-import '../model/plant.dart';
-import '../model/tile.dart';
+
+import '../model/enums.dart';
 import '../model/garden.dart';
 import '../model/gardens_store.dart';
-import '../model/enums.dart';
+import '../model/plant.dart';
+import '../model/tile.dart';
+import '../screens/edit_tile_plants_screen.dart';
+import '../screens/edit_tile_type_screen.dart';
 import '../utils/constants.dart';
 import '../utils/utility.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../model/gardens_store.dart';
 import '../screens/edit_garden_screen.dart';
 import '../screens/tiles_screen.dart';
-import '../model/gardens_store.dart';
 import '../utils/constants.dart';
 
 class GardensList extends StatelessWidget {

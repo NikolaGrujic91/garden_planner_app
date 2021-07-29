@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:collection';
+
+import '../utils/utility.dart';
 import 'enums.dart';
 import 'plant.dart';
-import '../utils/utility.dart';
 
 class Tile {
   TileType _type = TileType.none;
