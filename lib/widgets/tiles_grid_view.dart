@@ -68,12 +68,12 @@ class TilesGrid extends StatelessWidget {
               child: isPlantTile
                   ? TileGridViewCellDragTarget(
                       tiles: tiles,
-                      index: index,
+                      tileIndex: index,
                       gardensStore: gardensStore,
                     )
                   : TileGridViewCell(
                       tiles: tiles,
-                      index: index,
+                      tileIndex: index,
                       gardensStore: gardensStore,
                     ),
             );
@@ -88,12 +88,12 @@ class TileGridViewCellDragTarget extends StatelessWidget {
   const TileGridViewCellDragTarget({
     Key? key,
     required this.tiles,
-    required this.index,
+    required this.tileIndex,
     required this.gardensStore,
   }) : super(key: key);
 
   final UnmodifiableListView<Tile> tiles;
-  final int index;
+  final int tileIndex;
   final GardensStore gardensStore;
 
   @override
@@ -102,16 +102,16 @@ class TileGridViewCellDragTarget extends StatelessWidget {
       builder: (context, candidateData, rejectedData) {
         return TileGridViewCell(
           tiles: tiles,
-          index: index,
+          tileIndex: tileIndex,
           gardensStore: gardensStore,
         );
       },
       onWillAccept: (data) {
-        return true;
+        return tiles[tileIndex].plants.length < 4;
       },
       onAccept: (data) async {
         PlantType plantType = stringToPlantType(data.toString());
-        gardensStore.addPlant(tileIndex: index, plantType: plantType);
+        gardensStore.addPlant(tileIndex: tileIndex, plantType: plantType);
         await gardensStore.saveGardens();
         print(data);
       },
@@ -123,38 +123,38 @@ class TileGridViewCell extends StatelessWidget {
   const TileGridViewCell({
     Key? key,
     required this.tiles,
-    required this.index,
+    required this.tileIndex,
     required this.gardensStore,
   }) : super(key: key);
 
   final UnmodifiableListView<Tile> tiles;
-  final int index;
+  final int tileIndex;
   final GardensStore gardensStore;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> plantIcons = <Widget>[];
 
-    for (Plant plant in tiles[index].plants) {
+    for (Plant plant in tiles[tileIndex].plants) {
       plantIcons.add(Icon(plantTypeToIconData(plant.type)));
     }
 
     return Padding(
       padding: const EdgeInsets.all(0.5),
       child: ListTile(
-        leading: Icon(tileTypeToIconData(tiles[index].type)),
+        leading: Icon(tileTypeToIconData(tiles[tileIndex].type)),
         title: Wrap(
           spacing: 12, // space between two icons
           children: plantIcons,
         ),
-        tileColor: tileTypeToTileColor(tiles[index].type),
+        tileColor: tileTypeToTileColor(tiles[tileIndex].type),
         onLongPress: () async {
-          gardensStore.setSelectedTileIndex(index);
+          gardensStore.setSelectedTileIndex(tileIndex);
           Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
         },
         onTap: () async {
-          if (tiles[index].type == TileType.plant && tiles[index].plants.length > 0) {
-            gardensStore.setSelectedTileIndex(index);
+          if (tiles[tileIndex].type == TileType.plant && tiles[tileIndex].plants.length > 0) {
+            gardensStore.setSelectedTileIndex(tileIndex);
             Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
           }
         },
