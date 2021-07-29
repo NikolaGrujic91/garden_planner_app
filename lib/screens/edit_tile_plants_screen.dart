@@ -52,7 +52,6 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
             backScreenID: TilesScreen.id,
             title: 'Edit plants',
             saveCallback: _save,
-            appBar: AppBar(),
           ),
           body: Container(
             color: kBackgroundColor,

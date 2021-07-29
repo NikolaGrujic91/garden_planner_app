@@ -4,12 +4,11 @@ import '../widgets/save_icon_button.dart';
 import '../utils/constants.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String backScreenID;
+  final String? backScreenID;
   final String title;
   final AsyncCallback? saveCallback;
-  final AppBar appBar;
 
-  const BaseAppBar({required this.backScreenID, required this.title, required this.saveCallback, required this.appBar});
+  const BaseAppBar({this.backScreenID, required this.title, this.saveCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +20,25 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       }));
     }
 
-    return AppBar(
-      backgroundColor: kAppBarBackgroundColor,
-      leading: IconButton(
+    Widget? backButton;
+
+    if (this.backScreenID != null) {
+      backButton = IconButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, backScreenID);
+          Navigator.pushReplacementNamed(context, this.backScreenID!);
         },
         icon: Icon(kBackIcon),
-      ),
+      );
+    }
+
+    return AppBar(
+      backgroundColor: kAppBarBackgroundColor,
+      leading: backButton,
       title: Text(title),
       actions: actions,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 }

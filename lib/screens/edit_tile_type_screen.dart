@@ -37,7 +37,6 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
             backScreenID: TilesScreen.id,
             title: 'Edit tile type',
             saveCallback: _save,
-            appBar: AppBar(),
           ),
           body: Container(
             color: kBackgroundColor,

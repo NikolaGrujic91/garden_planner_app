@@ -16,8 +16,6 @@ class TilesScreen extends StatelessWidget {
         appBar: BaseAppBar(
           backScreenID: MainScreen.id,
           title: gardensStore.gardens[gardensStore.selectedGardenIndex].name,
-          saveCallback: null,
-          appBar: AppBar(),
         ),
         body: TilesGrid(),
         bottomNavigationBar: TilesBottomBar(),

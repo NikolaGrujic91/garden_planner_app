@@ -41,7 +41,6 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
             backScreenID: MainScreen.id,
             title: 'Edit $_name',
             saveCallback: _save,
-            appBar: AppBar(),
           ),
           body: Container(
             color: kBackgroundColor,

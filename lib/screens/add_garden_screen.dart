@@ -28,7 +28,6 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
         backScreenID: MainScreen.id,
         title: 'Add Garden',
         saveCallback: _save,
-        appBar: AppBar(),
       ),
       body: Container(
         color: kBackgroundColor,

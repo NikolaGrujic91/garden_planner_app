@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'add_garden_screen.dart';
+import '../widgets/base_app_bar.dart';
 import '../widgets/gardens_list.dart';
 import '../utils/constants.dart';
 
@@ -9,9 +10,8 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: kAppBarBackgroundColor,
-          title: Text('Gardens'),
+        appBar: BaseAppBar(
+          title: 'Gardens',
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
