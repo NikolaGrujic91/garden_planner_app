@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
 import '../widgets/save_icon_button.dart';
+import '../widgets/styled_text.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? backScreenID;
@@ -35,7 +36,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: kAppBarBackgroundColor,
       leading: backButton,
-      title: Text(title),
+      title: StyledText(text: title),
       actions: actions,
     );
   }

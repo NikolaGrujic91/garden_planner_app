@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/styled_text.dart';
+
 class DatePicker extends StatefulWidget {
   final String restorationId;
   final Function callback;
@@ -50,7 +52,7 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
       onPressed: () {
         _restorableDatePickerRouteFuture.present();
       },
-      child: const Text('Change date'),
+      child: const StyledText(text: 'Change date'),
     );
   }
 
@@ -84,7 +86,7 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
         _selectedDate.value = newSelectedDate;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Selected: ${_selectedDate.value.day}.${_selectedDate.value.month}.${_selectedDate.value.year}'),
+            content: StyledText(text: 'Selected: ${_selectedDate.value.day}.${_selectedDate.value.month}.${_selectedDate.value.year}'),
           ),
         );
         widget.callback('${_selectedDate.value.day}.${_selectedDate.value.month}.${_selectedDate.value.year}');

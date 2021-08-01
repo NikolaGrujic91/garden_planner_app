@@ -7,6 +7,8 @@ import '../model/gardens_store.dart';
 import '../model/tile.dart';
 import '../utils/constants.dart';
 import '../widgets/base_app_bar.dart';
+import '../widgets/styled_text.dart';
+
 import 'tiles_screen.dart';
 
 class EditTileTypeScreen extends StatefulWidget {
@@ -47,7 +49,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                 children: [
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text(kPlant),
+                      title: const StyledText(text: kPlant),
                       value: TileType.plant,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -56,7 +58,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text(kHome),
+                      title: const StyledText(text: kHome),
                       value: TileType.home,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -65,7 +67,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text(kPath),
+                      title: const StyledText(text: kPath),
                       value: TileType.path,
                       groupValue: _tileType,
                       onChanged: _setTileType,
@@ -74,7 +76,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
                   ),
                   Material(
                     child: RadioListTile<TileType>(
-                      title: const Text(kNone),
+                      title: const StyledText(text: kNone),
                       value: TileType.none,
                       groupValue: _tileType,
                       onChanged: _setTileType,

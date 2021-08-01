@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:garden_planner_app/utils/constants.dart';
 
 class TextFieldBorderedNumeric extends StatelessWidget {
   TextFieldBorderedNumeric({required this.text, required this.hintText, required this.callback}) {
@@ -27,6 +28,7 @@ class TextFieldBorderedNumeric extends StatelessWidget {
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: _decoration,
         controller: this._textEditingController,
+        style: kTextStyle,
         onChanged: (value) {
           var intValue = int.tryParse(value);
 

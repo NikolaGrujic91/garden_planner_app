@@ -5,6 +5,7 @@ import '../model/gardens_store.dart';
 import '../screens/edit_garden_screen.dart';
 import '../screens/tiles_screen.dart';
 import '../utils/constants.dart';
+import '../widgets/styled_text.dart';
 
 class GardensList extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -28,7 +29,7 @@ class GardensList extends StatelessWidget {
                     child: ListTile(
                       tileColor: kBackgroundColor,
                       leading: Icon(Icons.grid_4x4),
-                      title: Text(gardensStore.gardens[index].name),
+                      title: StyledText(text: gardensStore.gardens[index].name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -73,17 +74,17 @@ class GardensList extends StatelessWidget {
         return Consumer<GardensStore>(
           builder: (context, gardensStore, child) {
             return AlertDialog(
-              title: Text('Confirm delete'),
+              title: StyledText(text: 'Confirm delete'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('Delete the garden \"${gardensStore.gardens[gardensStore.selectedGardenIndex].name}\"?'),
+                    StyledText(text: 'Delete the garden \"${gardensStore.gardens[gardensStore.selectedGardenIndex].name}\"?'),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Delete'),
+                  child: const StyledText(text: 'Delete'),
                   onPressed: () async {
                     gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
                     await gardensStore.saveGardens();
@@ -91,7 +92,7 @@ class GardensList extends StatelessWidget {
                   },
                 ),
                 TextButton(
-                  child: const Text('Cancel'),
+                  child: const StyledText(text: 'Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

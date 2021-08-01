@@ -36,3 +36,7 @@ const IconData kTreeIcon = Icons.home;
 const IconData kFruitIcon = Icons.home;
 const IconData kVegetableIcon = Icons.home;
 const IconData kFlowerIcon = Icons.home;
+
+const kTextStyle = TextStyle(
+  fontFamily: 'Roboto Sans',
+);

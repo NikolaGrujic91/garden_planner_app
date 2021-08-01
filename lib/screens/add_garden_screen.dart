@@ -7,6 +7,7 @@ import '../screens/main_screen.dart';
 import '../utils/constants.dart';
 import '../widgets/base_app_bar.dart';
 import '../widgets/preview_grid_view.dart';
+import '../widgets/styled_text.dart';
 import '../widgets/text_field_bordered.dart';
 import '../widgets/text_field_bordered_numeric.dart';
 
@@ -38,11 +39,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'Garden name',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
+              const StyledText(
+                text: 'Garden name',
               ),
               const SizedBox(
                 height: 20.0,
@@ -55,11 +53,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              const Text(
-                'Garden size',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
+              const StyledText(
+                text: 'Garden size',
               ),
               const SizedBox(
                 height: 20.0,
@@ -74,11 +69,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   const SizedBox(
                     width: 20.0,
                   ),
-                  const Text(
-                    'X',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
+                  const StyledText(
+                    text: 'X',
                   ),
                   const SizedBox(
                     width: 20.0,
@@ -93,11 +85,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              const Text(
-                'Preview',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
+              const StyledText(
+                text: 'Preview',
               ),
               const SizedBox(
                 height: 20.0,

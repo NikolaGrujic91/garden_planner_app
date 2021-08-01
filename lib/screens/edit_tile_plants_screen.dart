@@ -10,6 +10,7 @@ import '../utils/constants.dart';
 import '../utils/utility.dart';
 import '../widgets/base_app_bar.dart';
 import '../widgets/date_picker.dart';
+import '../widgets/styled_text.dart';
 import '../widgets/text_field_bordered.dart';
 import 'tiles_screen.dart';
 
@@ -81,7 +82,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                         items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: StyledText(text: value),
                           );
                         }).toList(),
                       ),
@@ -99,7 +100,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                       SizedBox(
                         width: 20.0,
                       ),
-                      Text(_plantedDates[index]),
+                      StyledText(text: _plantedDates[index]),
                       SizedBox(
                         width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
                       ),
@@ -165,17 +166,17 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
         return Consumer<GardensStore>(
           builder: (context, gardensStore, child) {
             return AlertDialog(
-              title: Text('Confirm delete'),
+              title: StyledText(text: 'Confirm delete'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text('Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
+                    StyledText(text: 'Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
                   ],
                 ),
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Delete'),
+                  child: const StyledText(text: 'Delete'),
                   onPressed: () async {
                     gardensStore.removePlant(index: index);
                     await gardensStore.saveGardens();
@@ -190,7 +191,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                   },
                 ),
                 TextButton(
-                  child: const Text('Cancel'),
+                  child: const StyledText(text: 'Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

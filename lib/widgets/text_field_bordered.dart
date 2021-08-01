@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:garden_planner_app/utils/constants.dart';
 
 class TextFieldBordered extends StatelessWidget {
   TextFieldBordered({required String text, required this.hintText, required this.callback, this.index}) {
@@ -24,6 +25,7 @@ class TextFieldBordered extends StatelessWidget {
     return TextField(
       decoration: _decoration,
       controller: _textEditingController,
+      style: kTextStyle,
       onChanged: (value) {
         if (index == null) {
           callback(value);
