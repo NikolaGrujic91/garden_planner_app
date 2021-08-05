@@ -14,4 +14,6 @@ Tasks:
 - DONE - Zoom and pan grid
 - DONE - Directly go back, no stack
 - Set new icons
-- Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
+- DONE - Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
+- Add max of four icons to tile, but one of each type
+- Add unlimited fruits, vegetables, trees and flowers to tile, but only 4 icons are visible
