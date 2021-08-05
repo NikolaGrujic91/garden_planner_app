@@ -21,7 +21,7 @@ class PreviewGridView extends StatelessWidget {
             padding: const EdgeInsets.all(0.5),
             child: Material(
               child: ListTile(
-                tileColor: Color.fromARGB(255, 82, 118, 82),
+                tileColor: Color.fromARGB(255, 146, 168, 144),
               ),
             ),
           );

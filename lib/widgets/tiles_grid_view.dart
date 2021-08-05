@@ -19,67 +19,64 @@ class TilesGrid extends StatelessWidget {
     return Consumer<GardensStore>(builder: (context, gardensStore, child) {
       final Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
       final int columns = selectedGarden.columns;
-      final int rows = selectedGarden.rows;
       final int itemCount = selectedGarden.columns * selectedGarden.rows;
       final UnmodifiableListView<Tile> tiles = selectedGarden.tiles;
-
-      // Calculate aspect ratio in order to make all grid cells always visible properly
-      var size = MediaQuery.of(context).size;
-      var aspectRatio = (size.width / columns) / ((size.height - 56 - 56) / rows);
 
       return InteractiveViewer(
         minScale: 0.1,
         maxScale: 2.0,
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: columns,
-            childAspectRatio: aspectRatio,
-          ),
-          itemCount: itemCount,
-          itemBuilder: (context, index) {
-            bool drawTopBorder = ((index - columns) >= 0 && tiles[index - columns].type != TileType.home) || ((index - columns) < 0);
-            bool drawBottomBorder = ((index + columns) < tiles.length && tiles[index + columns].type != TileType.home) || ((index + columns) > tiles.length);
-            bool drawLeftBorder = (index - 1) >= 0 && tiles[index - 1].type != TileType.home;
-            bool drawRightBorder = (index + 1) < tiles.length && tiles[index + 1].type != TileType.home;
-            bool isHomeTile = tiles[index].type == TileType.home;
-            bool isPlantTile = tiles[index].type == TileType.plant;
+        child: Center(
+          child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: columns,
+            ),
+            itemCount: itemCount,
+            itemBuilder: (context, index) {
+              bool drawTopBorder = ((index - columns) >= 0 && tiles[index - columns].type != TileType.home) || ((index - columns) < 0);
+              bool drawBottomBorder = ((index + columns) < tiles.length && tiles[index + columns].type != TileType.home) || ((index + columns) > tiles.length);
+              bool drawLeftBorder = (index - 1) >= 0 && tiles[index - 1].type != TileType.home;
+              bool drawRightBorder = (index + 1) < tiles.length && tiles[index + 1].type != TileType.home;
+              bool isHomeTile = tiles[index].type == TileType.home;
+              bool isPlantTile = tiles[index].type == TileType.plant;
 
-            return Container(
-              decoration: isHomeTile
-                  ? BoxDecoration(
-                      border: Border(
-                        top: BorderSide(
-                          width: drawTopBorder ? kTileHomeBorderWidth : 0.0,
-                          color: drawTopBorder ? kTileHomeBorderColor : Colors.white,
+              return Container(
+                decoration: isHomeTile
+                    ? BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: drawTopBorder ? kTileHomeBorderWidth : 0.0,
+                            color: drawTopBorder ? kTileHomeBorderColor : Colors.white,
+                          ),
+                          bottom: BorderSide(
+                            width: drawBottomBorder ? kTileHomeBorderWidth : 0.0,
+                            color: drawBottomBorder ? kTileHomeBorderColor : Colors.white,
+                          ),
+                          left: BorderSide(
+                            width: drawLeftBorder ? kTileHomeBorderWidth : 0.0,
+                            color: drawLeftBorder ? kTileHomeBorderColor : Colors.white,
+                          ),
+                          right: BorderSide(
+                            width: drawRightBorder ? kTileHomeBorderWidth : 0.0,
+                            color: drawRightBorder ? kTileHomeBorderColor : Colors.white,
+                          ),
                         ),
-                        bottom: BorderSide(
-                          width: drawBottomBorder ? kTileHomeBorderWidth : 0.0,
-                          color: drawBottomBorder ? kTileHomeBorderColor : Colors.white,
-                        ),
-                        left: BorderSide(
-                          width: drawLeftBorder ? kTileHomeBorderWidth : 0.0,
-                          color: drawLeftBorder ? kTileHomeBorderColor : Colors.white,
-                        ),
-                        right: BorderSide(
-                          width: drawRightBorder ? kTileHomeBorderWidth : 0.0,
-                          color: drawRightBorder ? kTileHomeBorderColor : Colors.white,
-                        ),
+                      )
+                    : null,
+                child: isPlantTile
+                    ? TileGridViewCellDragTarget(
+                        tiles: tiles,
+                        tileIndex: index,
+                        gardensStore: gardensStore,
+                      )
+                    : TileGridViewCell(
+                        tiles: tiles,
+                        tileIndex: index,
+                        gardensStore: gardensStore,
                       ),
-                    )
-                  : null,
-              child: isPlantTile
-                  ? TileGridViewCellDragTarget(
-                      tiles: tiles,
-                      tileIndex: index,
-                      gardensStore: gardensStore,
-                    )
-                  : TileGridViewCell(
-                      tiles: tiles,
-                      tileIndex: index,
-                      gardensStore: gardensStore,
-                    ),
-            );
-          },
+              );
+            },
+          ),
         ),
       );
     });
@@ -138,18 +135,19 @@ class TileGridViewCell extends StatelessWidget {
     List<Widget> plantIcons = <Widget>[];
 
     for (Plant plant in tiles[tileIndex].plants) {
-      plantIcons.add(Icon(plantTypeToIconData(plant.type)));
+      plantIcons.add(plantTypeToIconData(plant.type));
     }
 
     return Padding(
       padding: const EdgeInsets.all(0.5),
-      child: ListTile(
-        leading: Icon(tileTypeToIconData(tiles[tileIndex].type)),
-        title: Wrap(
-          spacing: 12, // space between two icons
-          children: plantIcons,
+      child: GestureDetector(
+        child: Container(
+          child: Wrap(
+            spacing: 12, // space between two icons
+            children: plantIcons,
+          ),
+          color: tileTypeToTileColor(tiles[tileIndex].type),
         ),
-        tileColor: tileTypeToTileColor(tiles[tileIndex].type),
         onLongPress: () async {
           gardensStore.setSelectedTileIndex(tileIndex);
           Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);

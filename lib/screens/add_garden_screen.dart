@@ -40,7 +40,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StyledText(
-                text: 'Garden name',
+                text: 'garden name',
               ),
               const SizedBox(
                 height: 20.0,
@@ -54,7 +54,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 height: 20.0,
               ),
               const StyledText(
-                text: 'Garden size',
+                text: 'garden size',
               ),
               const SizedBox(
                 height: 20.0,
@@ -86,7 +86,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 height: 20.0,
               ),
               const StyledText(
-                text: 'Preview',
+                text: 'preview',
               ),
               const SizedBox(
                 height: 20.0,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'constants.dart';
 import '../model/enums.dart';
 
@@ -84,15 +86,15 @@ PlantType stringToPlantType(String value) {
   }
 }
 
-IconData plantTypeToIconData(PlantType type) {
+SvgPicture plantTypeToIconData(PlantType type) {
   switch (type) {
     case PlantType.tree:
-      return kTreeIcon;
+      return kTreeIcon20;
     case PlantType.fruit:
-      return kFruitIcon;
+      return kFruitIcon20;
     case PlantType.vegetable:
-      return kVegetableIcon;
+      return kVegetableIcon20;
     case PlantType.flower:
-      return kFlowerIcon;
+      return kFlowerIcon20;
   }
 }

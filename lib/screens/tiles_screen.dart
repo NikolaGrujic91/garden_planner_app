@@ -18,7 +18,9 @@ class TilesScreen extends StatelessWidget {
           backScreenID: MainScreen.id,
           title: gardensStore.gardens[gardensStore.selectedGardenIndex].name,
         ),
-        body: TilesGrid(),
+        body: SafeArea(
+          child: TilesGrid(),
+        ),
         bottomNavigationBar: TilesBottomBar(),
       );
     });

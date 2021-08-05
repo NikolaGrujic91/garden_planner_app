@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: BaseAppBar(
-          title: 'Gardens',
+          title: 'Grow',
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {

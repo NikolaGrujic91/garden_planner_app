@@ -19,12 +19,12 @@ class _TilesBottomBarState extends State<TilesBottomBar> {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       onTap: _onTap,
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Draggable(
-            child: Icon(kTreeIcon),
-            feedback: Icon(kTreeIcon),
-            childWhenDragging: Icon(kTreeIcon),
+            child: kTreeIcon40,
+            feedback: kTreeIcon40,
+            childWhenDragging: kTreeIcon40,
             data: kTree,
           ),
           label: kTree,
@@ -32,9 +32,9 @@ class _TilesBottomBarState extends State<TilesBottomBar> {
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: Icon(kFruitIcon),
-            feedback: Icon(kFruitIcon),
-            childWhenDragging: Icon(kFruitIcon),
+            child: kFruitIcon40,
+            feedback: kFruitIcon40,
+            childWhenDragging: kFruitIcon40,
             data: kFruit,
           ),
           label: kFruit,
@@ -42,9 +42,9 @@ class _TilesBottomBarState extends State<TilesBottomBar> {
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: Icon(kVegetableIcon),
-            feedback: Icon(kVegetableIcon),
-            childWhenDragging: Icon(kVegetableIcon),
+            child: kVegetableIcon40,
+            feedback: kVegetableIcon40,
+            childWhenDragging: kVegetableIcon40,
             data: kVegetable,
           ),
           label: kVegetable,
@@ -52,9 +52,9 @@ class _TilesBottomBarState extends State<TilesBottomBar> {
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: Icon(kFlowerIcon),
-            feedback: Icon(kFlowerIcon),
-            childWhenDragging: Icon(kFlowerIcon),
+            child: kFlowerIcon40,
+            feedback: kFlowerIcon40,
+            childWhenDragging: kFlowerIcon40,
             data: kFlower,
           ),
           label: kFlower,
