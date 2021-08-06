@@ -106,7 +106,7 @@ class TileGridViewCellDragTarget extends StatelessWidget {
         );
       },
       onWillAccept: (data) {
-        return tiles[tileIndex].plants.length < 4;
+        return true;
       },
       onAccept: (data) async {
         PlantType plantType = stringToPlantType(data.toString());
@@ -132,10 +132,17 @@ class TileGridViewCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> plantIcons = <Widget>[];
-
+    List<PlantType> plantTypes = <PlantType>[];
     for (Plant plant in tiles[tileIndex].plants) {
-      plantIcons.add(plantTypeToIconData(plant.type));
+      if (!plantTypes.contains(plant.type)) {
+        plantTypes.add(plant.type);
+      }
+    }
+    plantTypes.sort((a, b) => a.index.compareTo(b.index));
+
+    List<Widget> plantIcons = <Widget>[];
+    for (PlantType plantType in plantTypes) {
+      plantIcons.add(plantTypeToIconData(plantType));
     }
 
     return Padding(
