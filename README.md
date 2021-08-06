@@ -15,5 +15,5 @@ Tasks:
 - DONE - Directly go back, no stack
 - Set new icons
 - DONE - Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
-- Add max of four icons to tile, but one of each type
-- Add unlimited fruits, vegetables, trees and flowers to tile, but only 4 icons are visible
+- DONE - Add max of four icons to tile, but one of each type
+- DONE - Add unlimited fruits, vegetables, trees and flowers to tile, but only 4 icons are visible
