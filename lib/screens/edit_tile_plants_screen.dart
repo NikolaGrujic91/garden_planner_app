@@ -82,7 +82,10 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                         items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: StyledText(text: value),
+                            child: Wrap(
+                              spacing: 12.0,
+                              children: <Widget>[plantTypeToIconData(stringToPlantType(value)), StyledText(text: value)],
+                            ),
                           );
                         }).toList(),
                       ),
