@@ -145,26 +145,29 @@ class TileGridViewCell extends StatelessWidget {
       plantIcons.add(plantTypeToIconData(plantType));
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(0.5),
-      child: GestureDetector(
-        child: Container(
-          child: Wrap(
-            spacing: 12, // space between two icons
-            children: plantIcons,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Padding(
+        padding: const EdgeInsets.all(0.5),
+        child: GestureDetector(
+          child: Container(
+            child: Wrap(
+              spacing: 12, // space between two icons
+              children: plantIcons,
+            ),
+            color: tileTypeToTileColor(tiles[tileIndex].type),
           ),
-          color: tileTypeToTileColor(tiles[tileIndex].type),
-        ),
-        onLongPress: () async {
-          gardensStore.setSelectedTileIndex(tileIndex);
-          Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
-        },
-        onTap: () async {
-          if (tiles[tileIndex].type == TileType.plant && tiles[tileIndex].plants.isNotEmpty) {
+          onLongPress: () async {
             gardensStore.setSelectedTileIndex(tileIndex);
-            Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
-          }
-        },
+            Navigator.pushReplacementNamed(context, EditTileTypeScreen.id);
+          },
+          onTap: () async {
+            if (tiles[tileIndex].type == TileType.plant && tiles[tileIndex].plants.isNotEmpty) {
+              gardensStore.setSelectedTileIndex(tileIndex);
+              Navigator.pushReplacementNamed(context, EditTilePlantsScreen.id);
+            }
+          },
+        ),
       ),
     );
   }
