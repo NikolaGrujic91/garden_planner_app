@@ -17,3 +17,12 @@ Tasks:
 - DONE - Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
 - DONE - Add max of four icons to tile, but one of each type
 - DONE - Add unlimited fruits, vegetables, trees and flowers to tile, but only 4 icons are visible
+- iOS - Launch screen
+- Text field display clear button
+- Divider between plant edit blocks
+- Add extra/description field
+- iOS & Android use picker to chose type of plants
+- iOS - check dark mode
+- macOS & Win - tabbing between fields
+- iOS & macOS - order of delete cancel buttons in modal dialogs
+- macOS & Win - hover color and cursor change on tile
