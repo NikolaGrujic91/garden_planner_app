@@ -25,4 +25,5 @@ Tasks:
 - iOS - check dark mode
 - macOS & Win - tabbing between fields
 - iOS & macOS - order of delete cancel buttons in modal dialogs
-- macOS & Win - hover color and cursor change on tile
+- macOS & Win - hover color
+- DONE - macOS & Win - cursor change on tile
