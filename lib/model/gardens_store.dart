@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'enums.dart';
 import 'garden.dart';
+import 'json_constants.dart';
 
 class GardensStore extends ChangeNotifier {
   List<Garden> _gardens = [];
@@ -17,7 +18,7 @@ class GardensStore extends ChangeNotifier {
     _loadGardens();
   }
 
-  Map<String, dynamic> toJson() => {'gardens': _gardens};
+  Map<String, dynamic> toJson() => {kJsonGardens: _gardens};
 
   UnmodifiableListView<Garden> get gardens => UnmodifiableListView(_gardens);
   int get selectedGardenIndex => _selectedGardenIndex;
@@ -99,12 +100,12 @@ class GardensStore extends ChangeNotifier {
     File file = await _localFile();
     String fileContent = await file.readAsString();
     Map<String, dynamic> json = await jsonDecode(fileContent);
-    _gardens = (json['gardens'] as List).map((i) => Garden.fromJson(i)).toList();
+    _gardens = (json[kJsonGardens] as List).map((i) => Garden.fromJson(i)).toList();
   }
 
   Future<File> _localFile() async {
     final path = await _localPath();
-    var file = File('$path/gardens.json').create(recursive: true);
+    var file = File('$path/$kJsonFileName').create(recursive: true);
     return file;
   }
 

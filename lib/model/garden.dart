@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'enums.dart';
+import 'json_constants.dart';
 import 'tile.dart';
 
 class Garden {
@@ -17,12 +18,12 @@ class Garden {
   }
 
   Garden.fromJson(Map<String, dynamic> json)
-      : _name = json['name'],
-        _rows = json['rows'],
-        _columns = json['columns'],
-        _tiles = (json['tiles'] as List).map((i) => Tile.fromJson(i)).toList();
+      : _name = json[kJsonName],
+        _rows = json[kJsonRows],
+        _columns = json[kJsonColumns],
+        _tiles = (json[kJsonTiles] as List).map((i) => Tile.fromJson(i)).toList();
 
-  Map<String, dynamic> toJson() => {'name': _name, 'rows': _rows, 'columns': _columns, 'tiles': _tiles};
+  Map<String, dynamic> toJson() => {kJsonName: _name, kJsonRows: _rows, kJsonColumns: _columns, kJsonTiles: _tiles};
 
   String get name => _name;
   int get rows => _rows;

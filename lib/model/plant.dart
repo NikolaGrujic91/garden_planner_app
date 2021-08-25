@@ -1,5 +1,6 @@
 import '../utils/utility.dart';
 import 'enums.dart';
+import 'json_constants.dart';
 
 class Plant {
   PlantType _type = PlantType.tree;
@@ -11,11 +12,11 @@ class Plant {
   }
 
   Plant.fromJson(Map<String, dynamic> json)
-      : _type = stringToPlantType(json['type']),
-        _name = json['plantName'],
-        _plantedDate = json['plantedDate'];
+      : _type = stringToPlantType(json[kJsonType]),
+        _name = json[kJsonPlantName],
+        _plantedDate = json[kJsonPlantedDate];
 
-  Map<String, dynamic> toJson() => {'type': plantTypeToString(_type), 'plantName': _name, 'plantedDate': _plantedDate};
+  Map<String, dynamic> toJson() => {kJsonType: plantTypeToString(_type), kJsonPlantName: _name, kJsonPlantedDate: _plantedDate};
 
   PlantType get type => _type;
   String get name => _name;
