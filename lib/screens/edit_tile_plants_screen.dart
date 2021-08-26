@@ -199,27 +199,52 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                 ),
               ),
               actions: <Widget>[
-                TextButton(
-                  child: const StyledText(text: 'Delete'),
-                  onPressed: () async {
-                    gardensStore.removePlant(index: index);
-                    await gardensStore.saveGardens();
-                    Navigator.of(context).pop();
+                if (Platform.isWindows)
+                  TextButton(
+                    child: const StyledText(text: 'Delete'),
+                    onPressed: () async {
+                      gardensStore.removePlant(index: index);
+                      await gardensStore.saveGardens();
+                      Navigator.of(context).pop();
 
-                    setState(() {
-                      _plantsNames.removeAt(index);
-                      _plantedDates.removeAt(index);
-                      _plantsTypes.removeAt(index);
-                      _plantsTypesString.removeAt(index);
-                    });
-                  },
-                ),
-                TextButton(
-                  child: const StyledText(text: 'Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+                      setState(() {
+                        _plantsNames.removeAt(index);
+                        _plantedDates.removeAt(index);
+                        _plantsTypes.removeAt(index);
+                        _plantsTypesString.removeAt(index);
+                      });
+                    },
+                  )
+                else
+                  TextButton(
+                    child: const StyledText(text: 'Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                if (Platform.isWindows)
+                  TextButton(
+                    child: const StyledText(text: 'Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                else
+                  TextButton(
+                    child: const StyledText(text: 'Delete'),
+                    onPressed: () async {
+                      gardensStore.removePlant(index: index);
+                      await gardensStore.saveGardens();
+                      Navigator.of(context).pop();
+
+                      setState(() {
+                        _plantsNames.removeAt(index);
+                        _plantedDates.removeAt(index);
+                        _plantsTypes.removeAt(index);
+                        _plantsTypesString.removeAt(index);
+                      });
+                    },
+                  ),
               ],
             );
           },

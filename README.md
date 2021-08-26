@@ -24,6 +24,6 @@ Tasks:
 - DONE - iOS & Android use picker to chose type of plants
 - iOS - check dark mode
 - macOS & Win - tabbing between fields
-- iOS & macOS - order of delete cancel buttons in modal dialogs
+- DONE - iOS & macOS - order of delete cancel buttons in modal dialogs
 - macOS & Win - hover color
 - DONE - macOS & Win - cursor change on tile

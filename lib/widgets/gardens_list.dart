@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,20 +85,38 @@ class GardensList extends StatelessWidget {
                 ),
               ),
               actions: <Widget>[
-                TextButton(
-                  child: const StyledText(text: 'Delete'),
-                  onPressed: () async {
-                    gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
-                    await gardensStore.saveGardens();
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: const StyledText(text: 'Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+                if (Platform.isWindows)
+                  TextButton(
+                    child: const StyledText(text: 'Delete'),
+                    onPressed: () async {
+                      gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+                      await gardensStore.saveGardens();
+                      Navigator.of(context).pop();
+                    },
+                  )
+                else
+                  TextButton(
+                    child: const StyledText(text: 'Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                if (Platform.isWindows)
+                  TextButton(
+                    child: const StyledText(text: 'Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                else
+                  TextButton(
+                    child: const StyledText(text: 'Delete'),
+                    onPressed: () async {
+                      gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+                      await gardensStore.saveGardens();
+                      Navigator.of(context).pop();
+                    },
+                  ),
               ],
             );
           },
