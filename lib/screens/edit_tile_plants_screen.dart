@@ -25,6 +25,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   late Tile _selectedTile;
   List<String> _plantsNames = <String>[];
   List<String> _plantedDates = <String>[];
+  List<String> _descriptions = <String>[];
   List<PlantType> _plantsTypes = <PlantType>[];
   List<String> _plantsTypesString = <String>[];
   List<String> _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
@@ -40,6 +41,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     for (Plant plant in _selectedTile.plants) {
       _plantsNames.add(plant.name);
       _plantedDates.add(plant.plantedDate);
+      _descriptions.add(plant.description);
       _plantsTypes.add(plant.type);
       _plantsTypesString.add(plantTypeToString(plant.type));
     }
@@ -62,84 +64,105 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
+                  child: Column(
                     children: [
-                      DropdownButton<String>(
-                        value: _plantsTypesString[index],
-                        icon: Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 8.0,
-                          ),
-                          child: const Icon(kDropdownArrow),
-                        ),
-                        iconSize: 24,
-                        elevation: 16,
-                        dropdownColor: kDropdownColor,
-                        style: const TextStyle(
-                          color: kDropdownText,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: kDropdownUnderline,
-                        ),
-                        onChanged: (String? newValue) {
-                          _setPlantType(newValue!, index);
-                        },
-                        items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Wrap(
-                              spacing: 12.0,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: 10.0,
-                                  ),
-                                  child: plantTypeToIconData(stringToPlantType(value)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 7.0),
-                                  child: StyledText(text: value),
-                                )
-                              ],
+                      Row(
+                        children: [
+                          DropdownButton<String>(
+                            value: _plantsTypesString[index],
+                            icon: Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8.0,
+                              ),
+                              child: const Icon(kDropdownArrow),
                             ),
-                          );
-                        }).toList(),
+                            iconSize: 24,
+                            elevation: 16,
+                            dropdownColor: kDropdownColor,
+                            style: const TextStyle(
+                              color: kDropdownText,
+                            ),
+                            underline: Container(
+                              height: 2,
+                              color: kDropdownUnderline,
+                            ),
+                            onChanged: (String? newValue) {
+                              _setPlantType(newValue!, index);
+                            },
+                            items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Wrap(
+                                  spacing: 12.0,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 10.0,
+                                      ),
+                                      child: plantTypeToIconData(stringToPlantType(value)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 7.0),
+                                      child: StyledText(text: value),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          StyledText(text: _plantedDates[index]),
+                          SizedBox(
+                            width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
+                          ),
+                          DatePicker(
+                            restorationId: EditTilePlantsScreen.id,
+                            callback: (String newValue) {
+                              _setPlantedDate(newValue, index);
+                            },
+                            initialDate: _plantedDates[index],
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () async {
+                              await _showDeleteDialog(context, index);
+                            },
+                            icon: const Icon(kDeleteIcon),
+                            tooltip: 'Delete plant',
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        width: 20.0,
+                        height: 10.0,
                       ),
-                      Expanded(
-                        child: TextFieldBordered(
-                          text: _plantsNames[index],
-                          hintText: 'Plant name',
-                          callback: _setPlantName,
-                          index: index,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      StyledText(text: _plantedDates[index]),
-                      SizedBox(
-                        width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
-                      ),
-                      DatePicker(
-                        restorationId: EditTilePlantsScreen.id,
-                        callback: (String newValue) {
-                          _setPlantedDate(newValue, index);
-                        },
-                        initialDate: _plantedDates[index],
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFieldBordered(
+                              text: _plantsNames[index],
+                              hintText: 'Plant name',
+                              callback: _setPlantName,
+                              index: index,
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        width: 20.0,
+                        height: 10.0,
                       ),
-                      IconButton(
-                        onPressed: () async {
-                          await _showDeleteDialog(context, index);
-                        },
-                        icon: const Icon(kDeleteIcon),
-                        tooltip: 'Delete plant',
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFieldBordered(
+                              text: _descriptions[index],
+                              hintText: 'Description',
+                              callback: _setDescription,
+                              index: index,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -165,6 +188,12 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     });
   }
 
+  void _setDescription(String description, int index) {
+    setState(() {
+      _descriptions[index] = description;
+    });
+  }
+
   void _setPlantedDate(String plantedDate, int index) {
     setState(() {
       _plantedDates[index] = plantedDate;
@@ -173,7 +202,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTilePlants(plantsNames: _plantsNames, plantedDates: _plantedDates, plantsTypes: _plantsTypes);
+    gardensStore.updateSelectedTilePlants(plantsNames: _plantsNames, plantedDates: _plantedDates, plantsTypes: _plantsTypes, descriptions: _descriptions);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }

@@ -52,7 +52,7 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
       onPressed: () {
         _restorableDatePickerRouteFuture.present();
       },
-      child: const StyledText(text: 'Change date'),
+      child: const StyledText(text: 'Change planted date'),
     );
   }
 

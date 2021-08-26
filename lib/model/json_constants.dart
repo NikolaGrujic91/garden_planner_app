@@ -2,6 +2,7 @@ const String kJsonType = 'type';
 const String kJsonPlants = 'plants';
 const String kJsonPlantName = 'plantName';
 const String kJsonPlantedDate = 'plantedDate';
+const String kJsonDescription = 'description';
 const String kJsonName = 'name';
 const String kJsonRows = 'rows';
 const String kJsonColumns = 'columns';

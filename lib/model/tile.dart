@@ -24,22 +24,23 @@ class Tile {
 
   set type(TileType value) => _type = value;
 
-  void updatePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes}) {
+  void updatePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes, required List<String> descriptions}) {
     int plantsLength = _plants.length;
 
-    if (plantsLength != plantsNames.length || plantsLength != plantedDates.length || plantsLength != plantsTypes.length) {
+    if (plantsLength != plantsNames.length || plantsLength != plantedDates.length || plantsLength != plantsTypes.length || plantsLength != descriptions.length) {
       return;
     }
 
     for (int i = 0; i < plantsLength; i++) {
-      _updatePlant(index: i, plantType: plantsTypes[i], plantName: plantsNames[i], plantedDate: plantedDates[i]);
+      _updatePlant(index: i, plantType: plantsTypes[i], plantName: plantsNames[i], plantedDate: plantedDates[i], description: descriptions[i]);
     }
   }
 
-  void _updatePlant({required int index, required PlantType plantType, required String plantName, required String plantedDate}) {
+  void _updatePlant({required int index, required PlantType plantType, required String plantName, required String plantedDate, required String description}) {
     _plants[index].type = plantType;
     _plants[index].name = plantName;
     _plants[index].plantedDate = plantedDate;
+    _plants[index].description = description;
   }
 
   void addPlant({required PlantType plantType}) {

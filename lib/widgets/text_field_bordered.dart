@@ -20,6 +20,11 @@ class TextFieldBordered extends StatelessWidget {
       suffixIcon: IconButton(
         onPressed: () {
           _textEditingController.clear();
+          if (index == null) {
+            callback(_textEditingController.value.text);
+          } else {
+            callback(_textEditingController.value.text, index);
+          }
         },
         icon: Icon(Icons.clear),
       ),
@@ -39,6 +44,9 @@ class TextFieldBordered extends StatelessWidget {
           callback(value, index);
         }
       },
+      keyboardType: TextInputType.multiline,
+      minLines: 1,
+      maxLines: 5,
     );
   }
 }

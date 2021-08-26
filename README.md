@@ -20,7 +20,7 @@ Tasks:
 - iOS - Launch screen
 - DONE - Text field display clear button
 - Divider between plant edit blocks
-- Add extra/description field
+- DONE - Add extra/description field
 - iOS & Android use picker to chose type of plants
 - iOS - check dark mode
 - macOS & Win - tabbing between fields
