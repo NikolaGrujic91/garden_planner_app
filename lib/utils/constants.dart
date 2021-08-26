@@ -32,7 +32,7 @@ const double kTileHomeBorderWidth = 3.0;
 const String kTree = 'tree';
 const String kFruit = 'fruit';
 const String kVegetable = 'vegetable';
-const String kFlower = 'plant';
+const String kFlower = 'flower';
 
 SvgPicture kTreeIcon20 = SvgPicture.asset(
   'images/tree.svg',

@@ -21,7 +21,7 @@ Tasks:
 - DONE - Text field display clear button
 - Divider between plant edit blocks
 - DONE - Add extra/description field
-- iOS & Android use picker to chose type of plants
+- DONE - iOS & Android use picker to chose type of plants
 - iOS - check dark mode
 - macOS & Win - tabbing between fields
 - iOS & macOS - order of delete cancel buttons in modal dialogs

@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +12,8 @@ import '../utils/constants.dart';
 import '../utils/utility.dart';
 import '../widgets/base_app_bar.dart';
 import '../widgets/date_picker.dart';
+import '../widgets/plant_type_dropdown.dart';
+import '../widgets/plant_type_picker.dart';
 import '../widgets/styled_text.dart';
 import '../widgets/text_field_bordered.dart';
 import 'tiles_screen.dart';
@@ -68,48 +72,19 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                     children: [
                       Row(
                         children: [
-                          DropdownButton<String>(
-                            value: _plantsTypesString[index],
-                            icon: Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 8.0,
-                              ),
-                              child: const Icon(kDropdownArrow),
-                            ),
-                            iconSize: 24,
-                            elevation: 16,
-                            dropdownColor: kDropdownColor,
-                            style: const TextStyle(
-                              color: kDropdownText,
-                            ),
-                            underline: Container(
-                              height: 2,
-                              color: kDropdownUnderline,
-                            ),
-                            onChanged: (String? newValue) {
-                              _setPlantType(newValue!, index);
-                            },
-                            items: _dropdownValues.map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Wrap(
-                                  spacing: 12.0,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 10.0,
-                                      ),
-                                      child: plantTypeToIconData(stringToPlantType(value)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 7.0),
-                                      child: StyledText(text: value),
-                                    )
-                                  ],
+                          (Platform.isMacOS || Platform.isWindows)
+                              ? PlantTypeDropdown(
+                                  dropdownValues: _dropdownValues,
+                                  value: _plantsTypesString[index],
+                                  index: index,
+                                  callback: _setPlantType,
+                                )
+                              : PlantTypePicker(
+                                  dropdownValues: _dropdownValues,
+                                  value: _plantsTypesString[index],
+                                  index: index,
+                                  callback: _setPlantType,
                                 ),
-                              );
-                            }).toList(),
-                          ),
                           SizedBox(
                             width: 20.0,
                           ),
