@@ -3,6 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 
 class TextFieldBorderedNumeric extends StatelessWidget {
+  final Function callback;
+  final String hintText;
+  final String text;
+
+  late final TextEditingController _textEditingController;
+  late final InputDecoration _decoration;
+
   TextFieldBorderedNumeric({required this.text, required this.hintText, required this.callback}) {
     _textEditingController = TextEditingController(text: this.text);
     _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
@@ -10,15 +17,14 @@ class TextFieldBorderedNumeric extends StatelessWidget {
     _decoration = InputDecoration(
       border: OutlineInputBorder(),
       hintText: this.hintText,
+      suffixIcon: IconButton(
+        onPressed: () {
+          _textEditingController.clear();
+        },
+        icon: Icon(Icons.clear),
+      ),
     );
   }
-
-  final Function callback;
-  final String hintText;
-  final String text;
-
-  late final TextEditingController _textEditingController;
-  late final InputDecoration _decoration;
 
   @override
   Widget build(BuildContext context) {
