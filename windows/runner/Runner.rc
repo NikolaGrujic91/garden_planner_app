@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "com.nikolagrujic" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "garden_planner_app" "\0"
+            VALUE "InternalName", "Grow" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2021 com.nikolagrujic. All rights reserved." "\0"
-            VALUE "OriginalFilename", "garden_planner_app.exe" "\0"
-            VALUE "ProductName", "garden_planner_app" "\0"
+            VALUE "OriginalFilename", "Grow.exe" "\0"
+            VALUE "ProductName", "Grow" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
