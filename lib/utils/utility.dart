@@ -95,12 +95,12 @@ PlantType stringToPlantType(String value) {
 SvgPicture plantTypeToSvgPicture(PlantType type) {
   switch (type) {
     case PlantType.tree:
-      return kTreeIcon20;
+      return kTreeIcon30;
     case PlantType.fruit:
-      return kFruitIcon20;
+      return kFruitIcon30;
     case PlantType.vegetable:
-      return kVegetableIcon20;
+      return kVegetableIcon30;
     case PlantType.flower:
-      return kFlowerIcon20;
+      return kFlowerIcon30;
   }
 }

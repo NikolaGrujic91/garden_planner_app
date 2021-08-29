@@ -39,11 +39,11 @@ class PlantTypeDropdown extends StatelessWidget {
       elevation: 16,
       dropdownColor: kDropdownColor,
       style: const TextStyle(
-        color: kDropdownText,
+        color: kDropdownTextColor,
       ),
       underline: Container(
         height: 2,
-        color: kDropdownUnderline,
+        color: kDropdownUnderlineColor,
       ),
       onChanged: (String? newValue) {
         callback(newValue!, index);
