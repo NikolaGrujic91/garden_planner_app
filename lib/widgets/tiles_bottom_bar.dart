@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/constants.dart';
 
-import '../utils/constants.dart';
-
+/// This widget represents bottom bar with draggable items
 class TilesBottomBar extends StatefulWidget {
-  const TilesBottomBar({
-    Key? key,
-  }) : super(key: key);
+  /// Creates a new instance
+  const TilesBottomBar({Key? key}) : super(key: key);
 
   @override
   _TilesBottomBarState createState() => _TilesBottomBarState();
@@ -22,40 +21,40 @@ class _TilesBottomBarState extends State<TilesBottomBar> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Draggable(
-            child: kTreeIcon40,
             feedback: kTreeIcon40,
-            childWhenDragging: kTreeIcon40,
             data: kTree,
+            childWhenDragging: kTreeIcon40,
+            child: kTreeIcon40,
           ),
           label: kTree,
           backgroundColor: kAppBarBackgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: kFruitIcon40,
             feedback: kFruitIcon40,
-            childWhenDragging: kFruitIcon40,
             data: kFruit,
+            childWhenDragging: kFruitIcon40,
+            child: kFruitIcon40,
           ),
           label: kFruit,
           backgroundColor: kAppBarBackgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: kVegetableIcon40,
             feedback: kVegetableIcon40,
-            childWhenDragging: kVegetableIcon40,
             data: kVegetable,
+            childWhenDragging: kVegetableIcon40,
+            child: kVegetableIcon40,
           ),
           label: kVegetable,
           backgroundColor: kAppBarBackgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Draggable(
-            child: kFlowerIcon40,
             feedback: kFlowerIcon40,
-            childWhenDragging: kFlowerIcon40,
             data: kFlower,
+            childWhenDragging: kFlowerIcon40,
+            child: kFlowerIcon40,
           ),
           label: kFlower,
           backgroundColor: kAppBarBackgroundColor,
