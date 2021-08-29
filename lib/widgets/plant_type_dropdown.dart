@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/utility.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 
-import '../utils/constants.dart';
-import '../utils/utility.dart';
-import 'styled_text.dart';
-
+/// This widget enables picking plant type via modal dropdown
 class PlantTypeDropdown extends StatelessWidget {
-  final List<String> dropdownValues;
-  final String value;
-  final int index;
-  final Function callback;
+  /// Creates a new instance
+  const PlantTypeDropdown({
+    Key? key,
+    required this.dropdownValues,
+    required this.value,
+    required this.index,
+    required this.callback,
+  }) : super(key: key);
 
-  const PlantTypeDropdown({Key? key, required this.dropdownValues, required this.value, required this.index, required this.callback}) : super(key: key);
+  /// List of values to display in the dropdown
+  final List<String> dropdownValues;
+
+  /// Value of initially selected value
+  final String value;
+
+  /// Index of selected tile
+  final int index;
+
+  /// Callback function
+  final Function(String plantType, int index) callback;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: value,
-      icon: Padding(
-        padding: const EdgeInsets.only(
-          bottom: 8.0,
+      icon: const Padding(
+        padding: EdgeInsets.only(
+          bottom: 8,
         ),
-        child: const Icon(kDropdownArrow),
+        child: Icon(kDropdownArrow),
       ),
-      iconSize: 24,
       elevation: 16,
       dropdownColor: kDropdownColor,
       style: const TextStyle(
@@ -39,16 +52,18 @@ class PlantTypeDropdown extends StatelessWidget {
         return DropdownMenuItem<String>(
           value: value,
           child: Wrap(
-            spacing: 12.0,
+            spacing: 12,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(
-                  bottom: 10.0,
+                  bottom: 10,
                 ),
                 child: plantTypeToIconData(stringToPlantType(value)),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 7.0),
+                padding: const EdgeInsets.only(
+                  top: 7,
+                ),
                 child: StyledText(text: value),
               )
             ],
