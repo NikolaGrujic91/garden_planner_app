@@ -21,8 +21,10 @@ class Tile {
   List<Plant> plants = <Plant>[];
 
   /// Convert object data to JSON
-  Map<String, dynamic> toJson() =>
-      {kJsonType: tileTypeToString(type), kJsonPlants: plants};
+  Map<String, dynamic> toJson() => {
+        kJsonType: tileTypeToString(type),
+        kJsonPlants: plants,
+      };
 
   /// Update tile plants based on given input
   void updatePlants({

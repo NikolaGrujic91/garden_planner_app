@@ -1,32 +1,36 @@
-import '../utils/utility.dart';
-import 'enums.dart';
-import 'json_constants.dart';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/json_constants.dart';
+import 'package:garden_planner_app/utils/utility.dart';
 
+/// Model class that stores Plant data
 class Plant {
-  PlantType _type = PlantType.tree;
-  String _name = '';
-  String _plantedDate = '';
-  String _description = '';
+  /// Creates a new instance
+  Plant({required this.type});
 
-  Plant({required PlantType type}) {
-    _type = type;
-  }
-
+  /// Creates a new instance from JSON
   Plant.fromJson(Map<String, dynamic> json)
-      : _type = stringToPlantType(json[kJsonType]),
-        _name = json[kJsonPlantName],
-        _plantedDate = json[kJsonPlantedDate],
-        _description = json[kJsonDescription];
+      : type = stringToPlantType(json[kJsonType].toString()),
+        name = json[kJsonPlantName].toString(),
+        plantedDate = json[kJsonPlantedDate].toString(),
+        description = json[kJsonDescription].toString();
 
-  Map<String, dynamic> toJson() => {kJsonType: plantTypeToString(_type), kJsonPlantName: _name, kJsonPlantedDate: _plantedDate, kJsonDescription: _description};
+  /// Plant type
+  PlantType type = PlantType.tree;
 
-  PlantType get type => _type;
-  String get name => _name;
-  String get plantedDate => _plantedDate;
-  String get description => _description;
+  /// Name
+  String name = '';
 
-  set type(PlantType value) => _type = value;
-  set name(String value) => _name = value;
-  set plantedDate(String value) => _plantedDate = value;
-  set description(String value) => _description = value;
+  /// Planted date
+  String plantedDate = '';
+
+  /// Additional description
+  String description = '';
+
+  /// Convert object data to JSON
+  Map<String, String> toJson() => {
+        kJsonType: plantTypeToString(type),
+        kJsonPlantName: name,
+        kJsonPlantedDate: plantedDate,
+        kJsonDescription: description,
+      };
 }
