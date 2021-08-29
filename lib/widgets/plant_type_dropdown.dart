@@ -58,7 +58,7 @@ class PlantTypeDropdown extends StatelessWidget {
                 padding: const EdgeInsets.only(
                   bottom: 10,
                 ),
-                child: plantTypeToIconData(stringToPlantType(value)),
+                child: plantTypeToSvgPicture(stringToPlantType(value)),
               ),
               Padding(
                 padding: const EdgeInsets.only(

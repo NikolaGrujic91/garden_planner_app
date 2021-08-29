@@ -32,7 +32,7 @@ class PlantTypePicker extends StatelessWidget {
       onPressed: () async {
         await _showPlantTypePicker(context, index);
       },
-      icon: plantTypeToIconData(stringToPlantType(value)),
+      icon: plantTypeToSvgPicture(stringToPlantType(value)),
     );
   }
 

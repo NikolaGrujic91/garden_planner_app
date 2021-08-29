@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/utils/constants.dart';
 
-import 'constants.dart';
-import '../model/enums.dart';
-
+/// Convert TileType enum to String
 String tileTypeToString(TileType type) {
   switch (type) {
     case TileType.none:
@@ -17,6 +17,7 @@ String tileTypeToString(TileType type) {
   }
 }
 
+/// Convert String to TileType enum
 TileType stringToTileType(String value) {
   switch (value) {
     case kNone:
@@ -32,6 +33,7 @@ TileType stringToTileType(String value) {
   }
 }
 
+/// Convert TileType enum to IconData
 IconData tileTypeToIconData(TileType type) {
   switch (type) {
     case TileType.none:
@@ -45,6 +47,7 @@ IconData tileTypeToIconData(TileType type) {
   }
 }
 
+/// Convert TileType enum to Color
 Color tileTypeToTileColor(TileType type) {
   switch (type) {
     case TileType.none:
@@ -58,6 +61,7 @@ Color tileTypeToTileColor(TileType type) {
   }
 }
 
+/// Convert PlantType enum to String
 String plantTypeToString(PlantType type) {
   switch (type) {
     case PlantType.tree:
@@ -71,6 +75,7 @@ String plantTypeToString(PlantType type) {
   }
 }
 
+/// Convert String to PlantType enum
 PlantType stringToPlantType(String value) {
   switch (value) {
     case kTree:
@@ -86,7 +91,8 @@ PlantType stringToPlantType(String value) {
   }
 }
 
-SvgPicture plantTypeToIconData(PlantType type) {
+/// Convert PlantType enum to SvgPicture
+SvgPicture plantTypeToSvgPicture(PlantType type) {
   switch (type) {
     case PlantType.tree:
       return kTreeIcon20;

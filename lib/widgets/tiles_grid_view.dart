@@ -172,7 +172,7 @@ class TileGridViewCell extends StatelessWidget {
 
     final plantIcons = <Widget>[];
     for (final plantType in plantTypes) {
-      plantIcons.add(plantTypeToIconData(plantType));
+      plantIcons.add(plantTypeToSvgPicture(plantType));
     }
 
     return MouseRegion(
