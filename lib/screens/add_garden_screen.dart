@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/model/garden.dart';
+import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/screens/main_screen.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/widgets/base_app_bar.dart';
+import 'package:garden_planner_app/widgets/preview_grid_view.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
+import 'package:garden_planner_app/widgets/text_field_bordered.dart';
+import 'package:garden_planner_app/widgets/text_field_bordered_numeric.dart';
 import 'package:provider/provider.dart';
 
-import '../model/garden.dart';
-import '../model/gardens_store.dart';
-import '../screens/main_screen.dart';
-import '../utils/constants.dart';
-import '../widgets/base_app_bar.dart';
-import '../widgets/preview_grid_view.dart';
-import '../widgets/styled_text.dart';
-import '../widgets/text_field_bordered.dart';
-import '../widgets/text_field_bordered_numeric.dart';
-
+/// Add Garden Screen Widget
 class AddGardenScreen extends StatefulWidget {
+  /// Creates a new instance
+  const AddGardenScreen({Key? key}) : super(key: key);
+
+  /// Screen ID
   static const String id = 'add_garden_screen';
 
   @override
@@ -34,16 +38,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
       body: Container(
         color: kBackgroundColor,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const StyledText(
                 text: 'garden name',
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               TextFieldBordered(
                 text: _name,
@@ -51,45 +54,45 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 callback: _setName,
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               const StyledText(
                 text: 'garden size',
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               Row(
                 children: [
                   TextFieldBorderedNumeric(
                     text: _columns.toString(),
                     hintText: 'Columns',
-                    callback: this._setColumns,
+                    callback: _setColumns,
                   ),
                   const SizedBox(
-                    width: 20.0,
+                    width: 20,
                   ),
                   const StyledText(
                     text: 'X',
                   ),
                   const SizedBox(
-                    width: 20.0,
+                    width: 20,
                   ),
                   TextFieldBorderedNumeric(
                     text: _rows.toString(),
                     hintText: 'Rows',
-                    callback: this._setRows,
+                    callback: _setRows,
                   ),
                 ],
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               const StyledText(
                 text: 'preview',
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               PreviewGridView(
                 columns: _columns,
@@ -121,10 +124,12 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   }
 
   Future<void> _save() async {
-    var garden = Garden(name: _name, rows: _rows, columns: _columns);
-    var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.addGarden(garden);
+    final garden = Garden(name: _name, rows: _rows, columns: _columns);
+    final gardensStore = Provider.of<GardensStore>(context, listen: false)
+      ..addGarden(garden);
     await gardensStore.saveGardens();
-    Navigator.pushReplacementNamed(context, MainScreen.id);
+
+    if (!mounted) return;
+    await Navigator.pushReplacementNamed(context, MainScreen.id);
   }
 }
