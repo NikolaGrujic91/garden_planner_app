@@ -8,7 +8,8 @@ class TextFieldBordered extends StatelessWidget {
   TextFieldBordered(
       {required String text,
       required this.hintText,
-      required this.callback,
+      this.callback,
+      this.callbackWithIndex,
       this.index}) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
@@ -21,9 +22,9 @@ class TextFieldBordered extends StatelessWidget {
         onPressed: () {
           _textEditingController.clear();
           if (index == null) {
-            callback(_textEditingController.value.text);
+            callback!(_textEditingController.value.text);
           } else {
-            callback(_textEditingController.value.text, index!);
+            callbackWithIndex!(_textEditingController.value.text, index!);
           }
         },
         icon: const Icon(Icons.clear),
@@ -32,7 +33,10 @@ class TextFieldBordered extends StatelessWidget {
   }
 
   /// Callback function on value changed
-  final Function callback;
+  final Function(String value)? callback;
+
+  /// Callback function on value changed with index
+  final Function(String value, int index)? callbackWithIndex;
 
   /// Placeholder/hint text
   final String hintText;
@@ -51,9 +55,9 @@ class TextFieldBordered extends StatelessWidget {
       style: kTextStyle,
       onChanged: (value) {
         if (index == null) {
-          callback(value);
+          callback!(value);
         } else {
-          callback(value, index!);
+          callbackWithIndex!(value, index!);
         }
       },
       keyboardType: TextInputType.multiline,

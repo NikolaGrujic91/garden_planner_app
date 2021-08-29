@@ -39,7 +39,8 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     super.initState();
 
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
+    Garden selectedGarden =
+        gardensStore.gardens[gardensStore.selectedGardenIndex];
     _selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
 
     for (Plant plant in _selectedTile.plants) {
@@ -118,7 +119,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                             child: TextFieldBordered(
                               text: _plantsNames[index],
                               hintText: 'Plant name',
-                              callback: _setPlantName,
+                              callbackWithIndex: _setPlantName,
                               index: index,
                             ),
                           ),
@@ -133,7 +134,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                             child: TextFieldBordered(
                               text: _descriptions[index],
                               hintText: 'Description',
-                              callback: _setDescription,
+                              callbackWithIndex: _setDescription,
                               index: index,
                             ),
                           ),
@@ -177,7 +178,11 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
   Future<void> _save() async {
     var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTilePlants(plantsNames: _plantsNames, plantedDates: _plantedDates, plantsTypes: _plantsTypes, descriptions: _descriptions);
+    gardensStore.updateSelectedTilePlants(
+        plantsNames: _plantsNames,
+        plantedDates: _plantedDates,
+        plantsTypes: _plantsTypes,
+        descriptions: _descriptions);
     await gardensStore.saveGardens();
     Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
@@ -194,7 +199,9 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    StyledText(text: 'Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
+                    StyledText(
+                        text:
+                            'Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
                   ],
                 ),
               ),
