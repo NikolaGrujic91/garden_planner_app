@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/styled_text.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 
+/// Date picker widget
 class DatePicker extends StatefulWidget {
-  final String restorationId;
-  final Function callback;
-  late final int day;
-  late final int month;
-  late final int year;
-
-  DatePicker({required this.restorationId, required this.callback, required String initialDate}) {
+  /// Creates a new instance
+  DatePicker(
+      {Key? key,
+      required this.restorationId,
+      required this.callback,
+      required String initialDate}) {
     if (initialDate.isEmpty) {
-      var now = DateTime.now();
+      final now = DateTime.now();
       year = now.year;
       month = now.month;
       day = now.day;
     } else {
-      var dateParts = initialDate.split(".");
+      final dateParts = initialDate.split('.');
       day = int.parse(dateParts[0]);
       month = int.parse(dateParts[1]);
       year = int.parse(dateParts[2]);
     }
   }
+
+  /// Id of screen
+  final String restorationId;
+
+  /// Callback function
+  final Function(String plantedDate) callback;
+
+  /// Initial day
+  late final int day;
+
+  /// Initial month
+  late final int month;
+
+  /// Initial year
+  late final int year;
 
   @override
   _DatePickerState createState() => _DatePickerState();
@@ -30,7 +45,8 @@ class DatePicker extends StatefulWidget {
 class _DatePickerState extends State<DatePicker> with RestorationMixin {
   late RestorableDateTime _selectedDate;
 
-  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture = RestorableRouteFuture<DateTime?>(
+  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
+      RestorableRouteFuture<DateTime?>(
     onComplete: _selectDate,
     onPresent: (NavigatorState navigator, Object? arguments) {
       return navigator.restorablePush(
@@ -43,15 +59,14 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
   @override
   void initState() {
     super.initState();
-    _selectedDate = RestorableDateTime(DateTime(widget.year, widget.month, widget.day));
+    _selectedDate =
+        RestorableDateTime(DateTime(widget.year, widget.month, widget.day));
   }
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {
-        _restorableDatePickerRouteFuture.present();
-      },
+      onPressed: _restorableDatePickerRouteFuture.present,
       child: const StyledText(text: 'Change planted date'),
     );
   }
@@ -62,10 +77,12 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_selectedDate, 'selected_date');
-    registerForRestoration(_restorableDatePickerRouteFuture, 'date_picker_route_future');
+    registerForRestoration(
+        _restorableDatePickerRouteFuture, 'date_picker_route_future');
   }
 
-  static Route<DateTime> _datePickerRoute(BuildContext context, Object? arguments) {
+  static Route<DateTime> _datePickerRoute(
+      BuildContext context, Object? arguments) {
     return DialogRoute<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -73,8 +90,8 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
           restorationId: 'date_picker_dialog',
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2000, 1, 1),
-          lastDate: DateTime(2100, 1, 1),
+          firstDate: DateTime(2000),
+          lastDate: DateTime(2100),
         );
       },
     );
@@ -84,12 +101,14 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
     if (newSelectedDate != null) {
       setState(() {
         _selectedDate.value = newSelectedDate;
+        final date = '${_selectedDate.value.day}.${_selectedDate.value.month}'
+            '.${_selectedDate.value.year}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: StyledText(text: 'Selected: ${_selectedDate.value.day}.${_selectedDate.value.month}.${_selectedDate.value.year}'),
+            content: StyledText(text: 'Selected: $date'),
           ),
         );
-        widget.callback('${_selectedDate.value.day}.${_selectedDate.value.month}.${_selectedDate.value.year}');
+        widget.callback(date);
       });
     }
   }
