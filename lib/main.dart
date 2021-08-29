@@ -25,12 +25,12 @@ class GardenPlannerApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: MainScreen.id,
         routes: {
-          MainScreen.id: (context) => MainScreen(),
-          AddGardenScreen.id: (context) => AddGardenScreen(),
-          EditGardenScreen.id: (context) => EditGardenScreen(),
-          TilesScreen.id: (context) => TilesScreen(),
-          EditTileTypeScreen.id: (context) => EditTileTypeScreen(),
-          EditTilePlantsScreen.id: (context) => EditTilePlantsScreen(),
+          MainScreen.id: (context) => const MainScreen(),
+          AddGardenScreen.id: (context) => const AddGardenScreen(),
+          EditGardenScreen.id: (context) => const EditGardenScreen(),
+          TilesScreen.id: (context) => const TilesScreen(),
+          EditTileTypeScreen.id: (context) => const EditTileTypeScreen(),
+          EditTilePlantsScreen.id: (context) => const EditTilePlantsScreen(),
         },
       ),
     );
