@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:garden_planner_app/widgets/styled_text.dart';
 
 /// Date picker widget

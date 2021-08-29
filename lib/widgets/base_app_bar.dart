@@ -1,35 +1,48 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/widgets/save_icon_button.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 
-import '../utils/constants.dart';
-import '../widgets/save_icon_button.dart';
-import '../widgets/styled_text.dart';
-
+/// This widget implements base app bar
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String? backScreenID;
-  final String title;
-  final AsyncCallback? saveCallback;
+  /// Creates a new instance
+  const BaseAppBar({
+    Key? key,
+    this.backScreenID,
+    required this.title,
+    this.saveCallback,
+  });
 
-  const BaseAppBar({this.backScreenID, required this.title, this.saveCallback});
+  /// Back button screen ID
+  final String? backScreenID;
+
+  /// Title in the app bar
+  final String title;
+
+  /// Save button callback
+  final AsyncCallback? saveCallback;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> actions = <Widget>[];
+    final actions = <Widget>[];
 
-    if (this.saveCallback != null) {
-      actions.add(SaveIconButton(callback: () async {
-        await saveCallback!();
-      }));
+    if (saveCallback != null) {
+      actions.add(SaveIconButton(
+        callback: () async {
+          await saveCallback!();
+        },
+      ));
     }
 
     Widget? backButton;
 
-    if (this.backScreenID != null) {
+    if (backScreenID != null) {
       backButton = IconButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, this.backScreenID!);
+          Navigator.pushReplacementNamed(context, backScreenID!);
         },
-        icon: Icon(kBackIcon),
+        icon: const Icon(kBackIcon),
       );
     }
 
