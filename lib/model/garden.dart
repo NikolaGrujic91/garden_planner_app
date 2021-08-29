@@ -1,73 +1,79 @@
-import 'dart:collection';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/json_constants.dart';
+import 'package:garden_planner_app/model/tile.dart';
 
-import 'enums.dart';
-import 'json_constants.dart';
-import 'tile.dart';
-
+/// Model class that stores Garden data
 class Garden {
-  String _name = '';
-  int _rows = 0;
-  int _columns = 0;
-  List<Tile> _tiles = <Tile>[];
-
-  Garden({required String name, required int rows, required int columns}) {
-    _name = name;
-    _rows = rows;
-    _columns = columns;
+  /// Creates a new instance
+  Garden({required this.name, required this.rows, required this.columns}) {
     _createTiles();
   }
 
+  /// Creates a new instance from JSON
   Garden.fromJson(Map<String, dynamic> json)
-      : _name = json[kJsonName],
-        _rows = json[kJsonRows],
-        _columns = json[kJsonColumns],
-        _tiles = (json[kJsonTiles] as List).map((i) => Tile.fromJson(i)).toList();
+      : name = json[kJsonName].toString(),
+        rows = json[kJsonRows] as int,
+        columns = json[kJsonColumns] as int,
+        tiles =
+            (json[kJsonTiles] as List).map((i) => Tile.fromJson(i)).toList();
 
-  Map<String, dynamic> toJson() => {kJsonName: _name, kJsonRows: _rows, kJsonColumns: _columns, kJsonTiles: _tiles};
+  /// Garden name
+  String name = '';
 
-  String get name => _name;
-  int get rows => _rows;
-  int get columns => _columns;
-  UnmodifiableListView<Tile> get tiles => UnmodifiableListView(_tiles);
+  /// Number of tiles grid rows
+  int rows = 0;
 
-  set name(String value) => _name = value;
-  set rows(int value) => _rows = value;
-  set columns(int value) => _columns = value;
+  /// Number of tiles grid columns
+  int columns = 0;
 
+  /// Tiles
+  List<Tile> tiles = <Tile>[];
+
+  /// Convert object data to JSON
+  Map<String, dynamic> toJson() => {
+        kJsonName: name,
+        kJsonRows: rows,
+        kJsonColumns: columns,
+        kJsonTiles: tiles
+      };
+
+  /// Update tiles list after number of columns or rows has changed
   void updateTiles() {
-    var newSize = _columns * _rows;
+    final newSize = columns * rows;
 
     // Grid expanding
-    if (_tiles.length < newSize) {
-      for (int index = 0; index <= newSize; index++) {
-        if (_tiles.length > index) {
+    if (tiles.length < newSize) {
+      for (var index = 0; index <= newSize; index++) {
+        if (tiles.length > index) {
           continue;
         }
 
-        _tiles.add(Tile(type: TileType.plant));
+        tiles.add(Tile(type: TileType.plant));
       }
     }
 
     // Grid shrinking
-    if (_tiles.length > newSize) {
-      while (_tiles.length > newSize) {
-        _tiles.removeLast();
+    else {
+      while (tiles.length > newSize) {
+        tiles.removeLast();
       }
     }
   }
 
+  /// Update tile type
   void updateTileType({required int index, required TileType type}) {
-    _tiles[index].type = type;
+    tiles[index].type = type;
   }
 
+  /// Add plant to tile
   void addTilePlant({required int tileIndex, required PlantType plantType}) {
-    _tiles[tileIndex].addPlant(plantType: plantType);
+    tiles[tileIndex].addPlant(plantType: plantType);
   }
 
   void _createTiles() {
-    for (int row = 0; row < _rows; row++) {
-      for (int column = 0; column < _columns; column++) {
-        _tiles.add(Tile(type: TileType.plant));
+    for (var row = 0; row < rows; row++) {
+      for (var column = 0; column < columns; column++) {
+        tiles.add(Tile(type: TileType.plant));
       }
     }
   }
