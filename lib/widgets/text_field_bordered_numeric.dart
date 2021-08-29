@@ -2,29 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 
+/// This widget is generic widget for numeric input
 class TextFieldBorderedNumeric extends StatelessWidget {
-  final Function callback;
+  /// Creates a new instance
+  TextFieldBorderedNumeric(
+      {required this.text, required this.hintText, required this.callback}) {
+    _textEditingController = TextEditingController(text: text);
+    _textEditingController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _textEditingController.text.length));
+
+    _decoration = InputDecoration(
+      border: const OutlineInputBorder(),
+      hintText: hintText,
+      suffixIcon: IconButton(
+        onPressed: _textEditingController.clear,
+        icon: const Icon(Icons.clear),
+      ),
+    );
+  }
+
+  /// Callback function on value changed
+  final Function(int value) callback;
+
+  /// Placeholder/hint text
   final String hintText;
+
+  /// Text
   final String text;
 
   late final TextEditingController _textEditingController;
   late final InputDecoration _decoration;
-
-  TextFieldBorderedNumeric({required this.text, required this.hintText, required this.callback}) {
-    _textEditingController = TextEditingController(text: this.text);
-    _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
-
-    _decoration = InputDecoration(
-      border: OutlineInputBorder(),
-      hintText: this.hintText,
-      suffixIcon: IconButton(
-        onPressed: () {
-          _textEditingController.clear();
-        },
-        icon: Icon(Icons.clear),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +40,10 @@ class TextFieldBorderedNumeric extends StatelessWidget {
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: _decoration,
-        controller: this._textEditingController,
+        controller: _textEditingController,
         style: kTextStyle,
         onChanged: (value) {
-          var intValue = int.tryParse(value);
+          final intValue = int.tryParse(value);
 
           if (intValue != null) {
             callback(intValue);
