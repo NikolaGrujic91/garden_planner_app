@@ -1,24 +1,26 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/model/tile.dart';
+import 'package:garden_planner_app/screens/tiles_screen.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/utility.dart';
+import 'package:garden_planner_app/widgets/base_app_bar.dart';
+import 'package:garden_planner_app/widgets/date_picker.dart';
+import 'package:garden_planner_app/widgets/plant_type_dropdown.dart';
+import 'package:garden_planner_app/widgets/plant_type_picker.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
+import 'package:garden_planner_app/widgets/text_field_bordered.dart';
 import 'package:provider/provider.dart';
 
-import '../model/enums.dart';
-import '../model/garden.dart';
-import '../model/gardens_store.dart';
-import '../model/plant.dart';
-import '../model/tile.dart';
-import '../utils/constants.dart';
-import '../utils/utility.dart';
-import '../widgets/base_app_bar.dart';
-import '../widgets/date_picker.dart';
-import '../widgets/plant_type_dropdown.dart';
-import '../widgets/plant_type_picker.dart';
-import '../widgets/styled_text.dart';
-import '../widgets/text_field_bordered.dart';
-import 'tiles_screen.dart';
-
+/// Edit Tile Plants Screen Widget
 class EditTilePlantsScreen extends StatefulWidget {
+  /// Creates a new instance
+  const EditTilePlantsScreen({Key? key}) : super(key: key);
+
+  /// Screen ID
   static const String id = 'edit_tile_plants_screen';
 
   @override
@@ -27,23 +29,23 @@ class EditTilePlantsScreen extends StatefulWidget {
 
 class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   late Tile _selectedTile;
-  List<String> _plantsNames = <String>[];
-  List<String> _plantedDates = <String>[];
-  List<String> _descriptions = <String>[];
-  List<PlantType> _plantsTypes = <PlantType>[];
-  List<String> _plantsTypesString = <String>[];
-  List<String> _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
+  final _plantsNames = <String>[];
+  final _plantedDates = <String>[];
+  final _descriptions = <String>[];
+  final _plantsTypes = <PlantType>[];
+  final _plantsTypesString = <String>[];
+  final _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
 
   @override
   void initState() {
     super.initState();
 
-    var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    Garden selectedGarden =
+    final gardensStore = Provider.of<GardensStore>(context, listen: false);
+    final selectedGarden =
         gardensStore.gardens[gardensStore.selectedGardenIndex];
     _selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
 
-    for (Plant plant in _selectedTile.plants) {
+    for (final plant in _selectedTile.plants) {
       _plantsNames.add(plant.name);
       _plantedDates.add(plant.plantedDate);
       _descriptions.add(plant.description);
@@ -68,26 +70,27 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
               itemCount: _selectedTile.plants.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
                       Row(
                         children: [
-                          (Platform.isMacOS || Platform.isWindows)
-                              ? PlantTypeDropdown(
-                                  dropdownValues: _dropdownValues,
-                                  value: _plantsTypesString[index],
-                                  index: index,
-                                  callback: _setPlantType,
-                                )
-                              : PlantTypePicker(
-                                  dropdownValues: _dropdownValues,
-                                  value: _plantsTypesString[index],
-                                  index: index,
-                                  callback: _setPlantType,
-                                ),
-                          SizedBox(
-                            width: 20.0,
+                          if (Platform.isMacOS || Platform.isWindows)
+                            PlantTypeDropdown(
+                              dropdownValues: _dropdownValues,
+                              value: _plantsTypesString[index],
+                              index: index,
+                              callback: _setPlantType,
+                            )
+                          else
+                            PlantTypePicker(
+                              dropdownValues: _dropdownValues,
+                              value: _plantsTypesString[index],
+                              index: index,
+                              callback: _setPlantType,
+                            ),
+                          const SizedBox(
+                            width: 20,
                           ),
                           StyledText(text: _plantedDates[index]),
                           SizedBox(
@@ -100,7 +103,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                             },
                             initialDate: _plantedDates[index],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           IconButton(
                             onPressed: () async {
                               await _showDeleteDialog(context, index);
@@ -110,8 +113,8 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10.0,
+                      const SizedBox(
+                        height: 10,
                       ),
                       Row(
                         children: [
@@ -125,8 +128,8 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10.0,
+                      const SizedBox(
+                        height: 10,
                       ),
                       Row(
                         children: [
@@ -177,14 +180,16 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   }
 
   Future<void> _save() async {
-    var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTilePlants(
-        plantsNames: _plantsNames,
-        plantedDates: _plantedDates,
-        plantsTypes: _plantsTypes,
-        descriptions: _descriptions);
+    final gardensStore = Provider.of<GardensStore>(context, listen: false)
+      ..updateSelectedTilePlants(
+          plantsNames: _plantsNames,
+          plantedDates: _plantedDates,
+          plantsTypes: _plantsTypes,
+          descriptions: _descriptions);
     await gardensStore.saveGardens();
-    Navigator.pushReplacementNamed(context, TilesScreen.id);
+
+    if (!mounted) return;
+    await Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
 
   Future<void> _showDeleteDialog(BuildContext context, int index) async {
@@ -195,23 +200,26 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
         return Consumer<GardensStore>(
           builder: (context, gardensStore, child) {
             return AlertDialog(
-              title: StyledText(text: 'Confirm delete'),
+              title: const StyledText(
+                text: 'Confirm delete',
+              ),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
                     StyledText(
                         text:
-                            'Delete the plant \"${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}\"?'),
+                            'Delete the plant "${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}"?'),
                   ],
                 ),
               ),
               actions: <Widget>[
                 if (Platform.isWindows)
                   TextButton(
-                    child: const StyledText(text: 'Delete'),
                     onPressed: () async {
                       gardensStore.removePlant(index: index);
                       await gardensStore.saveGardens();
+
+                      if (!mounted) return;
                       Navigator.of(context).pop();
 
                       setState(() {
@@ -221,27 +229,29 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                         _plantsTypesString.removeAt(index);
                       });
                     },
+                    child: const StyledText(text: 'Delete'),
                   )
                 else
                   TextButton(
-                    child: const StyledText(text: 'Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Cancel'),
                   ),
                 if (Platform.isWindows)
                   TextButton(
-                    child: const StyledText(text: 'Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Cancel'),
                   )
                 else
                   TextButton(
-                    child: const StyledText(text: 'Delete'),
                     onPressed: () async {
                       gardensStore.removePlant(index: index);
                       await gardensStore.saveGardens();
+
+                      if (!mounted) return;
                       Navigator.of(context).pop();
 
                       setState(() {
@@ -251,6 +261,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                         _plantsTypesString.removeAt(index);
                       });
                     },
+                    child: const StyledText(text: 'Delete'),
                   ),
               ],
             );
