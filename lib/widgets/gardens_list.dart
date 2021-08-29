@@ -1,15 +1,23 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/screens/edit_garden_screen.dart';
+import 'package:garden_planner_app/screens/tiles_screen.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
-import '../model/gardens_store.dart';
-import '../screens/edit_garden_screen.dart';
-import '../screens/tiles_screen.dart';
-import '../utils/constants.dart';
-import '../widgets/styled_text.dart';
+/// This widget represents list of gardens
+class GardensList extends StatefulWidget {
+  /// Creates a new instance
+  const GardensList({Key? key}) : super(key: key);
 
-class GardensList extends StatelessWidget {
+  @override
+  _GardensListState createState() => _GardensListState();
+}
+
+class _GardensListState extends State<GardensList> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -24,13 +32,13 @@ class GardensList extends StatelessWidget {
               color: kBackgroundColor,
               child: ListView.builder(
                 controller: _scrollController,
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10),
                 itemCount: gardensStore.gardens.length,
                 itemBuilder: (context, index) {
                   return Material(
                     child: ListTile(
                       tileColor: kBackgroundColor,
-                      leading: Icon(Icons.grid_4x4),
+                      leading: const Icon(Icons.grid_4x4),
                       title: StyledText(text: gardensStore.gardens[index].name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -46,7 +54,8 @@ class GardensList extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               gardensStore.setSelectedGardenIndex(index);
-                              Navigator.pushReplacementNamed(context, EditGardenScreen.id);
+                              Navigator.pushReplacementNamed(
+                                  context, EditGardenScreen.id);
                             },
                             icon: const Icon(kEditIcon),
                             tooltip: 'Edit garden',
@@ -76,46 +85,55 @@ class GardensList extends StatelessWidget {
         return Consumer<GardensStore>(
           builder: (context, gardensStore, child) {
             return AlertDialog(
-              title: StyledText(text: 'Confirm delete'),
+              title: const StyledText(text: 'Confirm delete'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    StyledText(text: 'Delete the garden \"${gardensStore.gardens[gardensStore.selectedGardenIndex].name}\"?'),
+                    StyledText(
+                      text:
+                          'Delete the garden "${gardensStore.gardens[gardensStore.selectedGardenIndex].name}"?',
+                    ),
                   ],
                 ),
               ),
               actions: <Widget>[
                 if (Platform.isWindows)
                   TextButton(
-                    child: const StyledText(text: 'Delete'),
                     onPressed: () async {
-                      gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+                      gardensStore.removeGarden(gardensStore
+                          .gardens[gardensStore.selectedGardenIndex]);
                       await gardensStore.saveGardens();
+
+                      if (!mounted) return;
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Delete'),
                   )
                 else
                   TextButton(
-                    child: const StyledText(text: 'Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Cancel'),
                   ),
                 if (Platform.isWindows)
                   TextButton(
-                    child: const StyledText(text: 'Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Cancel'),
                   )
                 else
                   TextButton(
-                    child: const StyledText(text: 'Delete'),
                     onPressed: () async {
-                      gardensStore.removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+                      gardensStore.removeGarden(gardensStore
+                          .gardens[gardensStore.selectedGardenIndex]);
                       await gardensStore.saveGardens();
+
+                      if (!mounted) return;
                       Navigator.of(context).pop();
                     },
+                    child: const StyledText(text: 'Delete'),
                   ),
               ],
             );
