@@ -1,53 +1,60 @@
-import 'dart:collection';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/json_constants.dart';
+import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/utils/utility.dart';
 
-import '../utils/utility.dart';
-import 'enums.dart';
-import 'json_constants.dart';
-import 'plant.dart';
-
+/// Model class that stores Tile data
 class Tile {
-  TileType _type = TileType.none;
-  List<Plant> _plants = <Plant>[];
+  /// Creates a new instance
+  Tile({required this.type});
 
-  Tile({required TileType type}) {
-    _type = type;
-  }
-
+  /// Creates a new instance from JSON
   Tile.fromJson(Map<String, dynamic> json)
-      : _type = stringToTileType(json[kJsonType]),
-        _plants = (json[kJsonPlants] as List).map((i) => Plant.fromJson(i)).toList();
+      : type = stringToTileType(json[kJsonType].toString()),
+        plants =
+            (json[kJsonPlants] as List).map((i) => Plant.fromJson(i)).toList();
 
-  Map<String, dynamic> toJson() => {kJsonType: tileTypeToString(_type), kJsonPlants: _plants};
+  /// Tile type
+  TileType type = TileType.none;
 
-  TileType get type => _type;
-  UnmodifiableListView<Plant> get plants => UnmodifiableListView(_plants);
+  /// Plants in tile
+  List<Plant> plants = <Plant>[];
 
-  set type(TileType value) => _type = value;
+  /// Convert object data to JSON
+  Map<String, dynamic> toJson() =>
+      {kJsonType: tileTypeToString(type), kJsonPlants: plants};
 
-  void updatePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes, required List<String> descriptions}) {
-    int plantsLength = _plants.length;
+  /// Update tile plants based on given input
+  void updatePlants({
+    required List<String> plantsNames,
+    required List<String> plantedDates,
+    required List<PlantType> plantsTypes,
+    required List<String> descriptions,
+  }) {
+    final plantsLength = plants.length;
 
-    if (plantsLength != plantsNames.length || plantsLength != plantedDates.length || plantsLength != plantsTypes.length || plantsLength != descriptions.length) {
+    if (plantsLength != plantsNames.length ||
+        plantsLength != plantedDates.length ||
+        plantsLength != plantsTypes.length ||
+        plantsLength != descriptions.length) {
       return;
     }
 
-    for (int i = 0; i < plantsLength; i++) {
-      _updatePlant(index: i, plantType: plantsTypes[i], plantName: plantsNames[i], plantedDate: plantedDates[i], description: descriptions[i]);
+    for (var i = 0; i < plantsLength; i++) {
+      plants[i].type = plantsTypes[i];
+      plants[i].name = plantsNames[i];
+      plants[i].plantedDate = plantedDates[i];
+      plants[i].description = descriptions[i];
     }
   }
 
-  void _updatePlant({required int index, required PlantType plantType, required String plantName, required String plantedDate, required String description}) {
-    _plants[index].type = plantType;
-    _plants[index].name = plantName;
-    _plants[index].plantedDate = plantedDate;
-    _plants[index].description = description;
-  }
-
+  /// Add plant to tile
   void addPlant({required PlantType plantType}) {
-    _plants.add(Plant(type: plantType));
+    plants.add(Plant(type: plantType));
   }
 
+  /// Remove plant from tile at index
   void removePlant({required int index}) {
-    _plants.removeAt(index);
+    plants.removeAt(index);
   }
 }
