@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/screens/tiles_screen.dart';
+import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/widgets/base_app_bar.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
-import '../model/enums.dart';
-import '../model/garden.dart';
-import '../model/gardens_store.dart';
-import '../model/tile.dart';
-import '../utils/constants.dart';
-import '../widgets/base_app_bar.dart';
-import '../widgets/styled_text.dart';
-
-import 'tiles_screen.dart';
-
+/// Edit Tile Type Screen Widget
 class EditTileTypeScreen extends StatefulWidget {
+  /// Creates a new instance
+  const EditTileTypeScreen({Key? key}) : super(key: key);
+
+  /// Screen ID
   static const String id = 'edit_tile_type_screen';
 
   @override
@@ -25,9 +26,10 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   void initState() {
     super.initState();
 
-    var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    Garden selectedGarden = gardensStore.gardens[gardensStore.selectedGardenIndex];
-    Tile selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
+    final gardensStore = Provider.of<GardensStore>(context, listen: false);
+    final selectedGarden =
+        gardensStore.gardens[gardensStore.selectedGardenIndex];
+    final selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
     _tileType = selectedTile.type;
   }
 
@@ -44,7 +46,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
           body: Container(
             color: kBackgroundColor,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   Material(
@@ -99,9 +101,11 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   }
 
   Future<void> _save() async {
-    var gardensStore = Provider.of<GardensStore>(context, listen: false);
-    gardensStore.updateSelectedTileType(type: _tileType);
+    final gardensStore = Provider.of<GardensStore>(context, listen: false)
+      ..updateSelectedTileType(type: _tileType);
     await gardensStore.saveGardens();
-    Navigator.pushReplacementNamed(context, TilesScreen.id);
+
+    if (!mounted) return;
+    await Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
 }

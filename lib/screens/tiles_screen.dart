@@ -11,7 +11,7 @@ class TilesScreen extends StatelessWidget {
   /// Creates a new instance
   const TilesScreen({Key? key}) : super(key: key);
 
-  /// Tiles Screen ID
+  /// Screen ID
   static const String id = 'tiles_screen';
 
   @override

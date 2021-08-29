@@ -9,7 +9,7 @@ class MainScreen extends StatelessWidget {
   /// Creates a new instance
   const MainScreen({Key? key}) : super(key: key);
 
-  /// Tiles Screen ID
+  /// Screen ID
   static const String id = 'main_screen';
 
   @override
