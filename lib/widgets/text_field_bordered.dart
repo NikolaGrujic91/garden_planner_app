@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 
+/// This widget is generic widget for text input
 class TextFieldBordered extends StatelessWidget {
-  final String hintText;
-  final Function callback;
-  final int? index;
-
-  late final TextEditingController _textEditingController;
-  late final InputDecoration _decoration;
-
-  TextFieldBordered({required String text, required this.hintText, required this.callback, this.index}) {
+  /// Creates a new instance
+  TextFieldBordered(
+      {required String text,
+      required this.hintText,
+      required this.callback,
+      this.index}) {
     _textEditingController = TextEditingController(text: text);
-    _textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: _textEditingController.text.length));
+    _textEditingController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _textEditingController.text.length));
 
     _decoration = InputDecoration(
-      border: OutlineInputBorder(),
+      border: const OutlineInputBorder(),
       hintText: hintText,
       suffixIcon: IconButton(
         onPressed: () {
@@ -23,13 +23,25 @@ class TextFieldBordered extends StatelessWidget {
           if (index == null) {
             callback(_textEditingController.value.text);
           } else {
-            callback(_textEditingController.value.text, index);
+            callback(_textEditingController.value.text, index!);
           }
         },
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
       ),
     );
   }
+
+  /// Callback function on value changed
+  final Function callback;
+
+  /// Placeholder/hint text
+  final String hintText;
+
+  /// Optional index information for callback function
+  final int? index;
+
+  late final TextEditingController _textEditingController;
+  late final InputDecoration _decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +53,7 @@ class TextFieldBordered extends StatelessWidget {
         if (index == null) {
           callback(value);
         } else {
-          callback(value, index);
+          callback(value, index!);
         }
       },
       keyboardType: TextInputType.multiline,
