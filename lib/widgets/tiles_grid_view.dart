@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/gardens_store.dart';
@@ -82,12 +80,12 @@ class TilesGrid extends StatelessWidget {
                     : null,
                 child: isPlantTile
                     ? TileGridViewCellDragTarget(
-                        tiles: tiles,
+                        tile: tiles[index],
                         tileIndex: index,
                         gardensStore: gardensStore,
                       )
                     : TileGridViewCell(
-                        tiles: tiles,
+                        tile: tiles[index],
                         tileIndex: index,
                         gardensStore: gardensStore,
                       ),
@@ -100,18 +98,23 @@ class TilesGrid extends StatelessWidget {
   }
 }
 
-/// This widget extends base tile grid view cell to be draggable
+/// This widget extends base tile grid view cell to be a drag target
 class TileGridViewCellDragTarget extends StatelessWidget {
   /// Creates a new instance
   const TileGridViewCellDragTarget({
     Key? key,
-    required this.tiles,
+    required this.tile,
     required this.tileIndex,
     required this.gardensStore,
   }) : super(key: key);
 
-  final UnmodifiableListView<Tile> tiles;
+  /// Tile
+  final Tile tile;
+
+  /// Tile index
   final int tileIndex;
+
+  /// Gardens store
   final GardensStore gardensStore;
 
   @override
@@ -119,7 +122,7 @@ class TileGridViewCellDragTarget extends StatelessWidget {
     return DragTarget(
       builder: (context, candidateData, rejectedData) {
         return TileGridViewCell(
-          tiles: tiles,
+          tile: tile,
           tileIndex: tileIndex,
           gardensStore: gardensStore,
         );
@@ -128,10 +131,11 @@ class TileGridViewCellDragTarget extends StatelessWidget {
         return true;
       },
       onAccept: (data) async {
+        debugPrint(data.toString());
+
         final plantType = stringToPlantType(data.toString());
         gardensStore.addPlant(tileIndex: tileIndex, plantType: plantType);
         await gardensStore.saveGardens();
-        debugPrint(data.toString());
       },
     );
   }
@@ -142,19 +146,24 @@ class TileGridViewCell extends StatelessWidget {
   /// Creates a new instance
   const TileGridViewCell({
     Key? key,
-    required this.tiles,
+    required this.tile,
     required this.tileIndex,
     required this.gardensStore,
   }) : super(key: key);
 
-  final UnmodifiableListView<Tile> tiles;
+  /// Tile
+  final Tile tile;
+
+  /// Tile index
   final int tileIndex;
+
+  /// Gardens store
   final GardensStore gardensStore;
 
   @override
   Widget build(BuildContext context) {
     final plantTypes = <PlantType>[];
-    for (final plant in tiles[tileIndex].plants) {
+    for (final plant in tile.plants) {
       if (!plantTypes.contains(plant.type)) {
         plantTypes.add(plant.type);
       }
@@ -177,15 +186,14 @@ class TileGridViewCell extends StatelessWidget {
                 context, EditTileTypeScreen.id);
           },
           onTap: () async {
-            if (tiles[tileIndex].type == TileType.plant &&
-                tiles[tileIndex].plants.isNotEmpty) {
+            if (tile.type == TileType.plant && tile.plants.isNotEmpty) {
               gardensStore.setSelectedTileIndex(tileIndex);
               await Navigator.pushReplacementNamed(
                   context, EditTilePlantsScreen.id);
             }
           },
           child: Container(
-            color: tileTypeToTileColor(tiles[tileIndex].type),
+            color: tileTypeToTileColor(tile.type),
             child: Wrap(
               spacing: 12, // space between two icons
               children: plantIcons,
