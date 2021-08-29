@@ -181,13 +181,13 @@ class TileGridViewCell extends StatelessWidget {
         padding: const EdgeInsets.all(0.5),
         child: GestureDetector(
           onLongPress: () async {
-            gardensStore.setSelectedTileIndex(tileIndex);
+            gardensStore.selectedTileIndex = tileIndex;
             await Navigator.pushReplacementNamed(
                 context, EditTileTypeScreen.id);
           },
           onTap: () async {
             if (tile.type == TileType.plant && tile.plants.isNotEmpty) {
-              gardensStore.setSelectedTileIndex(tileIndex);
+              gardensStore.selectedTileIndex = tileIndex;
               await Navigator.pushReplacementNamed(
                   context, EditTilePlantsScreen.id);
             }

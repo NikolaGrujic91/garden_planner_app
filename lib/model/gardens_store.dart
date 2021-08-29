@@ -1,90 +1,111 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/garden.dart';
+import 'package:garden_planner_app/model/json_constants.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'enums.dart';
-import 'garden.dart';
-import 'json_constants.dart';
-
+/// Store responsible for handling the gardens data
 class GardensStore extends ChangeNotifier {
-  List<Garden> _gardens = [];
-  int _selectedGardenIndex = 0;
-  int _selectedTileIndex = 0;
-
+  /// Creates a new instance
   GardensStore() {
     _loadGardens();
   }
 
-  Map<String, dynamic> toJson() => {kJsonGardens: _gardens};
+  /// List of Gardens
+  List<Garden> gardens = [];
 
-  UnmodifiableListView<Garden> get gardens => UnmodifiableListView(_gardens);
-  int get selectedGardenIndex => _selectedGardenIndex;
-  int get selectedTileIndex => _selectedTileIndex;
+  /// Index of currently selected garden
+  int selectedGardenIndex = 0;
 
-  void setSelectedGardenIndex(int index) {
-    _selectedGardenIndex = index;
-  }
+  /// Index of currently selected tile
+  int selectedTileIndex = 0;
 
-  void setSelectedTileIndex(int index) {
-    _selectedTileIndex = index;
-  }
+  /// Convert object data to JSON
+  Map<String, dynamic> toJson() => {kJsonGardens: gardens};
 
+  /// Add garden
   void addGarden(Garden garden) {
-    _gardens.add(garden);
+    gardens.add(garden);
     notifyListeners();
   }
 
+  /// Remove garden
   void removeGarden(Garden? garden) {
-    setSelectedGardenIndex(0);
+    selectedGardenIndex = 0;
 
     if (garden != null) {
-      _gardens.remove(garden);
+      gardens.remove(garden);
     }
 
     notifyListeners();
   }
 
-  void updateSelectedGarden({required String name, required int rows, required int columns}) {
-    _gardens[_selectedGardenIndex].name = name;
-    _gardens[_selectedGardenIndex].rows = rows;
-    _gardens[_selectedGardenIndex].columns = columns;
-    _gardens[_selectedGardenIndex].updateTiles();
+  /// Update selected garden
+  void updateSelectedGarden({
+    required String name,
+    required int rows,
+    required int columns,
+  }) {
+    gardens[selectedGardenIndex].name = name;
+    gardens[selectedGardenIndex].rows = rows;
+    gardens[selectedGardenIndex].columns = columns;
+    gardens[selectedGardenIndex].updateTiles();
     notifyListeners();
   }
 
+  /// Update selected tile type
   void updateSelectedTileType({required TileType type}) {
-    _gardens[_selectedGardenIndex].updateTileType(index: _selectedTileIndex, type: type);
+    gardens[selectedGardenIndex]
+        .updateTileType(index: selectedTileIndex, type: type);
     notifyListeners();
   }
 
-  void updateSelectedTilePlants({required List<String> plantsNames, required List<String> plantedDates, required List<PlantType> plantsTypes, required List<String> descriptions}) {
-    _gardens[_selectedGardenIndex].tiles[_selectedTileIndex].updatePlants(plantsNames: plantsNames, plantedDates: plantedDates, plantsTypes: plantsTypes, descriptions: descriptions);
+  /// Update selected tile plants
+  void updateSelectedTilePlants({
+    required List<String> plantsNames,
+    required List<String> plantedDates,
+    required List<PlantType> plantsTypes,
+    required List<String> descriptions,
+  }) {
+    gardens[selectedGardenIndex].tiles[selectedTileIndex].updatePlants(
+          plantsNames: plantsNames,
+          plantedDates: plantedDates,
+          plantsTypes: plantsTypes,
+          descriptions: descriptions,
+        );
     notifyListeners();
   }
 
+  /// Add plant to tile
   void addPlant({required int tileIndex, required PlantType plantType}) {
-    _gardens[_selectedGardenIndex].tiles[tileIndex].addPlant(plantType: plantType);
+    gardens[selectedGardenIndex]
+        .tiles[tileIndex]
+        .addPlant(plantType: plantType);
   }
 
+  /// Remove plant from tile
   void removePlant({required int index}) {
-    _gardens[_selectedGardenIndex].tiles[_selectedTileIndex].removePlant(index: index);
+    gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .removePlant(index: index);
   }
 
+  /// Save gardens to JSON file
   Future<void> saveGardens() async {
     try {
-      File file = await _trySaveGardens();
-      print(file.path);
+      final file = await _trySaveGardens();
+      debugPrint(file.path);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   Future<File> _trySaveGardens() async {
-    File file = await _localFile();
-    return await file.writeAsString(jsonEncode(toJson()));
+    final file = await _localFile();
+    return file.writeAsString(jsonEncode(toJson()));
   }
 
   Future<void> _loadGardens() async {
@@ -92,20 +113,21 @@ class GardensStore extends ChangeNotifier {
       await _tryLoadGardens();
       notifyListeners();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   Future<void> _tryLoadGardens() async {
-    File file = await _localFile();
-    String fileContent = await file.readAsString();
-    Map<String, dynamic> json = await jsonDecode(fileContent);
-    _gardens = (json[kJsonGardens] as List).map((i) => Garden.fromJson(i)).toList();
+    final file = await _localFile();
+    final fileContent = await file.readAsString();
+    final json = await jsonDecode(fileContent) as Map<String, dynamic>;
+    gardens =
+        (json[kJsonGardens] as List).map((i) => Garden.fromJson(i)).toList();
   }
 
   Future<File> _localFile() async {
     final path = await _localPath();
-    var file = File('$path/$kJsonFileName').create(recursive: true);
+    final file = File('$path/$kJsonFileName').create(recursive: true);
     return file;
   }
 

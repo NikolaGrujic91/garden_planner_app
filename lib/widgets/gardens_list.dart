@@ -45,7 +45,7 @@ class _GardensListState extends State<GardensList> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              gardensStore.setSelectedGardenIndex(index);
+                              gardensStore.selectedGardenIndex = index;
                               await _showDeleteDialog(context);
                             },
                             icon: const Icon(kDeleteIcon),
@@ -53,7 +53,7 @@ class _GardensListState extends State<GardensList> {
                           ),
                           IconButton(
                             onPressed: () {
-                              gardensStore.setSelectedGardenIndex(index);
+                              gardensStore.selectedGardenIndex = index;
                               Navigator.pushReplacementNamed(
                                   context, EditGardenScreen.id);
                             },
@@ -63,7 +63,7 @@ class _GardensListState extends State<GardensList> {
                         ],
                       ),
                       onTap: () {
-                        gardensStore.setSelectedGardenIndex(index);
+                        gardensStore.selectedGardenIndex = index;
                         Navigator.pushReplacementNamed(context, TilesScreen.id);
                       },
                     ),
