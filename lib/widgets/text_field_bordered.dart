@@ -5,12 +5,14 @@ import 'package:garden_planner_app/utils/constants.dart';
 /// This widget is generic widget for text input
 class TextFieldBordered extends StatelessWidget {
   /// Creates a new instance
-  TextFieldBordered(
-      {required String text,
-      required this.hintText,
-      this.callback,
-      this.callbackWithIndex,
-      this.index}) {
+  TextFieldBordered({
+    Key? key,
+    required String text,
+    required this.hintText,
+    this.callback,
+    this.callbackWithIndex,
+    this.index,
+  }) : super(key: key) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
         TextPosition(offset: _textEditingController.text.length));

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 /// This widget represents reusable save button
 class SaveIconButton extends StatelessWidget {
   /// Creates a new instance
-  const SaveIconButton({required this.callback});
+  const SaveIconButton({
+    Key? key,
+    required this.callback,
+  }) : super(key: key);
 
   /// Callback function
   final VoidCallback callback;

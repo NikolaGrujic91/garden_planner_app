@@ -12,7 +12,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backScreenID,
     required this.title,
     this.saveCallback,
-  });
+  }) : super(key: key);
 
   /// Back button screen ID
   final String? backScreenID;

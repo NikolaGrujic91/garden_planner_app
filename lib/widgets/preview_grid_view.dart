@@ -4,7 +4,11 @@ import 'package:garden_planner_app/utils/constants.dart';
 /// This widget presents a preview of tiles grid while creating a garden
 class PreviewGridView extends StatelessWidget {
   /// Creates a new instance
-  const PreviewGridView({required this.columns, required this.rows});
+  const PreviewGridView({
+    Key? key,
+    required this.columns,
+    required this.rows,
+  }) : super(key: key);
 
   /// Number of columns
   final int columns;
