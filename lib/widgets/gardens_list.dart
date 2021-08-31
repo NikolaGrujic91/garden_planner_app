@@ -46,7 +46,10 @@ class _GardensListState extends State<GardensList> {
                           IconButton(
                             onPressed: () async {
                               gardensStore.selectedGardenIndex = index;
-                              await _showDeleteDialog(context);
+                              await _showDeleteDialog(
+                                context,
+                                gardensStore,
+                              );
                             },
                             icon: const Icon(kDeleteIcon),
                             tooltip: 'Delete garden',
@@ -77,69 +80,69 @@ class _GardensListState extends State<GardensList> {
     );
   }
 
-  Future<void> _showDeleteDialog(BuildContext context) async {
+  Future<void> _showDeleteDialog(
+    BuildContext context,
+    GardensStore gardensStore,
+  ) async {
+    final name = gardensStore.gardens[gardensStore.selectedGardenIndex].name;
+    final content = 'Delete the garden "$name"?';
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return Consumer<GardensStore>(
-          builder: (context, gardensStore, child) {
-            return AlertDialog(
-              title: const StyledText(text: 'Confirm delete'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    StyledText(
-                      text:
-                          'Delete the garden "${gardensStore.gardens[gardensStore.selectedGardenIndex].name}"?',
-                    ),
-                  ],
+        return AlertDialog(
+          title: const StyledText(text: 'Confirm delete'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                StyledText(
+                  text: content,
                 ),
-              ),
-              actions: <Widget>[
-                if (Platform.isWindows)
-                  TextButton(
-                    onPressed: () async {
-                      gardensStore.removeGarden(gardensStore
-                          .gardens[gardensStore.selectedGardenIndex]);
-                      await gardensStore.saveGardens();
-
-                      if (!mounted) return;
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Delete'),
-                  )
-                else
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Cancel'),
-                  ),
-                if (Platform.isWindows)
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Cancel'),
-                  )
-                else
-                  TextButton(
-                    onPressed: () async {
-                      gardensStore.removeGarden(gardensStore
-                          .gardens[gardensStore.selectedGardenIndex]);
-                      await gardensStore.saveGardens();
-
-                      if (!mounted) return;
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Delete'),
-                  ),
               ],
-            );
-          },
+            ),
+          ),
+          actions: <Widget>[
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed(gardensStore);
+                },
+                child: const StyledText(text: 'Delete'),
+              )
+            else
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              ),
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              )
+            else
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed(gardensStore);
+                },
+                child: const StyledText(text: 'Delete'),
+              ),
+          ],
         );
       },
     );
+  }
+
+  Future<void> _onDeletePressed(GardensStore gardensStore) async {
+    gardensStore
+        .removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+    await gardensStore.saveGardens();
+
+    if (!mounted) return;
+    Navigator.of(context).pop();
   }
 }

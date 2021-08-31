@@ -106,7 +106,11 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                           const Spacer(),
                           IconButton(
                             onPressed: () async {
-                              await _showDeleteDialog(context, index);
+                              await _showDeleteDialog(
+                                context,
+                                gardensStore,
+                                index,
+                              );
                             },
                             icon: const Icon(kDeleteIcon),
                             tooltip: 'Delete plant',
@@ -192,82 +196,79 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     await Navigator.pushReplacementNamed(context, TilesScreen.id);
   }
 
-  Future<void> _showDeleteDialog(BuildContext context, int index) async {
+  Future<void> _showDeleteDialog(
+    BuildContext context,
+    GardensStore gardensStore,
+    int index,
+  ) async {
+    final name = gardensStore.gardens[gardensStore.selectedGardenIndex]
+        .tiles[gardensStore.selectedTileIndex].plants[index].name;
+    final content = 'Delete the plant "$name"?';
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return Consumer<GardensStore>(
-          builder: (context, gardensStore, child) {
-            return AlertDialog(
-              title: const StyledText(
-                text: 'Confirm delete',
-              ),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    StyledText(
-                        text:
-                            'Delete the plant "${gardensStore.gardens[gardensStore.selectedGardenIndex].tiles[gardensStore.selectedTileIndex].plants[index].name}"?'),
-                  ],
+        return AlertDialog(
+          title: const StyledText(
+            text: 'Confirm delete',
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                StyledText(
+                  text: content,
                 ),
-              ),
-              actions: <Widget>[
-                if (Platform.isWindows)
-                  TextButton(
-                    onPressed: () async {
-                      gardensStore.removePlant(index: index);
-                      await gardensStore.saveGardens();
-
-                      if (!mounted) return;
-                      Navigator.of(context).pop();
-
-                      setState(() {
-                        _plantsNames.removeAt(index);
-                        _plantedDates.removeAt(index);
-                        _plantsTypes.removeAt(index);
-                        _plantsTypesString.removeAt(index);
-                      });
-                    },
-                    child: const StyledText(text: 'Delete'),
-                  )
-                else
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Cancel'),
-                  ),
-                if (Platform.isWindows)
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const StyledText(text: 'Cancel'),
-                  )
-                else
-                  TextButton(
-                    onPressed: () async {
-                      gardensStore.removePlant(index: index);
-                      await gardensStore.saveGardens();
-
-                      if (!mounted) return;
-                      Navigator.of(context).pop();
-
-                      setState(() {
-                        _plantsNames.removeAt(index);
-                        _plantedDates.removeAt(index);
-                        _plantsTypes.removeAt(index);
-                        _plantsTypesString.removeAt(index);
-                      });
-                    },
-                    child: const StyledText(text: 'Delete'),
-                  ),
               ],
-            );
-          },
+            ),
+          ),
+          actions: <Widget>[
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed(gardensStore, index);
+                },
+                child: const StyledText(text: 'Delete'),
+              )
+            else
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              ),
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              )
+            else
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed(gardensStore, index);
+                },
+                child: const StyledText(text: 'Delete'),
+              ),
+          ],
         );
       },
     );
+  }
+
+  Future<void> _onDeletePressed(GardensStore gardensStore, int index) async {
+    gardensStore.removePlant(index: index);
+    await gardensStore.saveGardens();
+
+    if (!mounted) return;
+    Navigator.of(context).pop();
+
+    setState(() {
+      _plantsNames.removeAt(index);
+      _plantedDates.removeAt(index);
+      _plantsTypes.removeAt(index);
+      _plantsTypesString.removeAt(index);
+    });
   }
 }
