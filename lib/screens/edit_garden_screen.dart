@@ -40,83 +40,79 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStore>(
-      builder: (context, gardensStore, child) {
-        return Scaffold(
-          appBar: BaseAppBar(
-            backScreenID: MainScreen.id,
-            title: 'Edit $_name',
-            saveCallback: _save,
-          ),
-          body: Container(
-            color: kBackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Scaffold(
+      appBar: BaseAppBar(
+        backScreenID: MainScreen.id,
+        title: 'Edit $_name',
+        saveCallback: _save,
+      ),
+      body: Container(
+        color: kBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const StyledText(
+                text: 'Garden name',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFieldBordered(
+                text: _name,
+                hintText: 'Name',
+                callback: _setName,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const StyledText(
+                text: 'Garden size',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
                 children: [
-                  const StyledText(
-                    text: 'Garden name',
+                  TextFieldBorderedNumeric(
+                    text: _columns.toString(),
+                    hintText: 'Columns',
+                    callback: _setColumns,
                   ),
                   const SizedBox(
-                    height: 20,
-                  ),
-                  TextFieldBordered(
-                    text: _name,
-                    hintText: 'Name',
-                    callback: _setName,
-                  ),
-                  const SizedBox(
-                    height: 20,
+                    width: 20,
                   ),
                   const StyledText(
-                    text: 'Garden size',
+                    text: 'X',
                   ),
                   const SizedBox(
-                    height: 20,
+                    width: 20,
                   ),
-                  Row(
-                    children: [
-                      TextFieldBorderedNumeric(
-                        text: _columns.toString(),
-                        hintText: 'Columns',
-                        callback: _setColumns,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const StyledText(
-                        text: 'X',
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      TextFieldBorderedNumeric(
-                        text: _rows.toString(),
-                        hintText: 'Rows',
-                        callback: _setRows,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const StyledText(
-                    text: 'Preview',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  PreviewGridView(
-                    columns: _columns,
-                    rows: _rows,
+                  TextFieldBorderedNumeric(
+                    text: _rows.toString(),
+                    hintText: 'Rows',
+                    callback: _setRows,
                   ),
                 ],
               ),
-            ),
+              const SizedBox(
+                height: 20,
+              ),
+              const StyledText(
+                text: 'Preview',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              PreviewGridView(
+                columns: _columns,
+                rows: _rows,
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 

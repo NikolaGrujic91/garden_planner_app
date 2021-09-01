@@ -35,62 +35,58 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStore>(
-      builder: (context, gardensStore, child) {
-        return Scaffold(
-          appBar: BaseAppBar(
-            backScreenID: TilesScreen.id,
-            title: 'Edit tile type',
-            saveCallback: _save,
-          ),
-          body: Container(
-            color: kBackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Material(
-                    child: RadioListTile<TileType>(
-                      title: const StyledText(text: kPlant),
-                      value: TileType.plant,
-                      groupValue: _tileType,
-                      onChanged: _setTileType,
-                      tileColor: kBackgroundColor,
-                    ),
-                  ),
-                  Material(
-                    child: RadioListTile<TileType>(
-                      title: const StyledText(text: kHome),
-                      value: TileType.home,
-                      groupValue: _tileType,
-                      onChanged: _setTileType,
-                      tileColor: kBackgroundColor,
-                    ),
-                  ),
-                  Material(
-                    child: RadioListTile<TileType>(
-                      title: const StyledText(text: kPath),
-                      value: TileType.path,
-                      groupValue: _tileType,
-                      onChanged: _setTileType,
-                      tileColor: kBackgroundColor,
-                    ),
-                  ),
-                  Material(
-                    child: RadioListTile<TileType>(
-                      title: const StyledText(text: kNone),
-                      value: TileType.none,
-                      groupValue: _tileType,
-                      onChanged: _setTileType,
-                      tileColor: kBackgroundColor,
-                    ),
-                  ),
-                ],
+    return Scaffold(
+      appBar: BaseAppBar(
+        backScreenID: TilesScreen.id,
+        title: 'Edit tile type',
+        saveCallback: _save,
+      ),
+      body: Container(
+        color: kBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Material(
+                child: RadioListTile<TileType>(
+                  title: const StyledText(text: kPlant),
+                  value: TileType.plant,
+                  groupValue: _tileType,
+                  onChanged: _setTileType,
+                  tileColor: kBackgroundColor,
+                ),
               ),
-            ),
+              Material(
+                child: RadioListTile<TileType>(
+                  title: const StyledText(text: kHome),
+                  value: TileType.home,
+                  groupValue: _tileType,
+                  onChanged: _setTileType,
+                  tileColor: kBackgroundColor,
+                ),
+              ),
+              Material(
+                child: RadioListTile<TileType>(
+                  title: const StyledText(text: kPath),
+                  value: TileType.path,
+                  groupValue: _tileType,
+                  onChanged: _setTileType,
+                  tileColor: kBackgroundColor,
+                ),
+              ),
+              Material(
+                child: RadioListTile<TileType>(
+                  title: const StyledText(text: kNone),
+                  value: TileType.none,
+                  groupValue: _tileType,
+                  onChanged: _setTileType,
+                  tileColor: kBackgroundColor,
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 

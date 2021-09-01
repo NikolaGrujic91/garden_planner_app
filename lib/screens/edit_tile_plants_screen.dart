@@ -56,105 +56,100 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStore>(
-      builder: (context, gardensStore, child) {
-        return Scaffold(
-          appBar: BaseAppBar(
-            backScreenID: TilesScreen.id,
-            title: 'Edit plants',
-            saveCallback: _save,
-          ),
-          body: Container(
-            color: kBackgroundColor,
-            child: ListView.builder(
-              itemCount: _selectedTile.plants.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
+    return Scaffold(
+      appBar: BaseAppBar(
+        backScreenID: TilesScreen.id,
+        title: 'Edit plants',
+        saveCallback: _save,
+      ),
+      body: Container(
+        color: kBackgroundColor,
+        child: ListView.builder(
+          itemCount: _selectedTile.plants.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          if (Platform.isMacOS || Platform.isWindows)
-                            PlantTypeDropdown(
-                              dropdownValues: _dropdownValues,
-                              value: _plantsTypesString[index],
-                              index: index,
-                              callback: _setPlantType,
-                            )
-                          else
-                            PlantTypePicker(
-                              dropdownValues: _dropdownValues,
-                              value: _plantsTypesString[index],
-                              index: index,
-                              callback: _setPlantType,
-                            ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          StyledText(text: _plantedDates[index]),
-                          SizedBox(
-                            width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
-                          ),
-                          DatePicker(
-                            restorationId: EditTilePlantsScreen.id,
-                            callback: (String newValue) {
-                              _setPlantedDate(newValue, index);
-                            },
-                            initialDate: _plantedDates[index],
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            onPressed: () async {
-                              await _showDeleteDialog(
-                                context,
-                                gardensStore,
-                                index,
-                              );
-                            },
-                            icon: const Icon(kDeleteIcon),
-                            tooltip: 'Delete plant',
-                          ),
-                        ],
-                      ),
+                      if (Platform.isMacOS || Platform.isWindows)
+                        PlantTypeDropdown(
+                          dropdownValues: _dropdownValues,
+                          value: _plantsTypesString[index],
+                          index: index,
+                          callback: _setPlantType,
+                        )
+                      else
+                        PlantTypePicker(
+                          dropdownValues: _dropdownValues,
+                          value: _plantsTypesString[index],
+                          index: index,
+                          callback: _setPlantType,
+                        ),
                       const SizedBox(
-                        height: 10,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFieldBordered(
-                              text: _plantsNames[index],
-                              hintText: 'Plant name',
-                              callbackWithIndex: _setPlantName,
-                              index: index,
-                            ),
-                          ),
-                        ],
+                      StyledText(text: _plantedDates[index]),
+                      SizedBox(
+                        width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
                       ),
-                      const SizedBox(
-                        height: 10,
+                      DatePicker(
+                        restorationId: EditTilePlantsScreen.id,
+                        callback: (String newValue) {
+                          _setPlantedDate(newValue, index);
+                        },
+                        initialDate: _plantedDates[index],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFieldBordered(
-                              text: _descriptions[index],
-                              hintText: 'Description',
-                              callbackWithIndex: _setDescription,
-                              index: index,
-                            ),
-                          ),
-                        ],
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () async {
+                          await _showDeleteDialog(
+                            context,
+                            index,
+                          );
+                        },
+                        icon: const Icon(kDeleteIcon),
+                        tooltip: 'Delete plant',
                       ),
                     ],
                   ),
-                );
-              },
-            ),
-          ),
-        );
-      },
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldBordered(
+                          text: _plantsNames[index],
+                          hintText: 'Plant name',
+                          callbackWithIndex: _setPlantName,
+                          index: index,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldBordered(
+                          text: _descriptions[index],
+                          hintText: 'Description',
+                          callbackWithIndex: _setDescription,
+                          index: index,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -198,9 +193,9 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
 
   Future<void> _showDeleteDialog(
     BuildContext context,
-    GardensStore gardensStore,
     int index,
   ) async {
+    final gardensStore = Provider.of<GardensStore>(context, listen: false);
     final name = gardensStore.gardens[gardensStore.selectedGardenIndex]
         .tiles[gardensStore.selectedTileIndex].plants[index].name;
     final content = 'Delete the plant "$name"?';
@@ -226,7 +221,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
             if (Platform.isWindows)
               TextButton(
                 onPressed: () async {
-                  await _onDeletePressed(gardensStore, index);
+                  await _onDeletePressed(index);
                 },
                 child: const StyledText(text: 'Delete'),
               )
@@ -247,7 +242,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
             else
               TextButton(
                 onPressed: () async {
-                  await _onDeletePressed(gardensStore, index);
+                  await _onDeletePressed(index);
                 },
                 child: const StyledText(text: 'Delete'),
               ),
@@ -257,8 +252,9 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     );
   }
 
-  Future<void> _onDeletePressed(GardensStore gardensStore, int index) async {
-    gardensStore.removePlant(index: index);
+  Future<void> _onDeletePressed(int index) async {
+    final gardensStore = Provider.of<GardensStore>(context, listen: false)
+      ..removePlant(index: index);
     await gardensStore.saveGardens();
 
     if (!mounted) return;
