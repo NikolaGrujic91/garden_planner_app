@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:garden_planner_app/db/gardens_store.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/model/json_constants.dart';
@@ -9,7 +10,7 @@ import 'package:garden_planner_app/model/tile.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Store responsible for handling the gardens data
-class GardensStoreJson extends ChangeNotifier {
+class GardensStoreJson extends ChangeNotifier implements GardensStore {
   /// Creates a new instance
   GardensStoreJson() {
     _loadGardens();
@@ -27,13 +28,13 @@ class GardensStoreJson extends ChangeNotifier {
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => {kJsonGardens: gardens};
 
-  /// Add garden
+  @override
   void addGarden(Garden garden) {
     gardens.add(garden);
     notifyListeners();
   }
 
-  /// Remove garden
+  @override
   void removeGarden(Garden? garden) {
     selectedGardenIndex = 0;
 
@@ -44,12 +45,12 @@ class GardensStoreJson extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Get selected garden
+  @override
   Garden getSelectedGarden() {
     return gardens[selectedGardenIndex];
   }
 
-  /// Update selected garden
+  @override
   void updateSelectedGarden({
     required String name,
     required int rows,
@@ -62,19 +63,19 @@ class GardensStoreJson extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Get selected tile
+  @override
   Tile getSelectedTile() {
     return gardens[selectedGardenIndex].tiles[selectedTileIndex];
   }
 
-  /// Update selected tile type
+  @override
   void updateSelectedTileType({required TileType type}) {
     gardens[selectedGardenIndex]
         .updateTileType(index: selectedTileIndex, type: type);
     notifyListeners();
   }
 
-  /// Update selected tile plants
+  @override
   void updateSelectedTilePlants({
     required List<String> plantsNames,
     required List<String> plantedDates,
@@ -90,21 +91,24 @@ class GardensStoreJson extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Add plant to tile
-  void addPlant({required int tileIndex, required PlantType plantType}) {
+  @override
+  void addPlant({
+    required int tileIndex,
+    required PlantType plantType,
+  }) {
     gardens[selectedGardenIndex]
         .tiles[tileIndex]
         .addPlant(plantType: plantType);
   }
 
-  /// Remove plant from tile
+  @override
   void removePlant({required int index}) {
     gardens[selectedGardenIndex]
         .tiles[selectedTileIndex]
         .removePlant(index: index);
   }
 
-  /// Save gardens to JSON file
+  @override
   Future<void> saveGardens() async {
     try {
       final file = await _trySaveGardens();
