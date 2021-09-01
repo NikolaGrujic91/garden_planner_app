@@ -2,6 +2,7 @@ import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/json_constants.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/utils/utility.dart';
+import 'package:uuid/uuid.dart';
 
 /// Model class that stores Tile data
 class Tile {
@@ -10,9 +11,13 @@ class Tile {
 
   /// Creates a new instance from JSON
   Tile.fromJson(Map<String, dynamic> json)
-      : type = stringToTileType(json[kJsonType].toString()),
+      : id = json[kJsonId].toString(),
+        type = stringToTileType(json[kJsonType].toString()),
         plants =
             (json[kJsonPlants] as List).map((i) => Plant.fromJson(i)).toList();
+
+  /// ID
+  String id = const Uuid().v1();
 
   /// Tile type
   TileType type = TileType.none;
@@ -22,6 +27,7 @@ class Tile {
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => {
+        kJsonId: id,
         kJsonType: tileTypeToString(type),
         kJsonPlants: plants,
       };

@@ -28,5 +28,8 @@ const String kJsonTiles = 'tiles';
 /// JSON Gardens constant
 const String kJsonGardens = 'gardens';
 
+/// JSON Id constant
+const String kJsonId = 'id';
+
 /// JSON File Name constant
 const String kJsonFileName = 'gardens.json';

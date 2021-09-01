@@ -1,6 +1,7 @@
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/json_constants.dart';
 import 'package:garden_planner_app/model/tile.dart';
+import 'package:uuid/uuid.dart';
 
 /// Model class that stores Garden data
 class Garden {
@@ -11,11 +12,15 @@ class Garden {
 
   /// Creates a new instance from JSON
   Garden.fromJson(Map<String, dynamic> json)
-      : name = json[kJsonName].toString(),
+      : id = json[kJsonId].toString(),
+        name = json[kJsonName].toString(),
         rows = json[kJsonRows] as int,
         columns = json[kJsonColumns] as int,
         tiles =
             (json[kJsonTiles] as List).map((i) => Tile.fromJson(i)).toList();
+
+  /// ID
+  String id = const Uuid().v1();
 
   /// Garden name
   String name = '';
@@ -31,6 +36,7 @@ class Garden {
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => {
+        kJsonId: id,
         kJsonName: name,
         kJsonRows: rows,
         kJsonColumns: columns,
