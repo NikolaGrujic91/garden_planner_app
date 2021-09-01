@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/db/gardens_store_json.dart';
 import 'package:garden_planner_app/screens/add_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_plants_screen.dart';
@@ -19,8 +19,8 @@ class GardenPlannerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<GardensStore>(
-      create: (context) => GardensStore(),
+    return ChangeNotifierProvider<GardensStoreJson>(
+      create: (context) => GardensStoreJson(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: MainScreen.id,

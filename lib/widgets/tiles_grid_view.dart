@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/model/enums.dart';
-import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/db/gardens_store_json.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/screens/edit_tile_plants_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
@@ -15,7 +15,7 @@ class TilesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStore>(builder: (context, gardensStore, child) {
+    return Consumer<GardensStoreJson>(builder: (context, gardensStore, child) {
       final selectedGarden = gardensStore.getSelectedGarden();
       final columns = selectedGarden.columns;
       final itemCount = selectedGarden.columns * selectedGarden.rows;
@@ -114,7 +114,7 @@ class TileGridViewCellDragTarget extends StatelessWidget {
   final int tileIndex;
 
   /// Gardens store
-  final GardensStore gardensStore;
+  final GardensStoreJson gardensStore;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,7 @@ class TileGridViewCell extends StatelessWidget {
   final int tileIndex;
 
   /// Gardens store
-  final GardensStore gardensStore;
+  final GardensStoreJson gardensStore;
 
   @override
   Widget build(BuildContext context) {

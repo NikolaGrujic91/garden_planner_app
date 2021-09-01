@@ -9,9 +9,9 @@ import 'package:garden_planner_app/model/tile.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Store responsible for handling the gardens data
-class GardensStore extends ChangeNotifier {
+class GardensStoreJson extends ChangeNotifier {
   /// Creates a new instance
-  GardensStore() {
+  GardensStoreJson() {
     _loadGardens();
   }
 

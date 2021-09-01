@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/model/gardens_store.dart';
+import 'package:garden_planner_app/db/gardens_store_json.dart';
 import 'package:garden_planner_app/screens/main_screen.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/tiles_bottom_bar.dart';
@@ -16,7 +16,7 @@ class TilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStore>(builder: (context, gardensStore, child) {
+    return Consumer<GardensStoreJson>(builder: (context, gardensStore, child) {
       return Scaffold(
         appBar: BaseAppBar(
           backScreenID: MainScreen.id,
