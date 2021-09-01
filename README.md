@@ -27,7 +27,6 @@ Tasks:
 - DONE - iOS & macOS - order of delete cancel buttons in modal dialogs
 - macOS & Win - hover color
 - DONE - macOS & Win - cursor change on tile
-- Investigate using Hive instead of storing to local JSON (https://pub.dev/packages/hive)
-- Disable changing tile type if there is a plant on it
+- DONE - Disable changing tile type if there is a plant on it
 - Schedule for watering/notification, reminder
 - Photo
