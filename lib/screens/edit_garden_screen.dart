@@ -31,8 +31,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
     super.initState();
 
     final gardensStore = Provider.of<GardensStore>(context, listen: false);
-    final selectedGarden =
-        gardensStore.gardens[gardensStore.selectedGardenIndex];
+    final selectedGarden = gardensStore.getSelectedGarden();
     _name = selectedGarden.name;
     _columns = selectedGarden.columns;
     _rows = selectedGarden.rows;

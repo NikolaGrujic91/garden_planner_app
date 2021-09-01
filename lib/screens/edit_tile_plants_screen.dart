@@ -41,9 +41,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     super.initState();
 
     final gardensStore = Provider.of<GardensStore>(context, listen: false);
-    final selectedGarden =
-        gardensStore.gardens[gardensStore.selectedGardenIndex];
-    _selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
+    _selectedTile = gardensStore.getSelectedTile();
 
     for (final plant in _selectedTile.plants) {
       _plantsNames.add(plant.name);
@@ -196,8 +194,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     int index,
   ) async {
     final gardensStore = Provider.of<GardensStore>(context, listen: false);
-    final name = gardensStore.gardens[gardensStore.selectedGardenIndex]
-        .tiles[gardensStore.selectedTileIndex].plants[index].name;
+    final name = gardensStore.getSelectedTile().plants[index].name;
     final content = 'Delete the plant "$name"?';
 
     return showDialog<void>(

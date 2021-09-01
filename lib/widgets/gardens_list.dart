@@ -84,7 +84,7 @@ class _GardensListState extends State<GardensList> {
     BuildContext context,
     GardensStore gardensStore,
   ) async {
-    final name = gardensStore.gardens[gardensStore.selectedGardenIndex].name;
+    final name = gardensStore.getSelectedGarden().name;
     final content = 'Delete the garden "$name"?';
 
     return showDialog<void>(
@@ -138,8 +138,7 @@ class _GardensListState extends State<GardensList> {
   }
 
   Future<void> _onDeletePressed(GardensStore gardensStore) async {
-    gardensStore
-        .removeGarden(gardensStore.gardens[gardensStore.selectedGardenIndex]);
+    gardensStore.removeGarden(gardensStore.getSelectedGarden());
     await gardensStore.saveGardens();
 
     if (!mounted) return;

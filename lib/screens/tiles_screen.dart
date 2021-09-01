@@ -20,7 +20,7 @@ class TilesScreen extends StatelessWidget {
       return Scaffold(
         appBar: BaseAppBar(
           backScreenID: MainScreen.id,
-          title: gardensStore.gardens[gardensStore.selectedGardenIndex].name,
+          title: gardensStore.getSelectedGarden().name,
         ),
         body: const SafeArea(
           child: TilesGrid(),

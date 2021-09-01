@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/model/json_constants.dart';
+import 'package:garden_planner_app/model/tile.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Store responsible for handling the gardens data
@@ -43,6 +44,11 @@ class GardensStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Get selected garden
+  Garden getSelectedGarden() {
+    return gardens[selectedGardenIndex];
+  }
+
   /// Update selected garden
   void updateSelectedGarden({
     required String name,
@@ -54,6 +60,11 @@ class GardensStore extends ChangeNotifier {
     gardens[selectedGardenIndex].columns = columns;
     gardens[selectedGardenIndex].updateTiles();
     notifyListeners();
+  }
+
+  /// Get selected tile
+  Tile getSelectedTile() {
+    return gardens[selectedGardenIndex].tiles[selectedTileIndex];
   }
 
   /// Update selected tile type

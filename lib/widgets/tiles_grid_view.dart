@@ -16,8 +16,7 @@ class TilesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GardensStore>(builder: (context, gardensStore, child) {
-      final selectedGarden =
-          gardensStore.gardens[gardensStore.selectedGardenIndex];
+      final selectedGarden = gardensStore.getSelectedGarden();
       final columns = selectedGarden.columns;
       final itemCount = selectedGarden.columns * selectedGarden.rows;
       final tiles = selectedGarden.tiles;

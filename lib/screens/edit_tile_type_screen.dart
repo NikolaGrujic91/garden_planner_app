@@ -27,9 +27,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
     super.initState();
 
     final gardensStore = Provider.of<GardensStore>(context, listen: false);
-    final selectedGarden =
-        gardensStore.gardens[gardensStore.selectedGardenIndex];
-    final selectedTile = selectedGarden.tiles[gardensStore.selectedTileIndex];
+    final selectedTile = gardensStore.getSelectedTile();
     _tileType = selectedTile.type;
   }
 
