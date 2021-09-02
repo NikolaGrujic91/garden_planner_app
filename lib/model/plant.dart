@@ -32,7 +32,7 @@ class Plant {
   String description = '';
 
   /// Convert object data to JSON
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         kJsonId: id,
         kJsonType: plantTypeToString(type),
         kJsonPlantName: name,

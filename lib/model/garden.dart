@@ -35,7 +35,7 @@ class Garden {
   List<Tile> tiles = <Tile>[];
 
   /// Convert object data to JSON
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         kJsonId: id,
         kJsonName: name,
         kJsonRows: rows,

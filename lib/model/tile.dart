@@ -26,7 +26,7 @@ class Tile {
   List<Plant> plants = <Plant>[];
 
   /// Convert object data to JSON
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         kJsonId: id,
         kJsonType: tileTypeToString(type),
         kJsonPlants: plants,

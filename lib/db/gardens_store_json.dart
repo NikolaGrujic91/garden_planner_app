@@ -26,7 +26,7 @@ class GardensStoreJson extends ChangeNotifier implements GardensStore {
   int selectedTileIndex = 0;
 
   /// Convert object data to JSON
-  Map<String, dynamic> toJson() => {kJsonGardens: gardens};
+  Map<String, dynamic> toJson() => <String, dynamic>{kJsonGardens: gardens};
 
   @override
   void addGarden(Garden garden) {
