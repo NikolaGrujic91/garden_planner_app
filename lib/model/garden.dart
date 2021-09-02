@@ -16,8 +16,9 @@ class Garden {
         name = json[kJsonName].toString(),
         rows = json[kJsonRows] as int,
         columns = json[kJsonColumns] as int,
-        tiles =
-            (json[kJsonTiles] as List).map((i) => Tile.fromJson(i)).toList();
+        tiles = (json[kJsonTiles] as List)
+            .map((dynamic i) => Tile.fromJson(i as Map<String, dynamic>))
+            .toList();
 
   /// ID
   String id = const Uuid().v1();

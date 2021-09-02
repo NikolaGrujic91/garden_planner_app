@@ -136,8 +136,9 @@ class GardensStoreJson extends ChangeNotifier implements GardensStore {
     final file = await _localFile();
     final fileContent = await file.readAsString();
     final json = await jsonDecode(fileContent) as Map<String, dynamic>;
-    gardens =
-        (json[kJsonGardens] as List).map((i) => Garden.fromJson(i)).toList();
+    gardens = (json[kJsonGardens] as List)
+        .map((dynamic i) => Garden.fromJson(i as Map<String, dynamic>))
+        .toList();
   }
 
   Future<File> _localFile() async {

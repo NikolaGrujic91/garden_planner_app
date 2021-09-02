@@ -13,8 +13,9 @@ class Tile {
   Tile.fromJson(Map<String, dynamic> json)
       : id = json[kJsonId].toString(),
         type = stringToTileType(json[kJsonType].toString()),
-        plants =
-            (json[kJsonPlants] as List).map((i) => Plant.fromJson(i)).toList();
+        plants = (json[kJsonPlants] as List)
+            .map((dynamic i) => Plant.fromJson(i as Map<String, dynamic>))
+            .toList();
 
   /// ID
   String id = const Uuid().v1();
