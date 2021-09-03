@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/model/enums.dart';
-import 'package:garden_planner_app/db/gardens_store_json.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
@@ -26,7 +26,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   void initState() {
     super.initState();
 
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false);
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     final selectedTile = gardensStore.getSelectedTile();
     _tileType = selectedTile.type;
   }
@@ -95,7 +95,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
   }
 
   Future<void> _save() async {
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false)
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedTileType(type: _tileType);
     await gardensStore.saveGardens();
 

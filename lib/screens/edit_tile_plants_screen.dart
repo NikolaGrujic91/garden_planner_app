@@ -2,7 +2,7 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/model/enums.dart';
-import 'package:garden_planner_app/db/gardens_store_json.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
@@ -40,7 +40,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   void initState() {
     super.initState();
 
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false);
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     _selectedTile = gardensStore.getSelectedTile();
 
     for (final plant in _selectedTile.plants) {
@@ -177,7 +177,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   }
 
   Future<void> _save() async {
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false)
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedTilePlants(
           plantsNames: _plantsNames,
           plantedDates: _plantedDates,
@@ -193,7 +193,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
     BuildContext context,
     int index,
   ) async {
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false);
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     final name = gardensStore.getSelectedTile().plants[index].name;
     final content = 'Delete the plant "$name"?';
 
@@ -250,7 +250,7 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
   }
 
   Future<void> _onDeletePressed(int index) async {
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false)
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..removePlant(index: index);
     await gardensStore.saveGardens();
 

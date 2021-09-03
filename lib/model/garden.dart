@@ -1,10 +1,16 @@
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/json_constants.dart';
 import 'package:garden_planner_app/model/tile.dart';
+import 'package:garden_planner_app/utils/hive_field_id.dart';
+import 'package:garden_planner_app/utils/hive_type_id.dart';
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
+part 'garden.g.dart';
+
 /// Model class that stores Garden data
-class Garden {
+@HiveType(typeId: kHiveTypeId2)
+class Garden extends HiveObject {
   /// Creates a new instance
   Garden({required this.name, required this.rows, required this.columns}) {
     _createTiles();
@@ -21,18 +27,23 @@ class Garden {
             .toList();
 
   /// ID
+  @HiveField(kHiveFieldId0)
   String id = const Uuid().v1();
 
   /// Garden name
+  @HiveField(kHiveFieldId1)
   String name = '';
 
   /// Number of tiles grid rows
+  @HiveField(kHiveFieldId2)
   int rows = 0;
 
   /// Number of tiles grid columns
+  @HiveField(kHiveFieldId3)
   int columns = 0;
 
   /// Tiles
+  @HiveField(kHiveFieldId4)
   List<Tile> tiles = <Tile>[];
 
   /// Convert object data to JSON

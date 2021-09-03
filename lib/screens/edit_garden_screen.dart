@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/db/gardens_store_json.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/main_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
@@ -30,7 +30,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
   void initState() {
     super.initState();
 
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false);
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     final selectedGarden = gardensStore.getSelectedGarden();
     _name = selectedGarden.name;
     _columns = selectedGarden.columns;
@@ -134,7 +134,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
   }
 
   Future<void> _save() async {
-    final gardensStore = Provider.of<GardensStoreJson>(context, listen: false)
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedGarden(name: _name, rows: _rows, columns: _columns);
     await gardensStore.saveGardens();
 

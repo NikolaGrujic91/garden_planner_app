@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/db/gardens_store_json.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
@@ -22,7 +22,7 @@ class _GardensListState extends State<GardensList> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStoreJson>(
+    return Consumer<GardensStoreHive>(
       builder: (context, gardensStore, child) {
         return Expanded(
           child: Scrollbar(
@@ -82,7 +82,7 @@ class _GardensListState extends State<GardensList> {
 
   Future<void> _showDeleteDialog(
     BuildContext context,
-    GardensStoreJson gardensStore,
+    GardensStoreHive gardensStore,
   ) async {
     final name = gardensStore.getSelectedGarden().name;
     final content = 'Delete the garden "$name"?';
@@ -137,7 +137,7 @@ class _GardensListState extends State<GardensList> {
     );
   }
 
-  Future<void> _onDeletePressed(GardensStoreJson gardensStore) async {
+  Future<void> _onDeletePressed(GardensStoreHive gardensStore) async {
     gardensStore.removeGarden(gardensStore.getSelectedGarden());
     await gardensStore.saveGardens();
 
