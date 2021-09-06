@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:garden_planner_app/db/gardens_store.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
-import 'package:garden_planner_app/model/json_constants.dart';
+import 'package:garden_planner_app/utils/json_constants.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/model/tile.dart';
 
