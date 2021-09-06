@@ -17,16 +17,21 @@ Tasks:
 - DONE - Ratio of grid view to always follows ratio of rows and columns, so the tiles are always square
 - DONE - Add max of four icons to tile, but one of each type
 - DONE - Add unlimited fruits, vegetables, trees and flowers to tile, but only 4 icons are visible
-- iOS - Launch screen
 - DONE - Text field display clear button
-- Divider between plant edit blocks
 - DONE - Add extra/description field
 - DONE - iOS & Android use picker to chose type of plants
-- iOS - check dark mode
-- macOS & Win - tabbing between fields
+- DONE - macOS & Win - tabbing between fields
 - DONE - iOS & macOS - order of delete cancel buttons in modal dialogs
-- macOS & Win - hover color
 - DONE - macOS & Win - cursor change on tile
 - DONE - Disable changing tile type if there is a plant on it
+- macOS & Win - hover color
+- iOS - check dark mode
+- iOS - Launch screen
+- Divider between plant edit blocks
+- Reorder plant edit screen, planted date should be in separate row
+- Remove labels above text fields
 - Schedule for watering/notification, reminder
 - Photo
+    - save image on local storage
+    - name it as uuid
+    - add image_uuid field to plant.dart
