@@ -31,6 +31,9 @@ Tasks:
 - iOS - check dark mode
 - iOS - Launch screen
 - Schedule for watering/notification, reminder
+    - https://pub.dev/packages/add_2_calendar
+    - https://pub.dev/packages/flutter_local_notifications
+    - https://brainsandbeards.com/blog/how-to-add-local-notifications-to-flutter-app
 - Photo
     - save image on local storage
     - name it as uuid
