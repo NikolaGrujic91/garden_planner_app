@@ -67,7 +67,7 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: _restorableDatePickerRouteFuture.present,
-      child: const StyledText(text: 'Change planted date'),
+      child: const StyledText(text: 'Change date'),
     );
   }
 

@@ -85,20 +85,6 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                           index: index,
                           callback: _setPlantType,
                         ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      StyledText(text: _plantedDates[index]),
-                      SizedBox(
-                        width: _plantedDates[index].isEmpty ? 0.0 : 20.0,
-                      ),
-                      DatePicker(
-                        restorationId: EditTilePlantsScreen.id,
-                        callback: (String newValue) {
-                          _setPlantedDate(newValue, index);
-                        },
-                        initialDate: _plantedDates[index],
-                      ),
                       const Spacer(),
                       IconButton(
                         onPressed: () async {
@@ -139,6 +125,30 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
                           callbackWithIndex: _setDescription,
                           index: index,
                         ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const StyledText(
+                        text: 'Planted:',
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      StyledText(
+                        text: _plantedDates[index],
+                      ),
+                      const Spacer(),
+                      DatePicker(
+                        restorationId: EditTilePlantsScreen.id,
+                        callback: (String newValue) {
+                          _setPlantedDate(newValue, index);
+                        },
+                        initialDate: _plantedDates[index],
                       ),
                     ],
                   ),

@@ -25,11 +25,11 @@ Tasks:
 - DONE - macOS & Win - cursor change on tile
 - DONE - Disable changing tile type if there is a plant on it
 - DONE - Remove labels above text fields
+- DONE - Reorder plant edit screen, planted date should be in separate row
 - macOS & Win - hover color
 - iOS - check dark mode
 - iOS - Launch screen
 - Divider between plant edit blocks
-- Reorder plant edit screen, planted date should be in separate row
 - Schedule for watering/notification, reminder
 - Photo
     - save image on local storage
