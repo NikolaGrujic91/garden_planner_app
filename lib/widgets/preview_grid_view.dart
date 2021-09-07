@@ -18,22 +18,16 @@ class PreviewGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate aspect ratio in order to make
-    // all grid cells always visible properly
-    final size = MediaQuery.of(context).size;
-    final aspectRatio =
-        (size.width / columns) / ((size.height - (53 * 6)) / rows);
-
     return Expanded(
       child: GridView.count(
+        shrinkWrap: true,
         crossAxisCount: columns,
-        childAspectRatio: aspectRatio,
         children: List.generate(columns * rows, (index) {
-          return const Padding(
-            padding: EdgeInsets.all(0.5),
+          return Padding(
+            padding: const EdgeInsets.all(0.5),
             child: Material(
-              child: ListTile(
-                tileColor: kTilePlantColor,
+              child: Container(
+                color: kTilePlantColor,
               ),
             ),
           );

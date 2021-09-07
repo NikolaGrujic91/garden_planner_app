@@ -92,12 +92,6 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const StyledText(
-                text: 'Preview',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               PreviewGridView(
                 columns: _columns,
                 rows: _rows,
