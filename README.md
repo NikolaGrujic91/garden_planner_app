@@ -26,10 +26,10 @@ Tasks:
 - DONE - Disable changing tile type if there is a plant on it
 - DONE - Remove labels above text fields
 - DONE - Reorder plant edit screen, planted date should be in separate row
+- DONE - Divider between plant edit blocks
 - macOS & Win - hover color
 - iOS - check dark mode
 - iOS - Launch screen
-- Divider between plant edit blocks
 - Schedule for watering/notification, reminder
 - Photo
     - save image on local storage

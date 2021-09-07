@@ -62,7 +62,9 @@ class _EditTilePlantsScreenState extends State<EditTilePlantsScreen> {
       ),
       body: Container(
         color: kBackgroundColor,
-        child: ListView.builder(
+        child: ListView.separated(
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
           itemCount: _selectedTile.plants.length,
           itemBuilder: (context, index) {
             return Padding(
