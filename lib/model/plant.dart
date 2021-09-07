@@ -42,6 +42,10 @@ class Plant extends HiveObject {
   @HiveField(kHiveFieldId4)
   String description = '';
 
+  /// List of image guids
+  @HiveField(kHiveFieldId5)
+  List<String>? images = <String>[];
+
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{
         kJsonId: id,
