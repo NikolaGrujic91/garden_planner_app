@@ -24,12 +24,12 @@ Tasks:
 - DONE - iOS & macOS - order of delete cancel buttons in modal dialogs
 - DONE - macOS & Win - cursor change on tile
 - DONE - Disable changing tile type if there is a plant on it
+- DONE - Remove labels above text fields
 - macOS & Win - hover color
 - iOS - check dark mode
 - iOS - Launch screen
 - Divider between plant edit blocks
 - Reorder plant edit screen, planted date should be in separate row
-- Remove labels above text fields
 - Schedule for watering/notification, reminder
 - Photo
     - save image on local storage

@@ -52,15 +52,9 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const StyledText(
-                text: 'Garden name',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               TextFieldBordered(
                 text: _name,
-                hintText: 'Name',
+                hintText: 'Garden name',
                 callback: _setName,
               ),
               const SizedBox(
@@ -75,9 +69,9 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
               Row(
                 children: [
                   TextFieldBorderedNumeric(
-                    text: _columns.toString(),
-                    hintText: 'Columns',
-                    callback: _setColumns,
+                    text: _rows.toString(),
+                    hintText: 'Rows',
+                    callback: _setRows,
                   ),
                   const SizedBox(
                     width: 20,
@@ -89,9 +83,9 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
                     width: 20,
                   ),
                   TextFieldBorderedNumeric(
-                    text: _rows.toString(),
-                    hintText: 'Rows',
-                    callback: _setRows,
+                    text: _columns.toString(),
+                    hintText: 'Columns',
+                    callback: _setColumns,
                   ),
                 ],
               ),

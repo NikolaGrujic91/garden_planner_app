@@ -42,22 +42,16 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const StyledText(
-                text: 'garden name',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               TextFieldBordered(
                 text: _name,
-                hintText: 'Name',
+                hintText: 'Garden name',
                 callback: _setName,
               ),
               const SizedBox(
                 height: 20,
               ),
               const StyledText(
-                text: 'garden size',
+                text: 'Garden size',
               ),
               const SizedBox(
                 height: 20,
@@ -65,9 +59,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               Row(
                 children: [
                   TextFieldBorderedNumeric(
-                    text: _columns.toString(),
-                    hintText: 'Columns',
-                    callback: _setColumns,
+                    text: _rows.toString(),
+                    hintText: 'Rows',
+                    callback: _setRows,
                   ),
                   const SizedBox(
                     width: 20,
@@ -79,9 +73,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                     width: 20,
                   ),
                   TextFieldBorderedNumeric(
-                    text: _rows.toString(),
-                    hintText: 'Rows',
-                    callback: _setRows,
+                    text: _columns.toString(),
+                    hintText: 'Columns',
+                    callback: _setColumns,
                   ),
                 ],
               ),
@@ -89,7 +83,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 height: 20,
               ),
               const StyledText(
-                text: 'preview',
+                text: 'Preview',
               ),
               const SizedBox(
                 height: 20,
