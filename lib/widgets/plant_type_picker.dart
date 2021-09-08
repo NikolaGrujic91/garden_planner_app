@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_pickers/flutter_material_pickers.dart';
+
+/// Not supported in Flutter 2.5.0
+//import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 
@@ -37,7 +39,8 @@ class PlantTypePicker extends StatelessWidget {
   }
 
   Future<void> _showPlantTypePicker(BuildContext context, int index) async {
-    await showMaterialRadioPicker<String>(
+    /// Not supported in Flutter 2.5.0
+    /*await showMaterialRadioPicker<String>(
       context: context,
       headerColor: kAppBarBackgroundColor,
       title: 'Pick plant type',
@@ -46,6 +49,6 @@ class PlantTypePicker extends StatelessWidget {
       onChanged: (newValue) {
         callback(newValue, index);
       },
-    );
+    );*/
   }
 }
