@@ -8,22 +8,28 @@ import 'package:provider/provider.dart';
 /// This widget represents tiles grid of a garden
 class PlantsList extends StatelessWidget {
   /// Creates a new instance
-  const PlantsList({Key? key}) : super(key: key);
+  PlantsList({Key? key}) : super(key: key);
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     final plants = gardensStore.getSelectedTile().plants;
 
-    return Container(
-      color: kBackgroundColor,
-      child: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        itemCount: plants.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
+    return Scrollbar(
+      isAlwaysShown: true,
+      controller: _scrollController,
+      child: Container(
+        color: kBackgroundColor,
+        child: ListView.separated(
+          controller: _scrollController,
+          padding: const EdgeInsets.all(10),
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+          itemCount: plants.length,
+          itemBuilder: (context, index) {
+            return Column(
               children: [
                 Row(
                   children: [
@@ -81,9 +87,9 @@ class PlantsList extends StatelessWidget {
                   ],
                 ),
               ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
