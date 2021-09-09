@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/screens/main_screen.dart';
+import 'package:garden_planner_app/screens/gardens_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/preview_grid_view.dart';
@@ -41,7 +41,7 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        backScreenID: MainScreen.id,
+        backScreenID: GardensScreen.id,
         title: 'Edit $_name',
         saveCallback: _save,
       ),
@@ -127,6 +127,6 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
     await gardensStore.saveGardens();
 
     if (!mounted) return;
-    await Navigator.pushReplacementNamed(context, MainScreen.id);
+    await Navigator.pushReplacementNamed(context, GardensScreen.id);
   }
 }

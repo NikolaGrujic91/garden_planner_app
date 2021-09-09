@@ -7,7 +7,7 @@ import 'package:garden_planner_app/screens/add_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
-import 'package:garden_planner_app/screens/main_screen.dart';
+import 'package:garden_planner_app/screens/gardens_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
@@ -45,9 +45,9 @@ class GardenPlannerApp extends StatelessWidget {
       create: (context) => GardensStoreHive(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: MainScreen.id,
+        initialRoute: GardensScreen.id,
         routes: {
-          MainScreen.id: (context) => const MainScreen(),
+          GardensScreen.id: (context) => const GardensScreen(),
           AddGardenScreen.id: (context) => const AddGardenScreen(),
           EditGardenScreen.id: (context) => const EditGardenScreen(),
           TilesScreen.id: (context) => const TilesScreen(),

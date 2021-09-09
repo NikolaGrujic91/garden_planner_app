@@ -5,12 +5,12 @@ import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/gardens_list.dart';
 
 /// Main Screen Widget
-class MainScreen extends StatelessWidget {
+class GardensScreen extends StatelessWidget {
   /// Creates a new instance
-  const MainScreen({Key? key}) : super(key: key);
+  const GardensScreen({Key? key}) : super(key: key);
 
   /// Screen ID
-  static const String id = 'main_screen';
+  static const String id = 'gardens_screen';
 
   @override
   Widget build(BuildContext context) {

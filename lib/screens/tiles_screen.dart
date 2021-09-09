@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/screens/main_screen.dart';
+import 'package:garden_planner_app/screens/gardens_screen.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/tiles_bottom_bar.dart';
 import 'package:garden_planner_app/widgets/tiles_grid_view.dart';
@@ -19,7 +19,7 @@ class TilesScreen extends StatelessWidget {
     return Consumer<GardensStoreHive>(builder: (context, gardensStore, child) {
       return Scaffold(
         appBar: BaseAppBar(
-          backScreenID: MainScreen.id,
+          backScreenID: GardensScreen.id,
           title: gardensStore.getSelectedGarden().name,
         ),
         body: const SafeArea(
