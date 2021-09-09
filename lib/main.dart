@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/add_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
-import 'package:garden_planner_app/screens/edit_tile_plants_screen.dart';
+import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
 import 'package:garden_planner_app/screens/main_screen.dart';
+import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:provider/provider.dart';
@@ -50,8 +51,9 @@ class GardenPlannerApp extends StatelessWidget {
           AddGardenScreen.id: (context) => const AddGardenScreen(),
           EditGardenScreen.id: (context) => const EditGardenScreen(),
           TilesScreen.id: (context) => const TilesScreen(),
+          PlantsScreen.id: (context) => const PlantsScreen(),
           EditTileTypeScreen.id: (context) => const EditTileTypeScreen(),
-          EditTilePlantsScreen.id: (context) => const EditTilePlantsScreen(),
+          EditPlantScreen.id: (context) => const EditPlantScreen(),
           TakePictureScreen.id: (context) => TakePictureScreen(camera: camera!)
         },
       ),

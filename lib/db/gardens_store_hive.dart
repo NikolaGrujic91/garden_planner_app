@@ -1,13 +1,13 @@
-import 'package:garden_planner_app/utils/hive_constants.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:garden_planner_app/db/gardens_store.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
-import 'package:garden_planner_app/utils/json_constants.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/model/tile.dart';
+import 'package:garden_planner_app/utils/hive_constants.dart';
+import 'package:garden_planner_app/utils/json_constants.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 /// Store responsible for handling the gardens data
 class GardensStoreHive extends ChangeNotifier implements GardensStore {
@@ -27,6 +27,9 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
 
   /// Index of currently selected tile
   int selectedTileIndex = 0;
+
+  /// Index of currently selected plant
+  int selectedPlantIndex = 0;
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{kJsonGardens: gardens};
@@ -79,19 +82,28 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   }
 
   @override
-  void updateSelectedTilePlants({
-    required List<String> plantsNames,
-    required List<String> plantedDates,
-    required List<PlantType> plantsTypes,
-    required List<String> descriptions,
+  void updateSelectedPlant({
+    required String plantName,
+    required String plantedDate,
+    required PlantType plantType,
+    required String description,
   }) {
-    gardens[selectedGardenIndex].tiles[selectedTileIndex].updatePlants(
-          plantsNames: plantsNames,
-          plantedDates: plantedDates,
-          plantsTypes: plantsTypes,
-          descriptions: descriptions,
+    gardens[selectedGardenIndex].tiles[selectedTileIndex].updatePlant(
+          index: selectedPlantIndex,
+          plantsName: plantName,
+          plantedDate: plantedDate,
+          plantsType: plantType,
+          description: description,
         );
     notifyListeners();
+  }
+
+  /// Get selected plant
+  @override
+  Plant getSelectedPlant() {
+    return gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .plants[selectedPlantIndex];
   }
 
   @override
@@ -105,10 +117,10 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   }
 
   @override
-  void removePlant({required int index}) {
+  void removeSelectedPlant() {
     gardens[selectedGardenIndex]
         .tiles[selectedTileIndex]
-        .removePlant(index: index);
+        .removePlant(index: selectedPlantIndex);
   }
 
   @override

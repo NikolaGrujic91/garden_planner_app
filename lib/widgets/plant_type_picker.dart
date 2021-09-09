@@ -12,7 +12,6 @@ class PlantTypePicker extends StatelessWidget {
     Key? key,
     required this.dropdownValues,
     required this.value,
-    required this.index,
     required this.callback,
   }) : super(key: key);
 
@@ -22,23 +21,20 @@ class PlantTypePicker extends StatelessWidget {
   /// Value of initially selected value
   final String value;
 
-  /// Index of selected tile
-  final int index;
-
   /// Callback function
-  final Function(String plantType, int index) callback;
+  final Function(String plantType) callback;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        await _showPlantTypePicker(context, index);
+        await _showPlantTypePicker(context);
       },
       icon: plantTypeToSvgPicture(stringToPlantType(value)),
     );
   }
 
-  Future<void> _showPlantTypePicker(BuildContext context, int index) async {
+  Future<void> _showPlantTypePicker(BuildContext context) async {
     /// Not supported in Flutter 2.5.0
     /*await showMaterialRadioPicker<String>(
       context: context,
@@ -47,7 +43,7 @@ class PlantTypePicker extends StatelessWidget {
       items: dropdownValues,
       selectedItem: value,
       onChanged: (newValue) {
-        callback(newValue, index);
+        callback(newValue);
       },
     );*/
   }

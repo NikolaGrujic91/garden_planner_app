@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
+import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/tile.dart';
-import 'package:garden_planner_app/screens/edit_tile_plants_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
+import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:provider/provider.dart';
@@ -189,8 +189,7 @@ class TileGridViewCell extends StatelessWidget {
           onTap: () async {
             if (tile.type == TileType.plant && tile.plants.isNotEmpty) {
               gardensStore.selectedTileIndex = tileIndex;
-              await Navigator.pushReplacementNamed(
-                  context, EditTilePlantsScreen.id);
+              await Navigator.pushReplacementNamed(context, PlantsScreen.id);
             }
           },
           child: Container(

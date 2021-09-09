@@ -10,7 +10,6 @@ class PlantTypeDropdown extends StatelessWidget {
     Key? key,
     required this.dropdownValues,
     required this.value,
-    required this.index,
     required this.callback,
   }) : super(key: key);
 
@@ -20,11 +19,8 @@ class PlantTypeDropdown extends StatelessWidget {
   /// Value of initially selected value
   final String value;
 
-  /// Index of selected tile
-  final int index;
-
   /// Callback function
-  final Function(String plantType, int index) callback;
+  final Function(String plantType) callback;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class PlantTypeDropdown extends StatelessWidget {
         color: kDropdownUnderlineColor,
       ),
       onChanged: (String? newValue) {
-        callback(newValue!, index);
+        callback(newValue!);
       },
       items: dropdownValues.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(

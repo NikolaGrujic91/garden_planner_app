@@ -1,8 +1,8 @@
 import 'package:garden_planner_app/model/enums.dart';
-import 'package:garden_planner_app/utils/json_constants.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/utils/hive_field_id.dart';
 import 'package:garden_planner_app/utils/hive_type_id.dart';
+import 'package:garden_planner_app/utils/json_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
@@ -43,27 +43,21 @@ class Tile extends HiveObject {
       };
 
   /// Update tile plants based on given input
-  void updatePlants({
-    required List<String> plantsNames,
-    required List<String> plantedDates,
-    required List<PlantType> plantsTypes,
-    required List<String> descriptions,
+  void updatePlant({
+    required int index,
+    required String plantsName,
+    required String plantedDate,
+    required PlantType plantsType,
+    required String description,
   }) {
-    final plantsLength = plants.length;
-
-    if (plantsLength != plantsNames.length ||
-        plantsLength != plantedDates.length ||
-        plantsLength != plantsTypes.length ||
-        plantsLength != descriptions.length) {
+    if (index >= plants.length) {
       return;
     }
 
-    for (var i = 0; i < plantsLength; i++) {
-      plants[i].type = plantsTypes[i];
-      plants[i].name = plantsNames[i];
-      plants[i].plantedDate = plantedDates[i];
-      plants[i].description = descriptions[i];
-    }
+    plants[index].type = plantsType;
+    plants[index].name = plantsName;
+    plants[index].plantedDate = plantedDate;
+    plants[index].description = description;
   }
 
   /// Add plant to tile
@@ -73,6 +67,10 @@ class Tile extends HiveObject {
 
   /// Remove plant from tile at index
   void removePlant({required int index}) {
+    if (index >= plants.length) {
+      return;
+    }
+
     plants.removeAt(index);
   }
 }
