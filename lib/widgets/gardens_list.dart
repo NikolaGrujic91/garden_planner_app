@@ -47,7 +47,6 @@ class _GardensListState extends State<GardensList> {
                             onPressed: () async {
                               gardensStore.selectedGardenIndex = index;
                               await _showDeleteDialog(
-                                context,
                                 gardensStore,
                               );
                             },
@@ -81,7 +80,6 @@ class _GardensListState extends State<GardensList> {
   }
 
   Future<void> _showDeleteDialog(
-    BuildContext context,
     GardensStoreHive gardensStore,
   ) async {
     final name = gardensStore.getSelectedGarden().name;
