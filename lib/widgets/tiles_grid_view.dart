@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
@@ -161,17 +162,29 @@ class TileGridViewCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final plantTypes = <PlantType>[];
+    final plantTypesUnique = tile.plants.map((p) => p.type).toSet().toList()
+      ..sort((a, b) => a.index.compareTo(b.index));
+
+    final plantTypesCounter = <PlantType, int>{};
+
     for (final plant in tile.plants) {
-      if (!plantTypes.contains(plant.type)) {
-        plantTypes.add(plant.type);
+      if (plantTypesCounter.containsKey(plant.type)) {
+        plantTypesCounter.update(plant.type, (int value) {
+          return plantTypesCounter[plant.type]! + 1;
+        });
+      } else {
+        plantTypesCounter[plant.type] = 1;
       }
     }
-    plantTypes.sort((a, b) => a.index.compareTo(b.index));
 
     final plantIcons = <Widget>[];
-    for (final plantType in plantTypes) {
-      plantIcons.add(plantTypeToSvgPicture(plantType));
+    for (final plantType in plantTypesUnique) {
+      plantIcons.add(
+        Badge(
+          badgeContent: Text(plantTypesCounter[plantType].toString()),
+          child: plantTypeToSvgPicture(plantType),
+        ),
+      );
     }
 
     return MouseRegion(
