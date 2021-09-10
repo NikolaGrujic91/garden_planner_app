@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
@@ -29,21 +33,16 @@ class PlantsList extends StatelessWidget {
               const Divider(),
           itemCount: plants.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    const StyledText(
-                      text: 'Name:',
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    StyledText(
-                      text: plants[index].name,
-                    ),
-                    const Spacer(),
-                    IconButton(
+            return Card(
+              color: Colors.grey,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                    leading: plantTypeToSvgPicture(plants[index].type),
+                    title: Text(plants[index].name),
+                    trailing: IconButton(
                       onPressed: () {
                         gardensStore.selectedPlantIndex = index;
                         Navigator.pushReplacementNamed(
@@ -51,42 +50,45 @@ class PlantsList extends StatelessWidget {
                       },
                       icon: const Icon(kEditIcon),
                       tooltip: 'Edit plant',
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    const StyledText(
-                      text: 'Description:',
                     ),
-                    const SizedBox(
-                      width: 10,
+                  ),
+                  if (plants[index].images != null &&
+                      plants[index].images!.isNotEmpty)
+                    CarouselSlider.builder(
+                      options: CarouselOptions(height: 200),
+                      itemCount: plants[index].images!.length,
+                      itemBuilder: (
+                        BuildContext context,
+                        int imageIndex,
+                        int pageViewIndex,
+                      ) {
+                        return Stack(
+                          children: [
+                            Image.file(
+                              File(plants[index].images![imageIndex]),
+                            ),
+                            StyledText(
+                              text:
+                                  '${imageIndex + 1}/${plants[index].images!.length}',
+                            ),
+                          ],
+                        );
+                      },
                     ),
-                    StyledText(
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: StyledText(
                       text: plants[index].description,
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    const StyledText(
-                      text: 'Planted:',
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    StyledText(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: StyledText(
                       text: plants[index].plantedDate,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             );
           },
         ),
