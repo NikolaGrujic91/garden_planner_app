@@ -5,6 +5,7 @@ import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
+import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
@@ -57,6 +58,14 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
         backScreenID: PlantsScreen.id,
         title: 'Edit plants',
         saveCallback: _save,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Navigator.pushReplacementNamed(context, TakePictureScreen.id);
+        },
+        tooltip: 'Take picture',
+        backgroundColor: kFloatingActionButtonColor,
+        child: const Icon(Icons.camera_alt),
       ),
       body: Container(
         color: kBackgroundColor,

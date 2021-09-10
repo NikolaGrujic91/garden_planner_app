@@ -37,4 +37,4 @@ Tasks:
 - Photo
     - save image on local storage
     - name it as uuid
-    - add image_uuid field to plant.dart
+    - DONE - add image_uuid field to plant.dart
