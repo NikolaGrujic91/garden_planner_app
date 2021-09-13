@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/save_icon_button.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 

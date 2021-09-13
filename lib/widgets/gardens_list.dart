@@ -5,7 +5,7 @@ import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
