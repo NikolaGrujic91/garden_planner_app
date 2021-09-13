@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/style_constants.dart';
 
 /// This widget is generic widget for text input
@@ -23,7 +24,7 @@ class TextFieldBordered extends StatelessWidget {
           _textEditingController.clear();
           callback!(_textEditingController.value.text);
         },
-        icon: const Icon(Icons.clear),
+        icon: const Icon(kClearIcon),
       ),
     );
   }

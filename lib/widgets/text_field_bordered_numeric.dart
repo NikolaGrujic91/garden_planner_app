@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/style_constants.dart';
 
 /// This widget is generic widget for numeric input
@@ -20,7 +21,7 @@ class TextFieldBorderedNumeric extends StatelessWidget {
       hintText: hintText,
       suffixIcon: IconButton(
         onPressed: _textEditingController.clear,
-        icon: const Icon(Icons.clear),
+        icon: const Icon(kClearIcon),
       ),
     );
   }

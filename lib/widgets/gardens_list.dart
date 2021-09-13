@@ -39,7 +39,7 @@ class _GardensListState extends State<GardensList> {
                   return Material(
                     child: ListTile(
                       tileColor: kBackgroundColor,
-                      leading: const Icon(Icons.grid_4x4),
+                      leading: const Icon(kGridIcon),
                       title: StyledText(text: gardensStore.gardens[index].name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,

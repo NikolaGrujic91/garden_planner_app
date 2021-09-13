@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/utils/svg_icon_constants.dart';
 import 'package:garden_planner_app/utils/string_constants.dart';
+import 'package:garden_planner_app/utils/svg_icon_constants.dart';
 
 /// Convert TileType enum to String
 String tileTypeToString(TileType type) {
@@ -32,20 +32,6 @@ TileType stringToTileType(String value) {
       return TileType.path;
     default:
       return TileType.none;
-  }
-}
-
-/// Convert TileType enum to IconData
-IconData tileTypeToIconData(TileType type) {
-  switch (type) {
-    case TileType.none:
-      return Icons.cancel;
-    case TileType.plant:
-      return Icons.api;
-    case TileType.home:
-      return Icons.home;
-    case TileType.path:
-      return Icons.directions_walk;
   }
 }
 
