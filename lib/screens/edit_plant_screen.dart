@@ -55,20 +55,24 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Platform.isAndroid || Platform.isIOS;
+
+    final floatingActionButtonTakePicture = FloatingActionButton(
+      onPressed: () async {
+        await Navigator.pushReplacementNamed(context, TakePictureScreen.id);
+      },
+      tooltip: 'Take picture',
+      backgroundColor: kFloatingActionButtonColor,
+      child: const Icon(kCameraIcon),
+    );
+
     return Scaffold(
       appBar: BaseAppBar(
         backScreenID: PlantsScreen.id,
         title: 'Edit plants',
         saveCallback: _save,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.pushReplacementNamed(context, TakePictureScreen.id);
-        },
-        tooltip: 'Take picture',
-        backgroundColor: kFloatingActionButtonColor,
-        child: const Icon(kCameraIcon),
-      ),
+      floatingActionButton: isMobile ? floatingActionButtonTakePicture : null,
       body: Container(
         color: kBackgroundColor,
         child: Padding(
