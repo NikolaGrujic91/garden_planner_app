@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 
 /// This widget presents a preview of tiles grid while creating a garden
 class PreviewGridView extends StatelessWidget {

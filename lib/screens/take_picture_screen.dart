@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:provider/provider.dart';
 

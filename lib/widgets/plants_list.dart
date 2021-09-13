@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';

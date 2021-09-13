@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/gardens_screen.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/preview_grid_view.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
