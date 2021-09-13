@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Not supported in Flutter 2.5.0
 //import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/style_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 
 /// This widget enables picking plant type via modal dialog

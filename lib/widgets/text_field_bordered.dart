@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/style_constants.dart';
 
 /// This widget is generic widget for text input
 class TextFieldBordered extends StatelessWidget {

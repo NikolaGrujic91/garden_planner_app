@@ -6,7 +6,7 @@ import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/style_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:provider/provider.dart';
 
