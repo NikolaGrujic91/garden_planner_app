@@ -30,8 +30,7 @@ class PlantsList extends StatelessWidget {
         child: ListView.separated(
           controller: _scrollController,
           padding: const EdgeInsets.all(10),
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+          separatorBuilder: (context, index) => const Divider(),
           itemCount: plants.length,
           itemBuilder: (context, index) {
             return Card(
@@ -64,13 +63,19 @@ class PlantsList extends StatelessWidget {
                         int pageViewIndex,
                       ) {
                         return Stack(
+                          alignment: AlignmentDirectional.topEnd,
                           children: [
                             Image.file(
                               File(plants[index].images![imageIndex]),
                             ),
-                            StyledText(
-                              text:
-                                  '${imageIndex + 1}/${plants[index].images!.length}',
+                            DecoratedBox(
+                              decoration: const BoxDecoration(
+                                color: Colors.lightBlue,
+                              ),
+                              child: StyledText(
+                                text:
+                                    '${imageIndex + 1}/${plants[index].images!.length}',
+                              ),
                             ),
                           ],
                         );
