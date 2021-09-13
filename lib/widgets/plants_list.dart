@@ -55,7 +55,10 @@ class PlantsList extends StatelessWidget {
                   if (plants[index].images != null &&
                       plants[index].images!.isNotEmpty)
                     CarouselSlider.builder(
-                      options: CarouselOptions(height: 200),
+                      options: CarouselOptions(
+                        height: 300,
+                        viewportFraction: 1,
+                      ),
                       itemCount: plants[index].images!.length,
                       itemBuilder: (
                         BuildContext context,
@@ -67,6 +70,8 @@ class PlantsList extends StatelessWidget {
                           children: [
                             Image.file(
                               File(plants[index].images![imageIndex]),
+                              fit: BoxFit.fitWidth,
+                              width: 2000,
                             ),
                             DecoratedBox(
                               decoration: const BoxDecoration(
