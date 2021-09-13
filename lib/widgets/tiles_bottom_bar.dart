@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 
 /// This widget represents bottom bar with draggable items
 class TilesBottomBar extends StatefulWidget {

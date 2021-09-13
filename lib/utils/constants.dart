@@ -31,18 +31,6 @@ const Color kDropdownColor = Color.fromARGB(255, 210, 160, 16);
 /// Dropdown Arrow Icon
 const IconData kDropdownArrow = Icons.arrow_downward;
 
-/// String none constant
-const String kNone = 'none';
-
-/// String plant constant
-const String kPlant = 'plant';
-
-/// String home constant
-const String kHome = 'home';
-
-/// String path constant
-const String kPath = 'path';
-
 /// TileType None Color
 const Color kTileNoneColor = Color.fromARGB(255, 59, 59, 59);
 
@@ -60,18 +48,6 @@ const Color kTileHomeBorderColor = Color.fromARGB(255, 99, 98, 98);
 
 /// TileType Home Border Width
 const double kTileHomeBorderWidth = 3;
-
-/// String tree constant
-const String kTree = 'tree';
-
-/// String fruit constant
-const String kFruit = 'fruit';
-
-/// String vegetable constant
-const String kVegetable = 'vegetable';
-
-/// String flower constant
-const String kFlower = 'flower';
 
 /// Tree SVG Icon 30x30
 SvgPicture kTreeIcon30 = SvgPicture.asset(

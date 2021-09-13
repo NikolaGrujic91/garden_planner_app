@@ -7,6 +7,7 @@ import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/constants.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/date_picker.dart';
