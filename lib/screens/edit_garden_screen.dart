@@ -60,12 +60,6 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const StyledText(
-                text: 'Garden size',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               Row(
                 children: [
                   TextFieldBorderedNumeric(

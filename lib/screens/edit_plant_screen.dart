@@ -92,7 +92,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Row(
                 children: [
@@ -106,7 +106,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Row(
                 children: [
@@ -120,7 +120,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Row(
                 children: [
@@ -142,6 +142,9 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     initialDate: _plantedDate,
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 20,
               ),
               Row(
                 children: [
