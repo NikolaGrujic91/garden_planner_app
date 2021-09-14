@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/screens/edit_plant_screen.dart';
+import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
@@ -58,7 +58,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BaseAppBar(
-        backScreenID: EditPlantScreen.id,
+        backScreenID: EditPlantImagesScreen.id,
         title: 'Take picture',
       ),
       // You must wait until the controller is initialized before displaying the
@@ -94,7 +94,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             gardensStore.getSelectedPlant().images!.add(image.path);
 
             if (!mounted) return;
-            await Navigator.pushReplacementNamed(context, EditPlantScreen.id);
+            await Navigator.pushReplacementNamed(
+                context, EditPlantImagesScreen.id);
           } catch (e) {
             debugPrint(e.toString());
           }

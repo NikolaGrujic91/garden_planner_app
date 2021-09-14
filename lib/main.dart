@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/add_garden_screen.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
+import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/screens/edit_tile_type_screen.dart';
 import 'package:garden_planner_app/screens/gardens_screen.dart';
@@ -54,6 +55,7 @@ class GardenPlannerApp extends StatelessWidget {
           PlantsScreen.id: (context) => const PlantsScreen(),
           EditTileTypeScreen.id: (context) => const EditTileTypeScreen(),
           EditPlantScreen.id: (context) => const EditPlantScreen(),
+          EditPlantImagesScreen.id: (context) => const EditPlantImagesScreen(),
           TakePictureScreen.id: (context) => TakePictureScreen(camera: camera!)
         },
       ),

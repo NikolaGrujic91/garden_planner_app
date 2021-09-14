@@ -11,12 +11,16 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BaseAppBar({
     Key? key,
     this.backScreenID,
+    this.forwardScreenID,
     required this.title,
     this.saveCallback,
   }) : super(key: key);
 
   /// Back button screen ID
   final String? backScreenID;
+
+  /// Forward button screen ID
+  final String? forwardScreenID;
 
   /// Title in the app bar
   final String title;
@@ -34,6 +38,19 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           await saveCallback!();
         },
       ));
+    }
+
+    Widget? forwardButton;
+
+    if (forwardScreenID != null) {
+      forwardButton = IconButton(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, forwardScreenID!);
+        },
+        icon: const Icon(kForwardIcon),
+      );
+
+      actions.add(forwardButton);
     }
 
     Widget? backButton;

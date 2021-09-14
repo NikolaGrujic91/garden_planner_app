@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 /// Back Icon
 const IconData kBackIcon = Icons.arrow_back_ios;
 
+/// Forward Icon
+const IconData kForwardIcon = Icons.arrow_forward_ios;
+
 /// Delete Icon
 const IconData kDeleteIcon = Icons.delete;
 

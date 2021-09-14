@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
-import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/date_picker.dart';
-import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
 import 'package:garden_planner_app/widgets/plant_type_dropdown.dart';
 import 'package:garden_planner_app/widgets/plant_type_picker.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
@@ -38,7 +37,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
-  late List<String>? _images;
   final _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
 
   @override
@@ -53,29 +51,16 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
-    _images = _selectedPlant.images;
   }
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = Platform.isAndroid || Platform.isIOS;
-
-    final floatingActionButtonTakePicture = FloatingActionButton(
-      onPressed: () async {
-        await Navigator.pushReplacementNamed(context, TakePictureScreen.id);
-      },
-      tooltip: 'Take picture',
-      backgroundColor: kFloatingActionButtonColor,
-      child: const Icon(kCameraIcon),
-    );
-
     return Scaffold(
       appBar: BaseAppBar(
-        backScreenID: PlantsScreen.id,
-        title: 'Edit plants',
+        backScreenID: EditPlantImagesScreen.id,
+        title: 'Edit plant info',
         saveCallback: _save,
       ),
-      floatingActionButton: isMobile ? floatingActionButtonTakePicture : null,
       body: Container(
         color: kBackgroundColor,
         child: Padding(
@@ -158,14 +143,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              if (_images != null && _images!.isNotEmpty)
-                ImageCarouselSlider(
-                  images: _images!,
-                  height: 300,
-                ),
             ],
           ),
         ),
