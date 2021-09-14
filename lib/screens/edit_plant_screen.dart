@@ -57,7 +57,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        backScreenID: EditPlantImagesScreen.id,
+        backScreenID: PlantsScreen.id,
         title: 'Edit plant info',
         saveCallback: _save,
       ),
@@ -140,6 +140,25 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                       _setPlantedDate(newValue);
                     },
                     initialDate: _plantedDate,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () async {
+                        await Navigator.pushReplacementNamed(
+                            context, EditPlantImagesScreen.id);
+                      },
+                      child: const Text(
+                        'Edit Images',
+                        style: TextStyle(
+                          fontFamily: 'Roboto Sans',
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

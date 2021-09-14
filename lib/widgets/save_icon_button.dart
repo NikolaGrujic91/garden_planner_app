@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:garden_planner_app/utils/icon_constants.dart';
 
 /// This widget represents reusable save button
 class SaveIconButton extends StatelessWidget {
@@ -15,10 +14,15 @@ class SaveIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return TextButton(
       onPressed: callback,
-      icon: const Icon(kSaveIcon),
-      tooltip: 'Save',
+      child: const Text(
+        'SAVE',
+        style: TextStyle(
+          fontFamily: 'Roboto Sans',
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

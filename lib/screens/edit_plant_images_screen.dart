@@ -52,8 +52,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
 
     return Scaffold(
       appBar: const BaseAppBar(
-        backScreenID: PlantsScreen.id,
-        forwardScreenID: EditPlantScreen.id,
+        backScreenID: EditPlantScreen.id,
         title: 'Edit plant images',
       ),
       floatingActionButton: isMobile ? floatingActionButtonTakePicture : null,

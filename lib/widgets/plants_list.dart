@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
+import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
@@ -44,7 +44,7 @@ class PlantsList extends StatelessWidget {
                       onPressed: () {
                         gardensStore.selectedPlantIndex = index;
                         Navigator.pushReplacementNamed(
-                            context, EditPlantImagesScreen.id);
+                            context, EditPlantScreen.id);
                       },
                       icon: const Icon(kEditIcon),
                       tooltip: 'Edit plant',
