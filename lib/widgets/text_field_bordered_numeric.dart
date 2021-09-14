@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/style_constants.dart';
 
 /// This widget is generic widget for numeric input
-class TextFieldBorderedNumeric extends StatelessWidget {
+class TextFieldBorderedNumeric extends StatefulWidget {
   /// Creates a new instance
   TextFieldBorderedNumeric({
     Key? key,
@@ -15,15 +14,6 @@ class TextFieldBorderedNumeric extends StatelessWidget {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
         TextPosition(offset: _textEditingController.text.length));
-
-    _decoration = InputDecoration(
-      border: const OutlineInputBorder(),
-      hintText: hintText,
-      suffixIcon: IconButton(
-        onPressed: _textEditingController.clear,
-        icon: const Icon(kClearIcon),
-      ),
-    );
   }
 
   /// Callback function on value changed
@@ -36,22 +26,36 @@ class TextFieldBorderedNumeric extends StatelessWidget {
   final String text;
 
   late final TextEditingController _textEditingController;
-  late final InputDecoration _decoration;
 
   @override
+  State<TextFieldBorderedNumeric> createState() =>
+      _TextFieldBorderedNumericState();
+}
+
+class _TextFieldBorderedNumericState extends State<TextFieldBorderedNumeric> {
+  @override
   Widget build(BuildContext context) {
+    final isEmpty = widget._textEditingController.value.text.isEmpty;
+    final _decoration = InputDecoration(
+      border: const OutlineInputBorder(),
+      labelText: isEmpty ? '' : widget.hintText,
+      hintText: isEmpty ? widget.hintText : '',
+    );
+
+    const maxValue = 5;
+
     return Expanded(
       child: TextField(
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: _decoration,
-        controller: _textEditingController,
+        controller: widget._textEditingController,
         style: kTextStyle,
         onChanged: (value) {
           final intValue = int.tryParse(value);
 
           if (intValue != null) {
-            callback(intValue);
+            widget.callback(intValue > maxValue ? maxValue : intValue);
           }
         },
       ),

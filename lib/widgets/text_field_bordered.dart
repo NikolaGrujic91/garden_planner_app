@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/style_constants.dart';
 
 /// This widget is generic widget for text input
-class TextFieldBordered extends StatelessWidget {
+class TextFieldBordered extends StatefulWidget {
   /// Creates a new instance
   TextFieldBordered({
     Key? key,
@@ -14,18 +13,7 @@ class TextFieldBordered extends StatelessWidget {
   }) : super(key: key) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
-        TextPosition(offset: _textEditingController.text.length));
-
-    _decoration = InputDecoration(
-      border: const OutlineInputBorder(),
-      hintText: hintText,
-      suffixIcon: IconButton(
-        onPressed: () {
-          _textEditingController.clear();
-          callback!(_textEditingController.value.text);
-        },
-        icon: const Icon(kClearIcon),
-      ),
+      TextPosition(offset: _textEditingController.text.length),
     );
   }
 
@@ -36,16 +24,27 @@ class TextFieldBordered extends StatelessWidget {
   final String hintText;
 
   late final TextEditingController _textEditingController;
-  late final InputDecoration _decoration;
 
   @override
+  State<TextFieldBordered> createState() => _TextFieldBorderedState();
+}
+
+class _TextFieldBorderedState extends State<TextFieldBordered> {
+  @override
   Widget build(BuildContext context) {
+    final isEmpty = widget._textEditingController.value.text.isEmpty;
+    final _decoration = InputDecoration(
+      border: const OutlineInputBorder(),
+      labelText: isEmpty ? '' : widget.hintText,
+      hintText: isEmpty ? widget.hintText : '',
+    );
+
     return TextField(
       decoration: _decoration,
-      controller: _textEditingController,
+      controller: widget._textEditingController,
       style: kTextStyle,
       onChanged: (value) {
-        callback!(value);
+        widget.callback!(value);
       },
       keyboardType: TextInputType.multiline,
       minLines: 1,
