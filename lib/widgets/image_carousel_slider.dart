@@ -10,16 +10,20 @@ class ImageCarouselSlider extends StatelessWidget {
   const ImageCarouselSlider({
     Key? key,
     required this.images,
+    required this.height,
   }) : super(key: key);
 
   /// Paths to images to be shown in the carousel
   final List<String> images;
 
+  /// Set carousel height
+  final double height;
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
-        height: 300,
+        height: height,
 
         /// Carousel covers 100% of available viewport
         viewportFraction: 1,

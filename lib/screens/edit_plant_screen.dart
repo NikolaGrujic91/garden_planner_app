@@ -12,6 +12,7 @@ import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/date_picker.dart';
+import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
 import 'package:garden_planner_app/widgets/plant_type_dropdown.dart';
 import 'package:garden_planner_app/widgets/plant_type_picker.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
@@ -37,6 +38,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
+  late List<String>? _images;
   final _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
 
   @override
@@ -51,6 +53,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
+    _images = _selectedPlant.images;
   }
 
   @override
@@ -155,6 +158,14 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              if (_images != null && _images!.isNotEmpty)
+                ImageCarouselSlider(
+                  images: _images!,
+                  height: 300,
+                ),
             ],
           ),
         ),

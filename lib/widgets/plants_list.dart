@@ -54,6 +54,7 @@ class PlantsList extends StatelessWidget {
                       plants[index].images!.isNotEmpty)
                     ImageCarouselSlider(
                       images: plants[index].images!,
+                      height: 300,
                     ),
                   Padding(
                     padding: const EdgeInsets.all(10),
