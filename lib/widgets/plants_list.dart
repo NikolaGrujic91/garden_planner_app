@@ -1,12 +1,10 @@
-import 'dart:io';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
+import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
@@ -54,37 +52,8 @@ class PlantsList extends StatelessWidget {
                   ),
                   if (plants[index].images != null &&
                       plants[index].images!.isNotEmpty)
-                    CarouselSlider.builder(
-                      options: CarouselOptions(
-                        height: 300,
-                        viewportFraction: 1,
-                      ),
-                      itemCount: plants[index].images!.length,
-                      itemBuilder: (
-                        BuildContext context,
-                        int imageIndex,
-                        int pageViewIndex,
-                      ) {
-                        return Stack(
-                          alignment: AlignmentDirectional.topEnd,
-                          children: [
-                            Image.file(
-                              File(plants[index].images![imageIndex]),
-                              fit: BoxFit.fitWidth,
-                              width: 2000,
-                            ),
-                            DecoratedBox(
-                              decoration: const BoxDecoration(
-                                color: Colors.lightBlue,
-                              ),
-                              child: StyledText(
-                                text:
-                                    '${imageIndex + 1}/${plants[index].images!.length}',
-                              ),
-                            ),
-                          ],
-                        );
-                      },
+                    ImageCarouselSlider(
+                      images: plants[index].images!,
                     ),
                   Padding(
                     padding: const EdgeInsets.all(10),
