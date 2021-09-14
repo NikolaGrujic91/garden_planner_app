@@ -47,7 +47,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
       },
       tooltip: 'Take picture',
       backgroundColor: kFloatingActionButtonColor,
-      child: const Icon(kCameraIcon),
+      child: const Icon(kAddIcon),
     );
 
     return Scaffold(
