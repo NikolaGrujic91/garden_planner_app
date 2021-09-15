@@ -63,110 +63,108 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
       ),
       body: Container(
         color: kBackgroundColor,
-        child: Padding(
+        child: ListView(
           padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  if (Platform.isMacOS || Platform.isWindows)
-                    PlantTypeDropdown(
-                      dropdownValues: _dropdownValues,
-                      value: _plantTypeString,
-                      callback: _setPlantType,
-                    )
-                  else
-                    PlantTypePicker(
-                      dropdownValues: _dropdownValues,
-                      value: _plantTypeString,
-                      callback: _setPlantType,
-                    ),
-                  const Spacer(),
-                  IconButton(
+          children: [
+            Row(
+              children: [
+                if (Platform.isMacOS || Platform.isWindows)
+                  PlantTypeDropdown(
+                    dropdownValues: _dropdownValues,
+                    value: _plantTypeString,
+                    callback: _setPlantType,
+                  )
+                else
+                  PlantTypePicker(
+                    dropdownValues: _dropdownValues,
+                    value: _plantTypeString,
+                    callback: _setPlantType,
+                  ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await _showDeleteDialog();
+                  },
+                  icon: const Icon(kDeleteIcon),
+                  tooltip: 'Delete plant',
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFieldBordered(
+                    text: _plantName,
+                    hintText: 'Plant name',
+                    callback: _setPlantName,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFieldBordered(
+                    text: _description,
+                    hintText: 'Description',
+                    callback: _setDescription,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                const StyledText(
+                  text: 'Planted:',
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                StyledText(
+                  text: _plantedDate,
+                ),
+                const Spacer(),
+                DatePicker(
+                  restorationId: EditPlantScreen.id,
+                  callback: (String newValue) {
+                    _setPlantedDate(newValue);
+                  },
+                  initialDate: _plantedDate,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
                     onPressed: () async {
-                      await _showDeleteDialog();
+                      await Navigator.pushReplacementNamed(
+                          context, EditPlantImagesScreen.id);
                     },
-                    icon: const Icon(kDeleteIcon),
-                    tooltip: 'Delete plant',
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFieldBordered(
-                      text: _plantName,
-                      hintText: 'Plant name',
-                      callback: _setPlantName,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFieldBordered(
-                      text: _description,
-                      hintText: 'Description',
-                      callback: _setDescription,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const StyledText(
-                    text: 'Planted:',
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  StyledText(
-                    text: _plantedDate,
-                  ),
-                  const Spacer(),
-                  DatePicker(
-                    restorationId: EditPlantScreen.id,
-                    callback: (String newValue) {
-                      _setPlantedDate(newValue);
-                    },
-                    initialDate: _plantedDate,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        await Navigator.pushReplacementNamed(
-                            context, EditPlantImagesScreen.id);
-                      },
-                      child: const Text(
-                        'Edit Images',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Sans',
-                          color: Colors.black,
-                        ),
+                    child: const Text(
+                      'Edit Images',
+                      style: TextStyle(
+                        fontFamily: 'Roboto Sans',
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
