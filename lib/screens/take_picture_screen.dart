@@ -91,7 +91,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
 
             // Store the automatically generated path to plant images
-            gardensStore.getSelectedPlant().images!.add(image.path);
+            gardensStore.addImage(image.path);
+            await gardensStore.saveGardens();
 
             if (!mounted) return;
             await Navigator.pushReplacementNamed(

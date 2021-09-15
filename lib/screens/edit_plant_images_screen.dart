@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
-import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
+import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
 /// Edit Plant Images Screen
@@ -67,10 +67,101 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
                   images: _images!,
                   height: 300,
                 ),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () async {
+                        await _showDeleteDialog();
+                      },
+                      child: const Text(
+                        'Delete Image',
+                        style: TextStyle(
+                          fontFamily: 'Roboto Sans',
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _showDeleteDialog() async {
+    if (_images == null || _images!.isEmpty) {
+      return;
+    }
+
+    const content = 'Delete the image?';
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const StyledText(
+            text: 'Confirm delete',
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                StyledText(
+                  text: content,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed();
+                },
+                child: const StyledText(text: 'Delete'),
+              )
+            else
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              ),
+            if (Platform.isWindows)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const StyledText(text: 'Cancel'),
+              )
+            else
+              TextButton(
+                onPressed: () async {
+                  await _onDeletePressed();
+                },
+                child: const StyledText(text: 'Delete'),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _onDeletePressed() async {
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
+      ..removeSelectedImage();
+    await gardensStore.saveGardens();
+
+    if (!mounted) return;
+    Navigator.of(context).pop();
+
+    setState(() {
+      _selectedPlant = gardensStore.getSelectedPlant();
+      _images = _selectedPlant.images;
+    });
   }
 }

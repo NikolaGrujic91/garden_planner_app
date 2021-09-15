@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
+import 'package:provider/provider.dart';
 
 /// This widget represents reusable image carousel slider
 class ImageCarouselSlider extends StatelessWidget {
@@ -27,6 +29,10 @@ class ImageCarouselSlider extends StatelessWidget {
 
         /// Carousel covers 100% of available viewport
         viewportFraction: 1,
+        onPageChanged: (int index, CarouselPageChangedReason reason) {
+          Provider.of<GardensStoreHive>(context, listen: false)
+              .selectedImageIndex = index;
+        },
       ),
       itemCount: images.length,
       itemBuilder: (

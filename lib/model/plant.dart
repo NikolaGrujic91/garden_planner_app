@@ -54,4 +54,23 @@ class Plant extends HiveObject {
         kJsonPlantedDate: plantedDate,
         kJsonDescription: description,
       };
+
+  /// Add image to plant images
+  void addImage({required String image}) {
+    images ??= <String>[];
+    images!.add(image);
+  }
+
+  /// Remove image from plant at index
+  void removeImage({required int index}) {
+    if (images == null) {
+      return;
+    }
+
+    if (index >= images!.length) {
+      return;
+    }
+
+    images!.removeAt(index);
+  }
 }

@@ -47,6 +47,15 @@ abstract class GardensStore {
   /// Remove selected plant from tile
   void removeSelectedPlant();
 
+  /// Get selected image
+  String getSelectedImage();
+
+  /// Add image to plant
+  void addImage(String image);
+
+  /// Remove selected image from plant
+  void removeSelectedImage();
+
   /// Save gardens
   Future<void> saveGardens();
 }

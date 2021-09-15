@@ -31,6 +31,9 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   /// Index of currently selected plant
   int selectedPlantIndex = 0;
 
+  /// Index of currently selected image
+  int selectedImageIndex = 0;
+
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{kJsonGardens: gardens};
 
@@ -121,6 +124,30 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
     gardens[selectedGardenIndex]
         .tiles[selectedTileIndex]
         .removePlant(index: selectedPlantIndex);
+  }
+
+  @override
+  String getSelectedImage() {
+    return gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .plants[selectedPlantIndex]
+        .images![selectedImageIndex];
+  }
+
+  @override
+  void addImage(String image) {
+    gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .plants[selectedPlantIndex]
+        .addImage(image: image);
+  }
+
+  @override
+  void removeSelectedImage() {
+    gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .plants[selectedPlantIndex]
+        .removeImage(index: selectedImageIndex);
   }
 
   @override
