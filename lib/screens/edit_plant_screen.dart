@@ -1,5 +1,7 @@
 import 'dart:io' show Platform;
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
@@ -226,6 +228,14 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     final name = gardensStore.getSelectedPlant().name;
     final content = 'Delete the plant "$name"?';
 
+    return _showMaterialDeleteDialog(context, content, _onDeletePressed);
+  }
+
+  Future<void> _showMaterialDeleteDialog(
+    BuildContext context,
+    String content,
+    AsyncCallback onDeletePressed,
+  ) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -247,7 +257,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             if (Platform.isWindows)
               TextButton(
                 onPressed: () async {
-                  await _onDeletePressed();
+                  await onDeletePressed();
                 },
                 child: const StyledText(text: 'Delete'),
               )
@@ -268,7 +278,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             else
               TextButton(
                 onPressed: () async {
-                  await _onDeletePressed();
+                  await onDeletePressed();
                 },
                 child: const StyledText(text: 'Delete'),
               ),
