@@ -80,14 +80,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     value: _plantTypeString,
                     callback: _setPlantType,
                   ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () async {
-                    await _showDeleteDialog();
-                  },
-                  icon: const Icon(kDeleteIcon),
-                  tooltip: 'Delete plant',
-                ),
               ],
             ),
             const SizedBox(
@@ -155,6 +147,27 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     },
                     child: const Text(
                       'Edit Images',
+                      style: TextStyle(
+                        fontFamily: 'Roboto Sans',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      await _showDeleteDialog();
+                    },
+                    child: const Text(
+                      'Delete Plant',
                       style: TextStyle(
                         fontFamily: 'Roboto Sans',
                         color: Colors.black,
