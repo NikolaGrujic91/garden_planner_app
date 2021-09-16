@@ -6,6 +6,7 @@ import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
+import 'package:garden_planner_app/widgets/alert_dialogs.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
@@ -92,62 +93,17 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
   }
 
   Future<void> _showDeleteDialog() async {
-    //if (_images == null || _images!.isEmpty) {
-    //  return;
-    //}
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
+    final selectedPlant = gardensStore.getSelectedPlant();
+    final images = selectedPlant.images;
+
+    if (images == null || images.isEmpty) {
+      return;
+    }
 
     const content = 'Delete the image?';
 
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const StyledText(
-            text: 'Confirm delete',
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                StyledText(
-                  text: content,
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () async {
-                  await _onDeletePressed();
-                },
-                child: const StyledText(text: 'Delete'),
-              )
-            else
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              ),
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              )
-            else
-              TextButton(
-                onPressed: () async {
-                  await _onDeletePressed();
-                },
-                child: const StyledText(text: 'Delete'),
-              ),
-          ],
-        );
-      },
-    );
+    return showDeleteDialog(context, content, _onDeletePressed);
   }
 
   Future<void> _onDeletePressed() async {
