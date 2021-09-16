@@ -2,7 +2,6 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/screens/edit_plant_screen.dart';
 import 'package:garden_planner_app/screens/take_picture_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
@@ -25,18 +24,6 @@ class EditPlantImagesScreen extends StatefulWidget {
 }
 
 class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
-  late Plant _selectedPlant;
-  late List<String>? _images;
-
-  @override
-  void initState() {
-    super.initState();
-
-    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
-    _selectedPlant = gardensStore.getSelectedPlant();
-    _images = _selectedPlant.images;
-  }
-
   @override
   Widget build(BuildContext context) {
     final isMobile = Platform.isAndroid || Platform.isIOS;
@@ -62,11 +49,23 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
-              if (_images != null && _images!.isNotEmpty)
-                ImageCarouselSlider(
-                  images: _images!,
-                  height: 300,
-                ),
+              Consumer<GardensStoreHive>(
+                  builder: (context, gardensStore, child) {
+                final selectedPlant = gardensStore.getSelectedPlant();
+                final images = selectedPlant.images;
+
+                if (images != null && images.isNotEmpty) {
+                  return ImageCarouselSlider(
+                    images: images,
+                    height: 300,
+                  );
+                } else {
+                  return const StyledText(text: 'No images');
+                }
+              }),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -93,9 +92,9 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
   }
 
   Future<void> _showDeleteDialog() async {
-    if (_images == null || _images!.isEmpty) {
-      return;
-    }
+    //if (_images == null || _images!.isEmpty) {
+    //  return;
+    //}
 
     const content = 'Delete the image?';
 
@@ -158,10 +157,5 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
 
     if (!mounted) return;
     Navigator.of(context).pop();
-
-    setState(() {
-      _selectedPlant = gardensStore.getSelectedPlant();
-      _images = _selectedPlant.images;
-    });
   }
 }

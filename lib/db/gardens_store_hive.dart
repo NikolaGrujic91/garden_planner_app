@@ -135,6 +135,7 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
         .tiles[selectedTileIndex]
         .plants[selectedPlantIndex]
         .addImage(image: image);
+    notifyListeners();
   }
 
   @override
@@ -143,6 +144,7 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
         .tiles[selectedTileIndex]
         .plants[selectedPlantIndex]
         .removeImage(index: selectedImageIndex);
+    notifyListeners();
   }
 
   @override
