@@ -9,7 +9,7 @@ abstract class GardensStore {
   void addGarden(Garden garden);
 
   /// Remove garden
-  void removeGarden(Garden? garden);
+  void removeSelectedGarden();
 
   /// Get selected garden
   Garden getSelectedGarden();

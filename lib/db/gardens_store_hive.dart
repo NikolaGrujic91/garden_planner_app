@@ -44,13 +44,8 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   }
 
   @override
-  void removeGarden(Garden? garden) {
-    selectedGardenIndex = 0;
-
-    if (garden != null) {
-      gardens.remove(garden);
-    }
-
+  void removeSelectedGarden() {
+    gardens.removeAt(selectedGardenIndex);
     notifyListeners();
   }
 

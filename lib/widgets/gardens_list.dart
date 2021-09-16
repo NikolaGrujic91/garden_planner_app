@@ -86,8 +86,8 @@ class _GardensListState extends State<GardensList> {
   }
 
   Future<void> _onDeletePressed() async {
-    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
-    gardensStore.removeGarden(gardensStore.getSelectedGarden());
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
+      ..removeSelectedGarden();
     await gardensStore.saveGardens();
 
     if (!mounted) return;
