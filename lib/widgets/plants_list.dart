@@ -46,7 +46,7 @@ class PlantsList extends StatelessWidget {
                         Navigator.pushReplacementNamed(
                             context, EditPlantScreen.id);
                       },
-                      icon: const Icon(kEditIcon),
+                      icon: Icon(kEditIcon),
                       tooltip: 'Edit plant',
                     ),
                   ),

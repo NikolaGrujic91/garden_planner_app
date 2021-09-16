@@ -38,7 +38,7 @@ class _GardensListState extends State<GardensList> {
                 return Material(
                   child: ListTile(
                     tileColor: kBackgroundColor,
-                    leading: const Icon(kGridIcon),
+                    leading: Icon(kGridIcon),
                     title: StyledText(text: gardensStore.gardens[index].name),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -48,7 +48,7 @@ class _GardensListState extends State<GardensList> {
                             gardensStore.selectedGardenIndex = index;
                             await _showDeleteDialog();
                           },
-                          icon: const Icon(kDeleteIcon),
+                          icon: Icon(kDeleteIcon),
                           tooltip: 'Delete garden',
                         ),
                         IconButton(
@@ -57,7 +57,7 @@ class _GardensListState extends State<GardensList> {
                             Navigator.pushReplacementNamed(
                                 context, EditGardenScreen.id);
                           },
-                          icon: const Icon(kEditIcon),
+                          icon: Icon(kEditIcon),
                           tooltip: 'Edit garden',
                         )
                       ],

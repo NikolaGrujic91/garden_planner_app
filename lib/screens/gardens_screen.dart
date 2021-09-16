@@ -25,7 +25,7 @@ class GardensScreen extends StatelessWidget {
         },
         tooltip: 'Add garden',
         backgroundColor: kFloatingActionButtonColor,
-        child: const Icon(kAddIcon),
+        child: Icon(kAddIcon),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

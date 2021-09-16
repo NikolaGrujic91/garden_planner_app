@@ -47,7 +47,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           Navigator.pushReplacementNamed(context, forwardScreenID!);
         },
-        icon: const Icon(kForwardIcon),
+        icon: Icon(kForwardIcon),
       );
 
       actions.add(forwardButton);
@@ -60,7 +60,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           Navigator.pushReplacementNamed(context, backScreenID!);
         },
-        icon: const Icon(kBackIcon),
+        icon: Icon(kBackIcon),
       );
     }
 

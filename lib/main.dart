@@ -23,7 +23,11 @@ Future<void> main() async {
     // Obtain a list of the available cameras on the device.
     final cameras = await availableCameras();
 
-    runApp(GardenPlannerApp(camera: cameras.first));
+    if (cameras.isNotEmpty) {
+      runApp(GardenPlannerApp(camera: cameras.first));
+    } else {
+      runApp(const GardenPlannerApp(camera: null));
+    }
   } else {
     runApp(const GardenPlannerApp(camera: null));
   }

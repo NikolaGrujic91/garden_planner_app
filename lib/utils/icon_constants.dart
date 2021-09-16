@@ -1,31 +1,31 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+final _isApple = Platform.isIOS || Platform.isMacOS;
+
 /// Back Icon
-const IconData kBackIcon = Icons.arrow_back_ios;
+IconData kBackIcon = _isApple ? CupertinoIcons.back : Icons.arrow_back;
 
 /// Forward Icon
-const IconData kForwardIcon = Icons.arrow_forward_ios;
+IconData kForwardIcon = _isApple ? CupertinoIcons.forward : Icons.arrow_forward;
 
 /// Delete Icon
-const IconData kDeleteIcon = Icons.delete;
+IconData kDeleteIcon = _isApple ? CupertinoIcons.delete : Icons.delete;
 
 /// Edit Icon
-const IconData kEditIcon = Icons.edit;
+IconData kEditIcon = _isApple ? CupertinoIcons.pencil : Icons.edit;
 
 /// Dropdown Arrow Icon
-const IconData kDropdownArrow = Icons.arrow_downward;
-
-/// Clear Icon
-const IconData kClearIcon = Icons.clear;
-
-/// Save Icon
-const IconData kSaveIcon = Icons.save;
+IconData kDropdownArrow =
+    _isApple ? CupertinoIcons.arrow_down : Icons.arrow_downward;
 
 /// Grid Icon
-const IconData kGridIcon = Icons.grid_4x4;
+IconData kGridIcon = _isApple ? CupertinoIcons.grid : Icons.grid_4x4;
 
 /// Camera Icon
-const IconData kCameraIcon = Icons.camera_alt;
+IconData kCameraIcon = _isApple ? CupertinoIcons.camera_fill : Icons.camera_alt;
 
 /// Add Icon
-const IconData kAddIcon = Icons.add;
+IconData kAddIcon = _isApple ? CupertinoIcons.add : Icons.add;

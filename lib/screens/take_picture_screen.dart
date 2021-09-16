@@ -102,7 +102,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
           }
         },
         backgroundColor: kFloatingActionButtonColor,
-        child: const Icon(kCameraIcon),
+        child: Icon(kCameraIcon),
       ),
     );
   }

@@ -27,8 +27,8 @@ class PlantTypeDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: value,
-      icon: const Padding(
-        padding: EdgeInsets.only(
+      icon: Padding(
+        padding: const EdgeInsets.only(
           bottom: 8,
         ),
         child: Icon(kDropdownArrow),
