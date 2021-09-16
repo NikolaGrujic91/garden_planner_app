@@ -228,7 +228,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     final name = gardensStore.getSelectedPlant().name;
     final content = 'Delete the plant "$name"?';
 
-    return showMaterialDeleteDialog(context, content, _onDeletePressed);
+    return showDeleteDialog(context, content, _onDeletePressed);
   }
 
   Future<void> _onDeletePressed() async {

@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
@@ -84,7 +82,7 @@ class _GardensListState extends State<GardensList> {
     final name = gardensStore.getSelectedGarden().name;
     final content = 'Delete the garden "$name"?';
 
-    return showMaterialDeleteDialog(context, content, _onDeletePressed);
+    return showDeleteDialog(context, content, _onDeletePressed);
   }
 
   Future<void> _onDeletePressed() async {
