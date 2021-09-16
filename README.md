@@ -34,7 +34,7 @@ Tasks:
     - https://pub.dev/packages/add_2_calendar
     - https://pub.dev/packages/flutter_local_notifications
     - https://brainsandbeards.com/blog/how-to-add-local-notifications-to-flutter-app
-- Photo
-    - save image on local storage
-    - name it as uuid
+- DONE - Photo
+    - DONE - save image on local storage
+    - DONE - name it as uuid
     - DONE - add image_uuid field to plant.dart
