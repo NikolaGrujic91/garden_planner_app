@@ -9,9 +9,9 @@ import 'package:garden_planner_app/model/plant.dart';
 import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/utils/utility.dart';
+import 'package:garden_planner_app/widgets/alert_dialogs.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/date_picker.dart';
 import 'package:garden_planner_app/widgets/plant_type_dropdown.dart';
@@ -228,64 +228,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     final name = gardensStore.getSelectedPlant().name;
     final content = 'Delete the plant "$name"?';
 
-    return _showMaterialDeleteDialog(context, content, _onDeletePressed);
-  }
-
-  Future<void> _showMaterialDeleteDialog(
-    BuildContext context,
-    String content,
-    AsyncCallback onDeletePressed,
-  ) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const StyledText(
-            text: 'Confirm delete',
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                StyledText(
-                  text: content,
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () async {
-                  await onDeletePressed();
-                },
-                child: const StyledText(text: 'Delete'),
-              )
-            else
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              ),
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              )
-            else
-              TextButton(
-                onPressed: () async {
-                  await onDeletePressed();
-                },
-                child: const StyledText(text: 'Delete'),
-              ),
-          ],
-        );
-      },
-    );
+    return showMaterialDeleteDialog(context, content, _onDeletePressed);
   }
 
   Future<void> _onDeletePressed() async {

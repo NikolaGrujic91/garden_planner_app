@@ -6,6 +6,7 @@ import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
+import 'package:garden_planner_app/widgets/alert_dialogs.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:provider/provider.dart';
 
@@ -47,9 +48,7 @@ class _GardensListState extends State<GardensList> {
                           IconButton(
                             onPressed: () async {
                               gardensStore.selectedGardenIndex = index;
-                              await _showDeleteDialog(
-                                gardensStore,
-                              );
+                              await _showDeleteDialog();
                             },
                             icon: const Icon(kDeleteIcon),
                             tooltip: 'Delete garden',
@@ -80,63 +79,16 @@ class _GardensListState extends State<GardensList> {
     );
   }
 
-  Future<void> _showDeleteDialog(
-    GardensStoreHive gardensStore,
-  ) async {
+  Future<void> _showDeleteDialog() async {
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     final name = gardensStore.getSelectedGarden().name;
     final content = 'Delete the garden "$name"?';
 
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const StyledText(text: 'Confirm delete'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                StyledText(
-                  text: content,
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () async {
-                  await _onDeletePressed(gardensStore);
-                },
-                child: const StyledText(text: 'Delete'),
-              )
-            else
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              ),
-            if (Platform.isWindows)
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const StyledText(text: 'Cancel'),
-              )
-            else
-              TextButton(
-                onPressed: () async {
-                  await _onDeletePressed(gardensStore);
-                },
-                child: const StyledText(text: 'Delete'),
-              ),
-          ],
-        );
-      },
-    );
+    return showMaterialDeleteDialog(context, content, _onDeletePressed);
   }
 
-  Future<void> _onDeletePressed(GardensStoreHive gardensStore) async {
+  Future<void> _onDeletePressed() async {
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
     gardensStore.removeGarden(gardensStore.getSelectedGarden());
     await gardensStore.saveGardens();
 
