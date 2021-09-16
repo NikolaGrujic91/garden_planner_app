@@ -22,58 +22,57 @@ class _GardensListState extends State<GardensList> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStoreHive>(
-      builder: (context, gardensStore, child) {
-        return Expanded(
-          child: Scrollbar(
-            isAlwaysShown: true,
-            controller: _scrollController,
-            child: Container(
-              color: kBackgroundColor,
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.all(10),
-                itemCount: gardensStore.gardens.length,
-                itemBuilder: (context, index) {
-                  return Material(
-                    child: ListTile(
-                      tileColor: kBackgroundColor,
-                      leading: const Icon(kGridIcon),
-                      title: StyledText(text: gardensStore.gardens[index].name),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              gardensStore.selectedGardenIndex = index;
-                              await _showDeleteDialog();
-                            },
-                            icon: const Icon(kDeleteIcon),
-                            tooltip: 'Delete garden',
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              gardensStore.selectedGardenIndex = index;
-                              Navigator.pushReplacementNamed(
-                                  context, EditGardenScreen.id);
-                            },
-                            icon: const Icon(kEditIcon),
-                            tooltip: 'Edit garden',
-                          )
-                        ],
-                      ),
-                      onTap: () {
-                        gardensStore.selectedGardenIndex = index;
-                        Navigator.pushReplacementNamed(context, TilesScreen.id);
-                      },
+    return Expanded(
+      child: Scrollbar(
+        isAlwaysShown: true,
+        controller: _scrollController,
+        child: Container(
+          color: kBackgroundColor,
+          child: Consumer<GardensStoreHive>(
+              builder: (context, gardensStore, child) {
+            return ListView.builder(
+              controller: _scrollController,
+              padding: const EdgeInsets.all(10),
+              itemCount: gardensStore.gardens.length,
+              itemBuilder: (context, index) {
+                return Material(
+                  child: ListTile(
+                    tileColor: kBackgroundColor,
+                    leading: const Icon(kGridIcon),
+                    title: StyledText(text: gardensStore.gardens[index].name),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            gardensStore.selectedGardenIndex = index;
+                            await _showDeleteDialog();
+                          },
+                          icon: const Icon(kDeleteIcon),
+                          tooltip: 'Delete garden',
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            gardensStore.selectedGardenIndex = index;
+                            Navigator.pushReplacementNamed(
+                                context, EditGardenScreen.id);
+                          },
+                          icon: const Icon(kEditIcon),
+                          tooltip: 'Edit garden',
+                        )
+                      ],
                     ),
-                  );
-                },
-              ),
-            ),
-          ),
-        );
-      },
+                    onTap: () {
+                      gardensStore.selectedGardenIndex = index;
+                      Navigator.pushReplacementNamed(context, TilesScreen.id);
+                    },
+                  ),
+                );
+              },
+            );
+          }),
+        ),
+      ),
     );
   }
 
