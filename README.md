@@ -38,3 +38,4 @@ Tasks:
     - DONE - save image on local storage
     - DONE - name it as uuid
     - DONE - add image_uuid field to plant.dart
+    - DONE - pick image from gallery
