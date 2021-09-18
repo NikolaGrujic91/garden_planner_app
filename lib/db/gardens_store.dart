@@ -51,7 +51,7 @@ abstract class GardensStore {
   String getSelectedImage();
 
   /// Add image to plant
-  void addImage(String image);
+  void addImages(List<String> images);
 
   /// Remove selected image from plant
   void removeSelectedImage();

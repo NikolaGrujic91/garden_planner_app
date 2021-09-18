@@ -40,6 +40,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late PlantType _plantType;
   late String _plantTypeString;
   final _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
+  final _isMobile = Platform.isAndroid || Platform.isIOS;
 
   @override
   void initState() {
@@ -139,28 +140,30 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      await Navigator.pushReplacementNamed(
-                          context, EditPlantImagesScreen.id);
-                    },
-                    child: const Text(
-                      'Edit Images',
-                      style: TextStyle(
-                        fontFamily: 'Roboto Sans',
-                        color: Colors.black,
+            if (_isMobile)
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () async {
+                        await Navigator.pushReplacementNamed(
+                            context, EditPlantImagesScreen.id);
+                      },
+                      child: const Text(
+                        'Edit Images',
+                        style: TextStyle(
+                          fontFamily: 'Roboto Sans',
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+                ],
+              ),
+            if (_isMobile)
+              const SizedBox(
+                height: 20,
+              ),
             Row(
               children: [
                 Expanded(

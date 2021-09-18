@@ -130,11 +130,14 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   }
 
   @override
-  void addImage(String image) {
-    gardens[selectedGardenIndex]
-        .tiles[selectedTileIndex]
-        .plants[selectedPlantIndex]
-        .addImage(image: image);
+  void addImages(List<String> images) {
+    for (final image in images) {
+      gardens[selectedGardenIndex]
+          .tiles[selectedTileIndex]
+          .plants[selectedPlantIndex]
+          .addImage(image: image);
+    }
+
     notifyListeners();
   }
 

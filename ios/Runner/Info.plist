@@ -43,5 +43,7 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
     <string>Take pictures of plants.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Pick images of plants from photo library.</string>
 </dict>
 </plist>
