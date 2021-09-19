@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// This widget represents reusable save button
-class SaveIconButton extends StatelessWidget {
+class SaveButton extends StatelessWidget {
   /// Creates a new instance
-  const SaveIconButton({
+  const SaveButton({
     Key? key,
     required this.callback,
   }) : super(key: key);

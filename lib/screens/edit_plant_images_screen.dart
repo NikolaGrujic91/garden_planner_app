@@ -5,6 +5,7 @@ import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/alert_dialogs.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/image_carousel_slider.dart';
+import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -54,19 +55,9 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        await _showDeleteDialog();
-                      },
-                      child: const Text(
-                        'Delete Image',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Sans',
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  StyledOutlinedButton(
+                    text: 'Remove Current Photo',
+                    onPressed: _showDeleteDialog,
                   ),
                 ],
               ),
@@ -75,19 +66,9 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        await _onPickImagesPressed();
-                      },
-                      child: const Text(
-                        'Pick multiple images',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Sans',
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  StyledOutlinedButton(
+                    text: 'Choose From Gallery',
+                    onPressed: _onPickImagesPressed,
                   ),
                 ],
               ),
@@ -96,19 +77,9 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        await _onCapturePhotoPressed();
-                      },
-                      child: const Text(
-                        'Capture a photo',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Sans',
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  StyledOutlinedButton(
+                    text: 'Take Photo',
+                    onPressed: _onCapturePhotoPressed,
                   ),
                 ],
               ),
@@ -151,7 +122,10 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
   Future<void> _onCapturePhotoPressed() async {
     final picker = ImagePicker();
     final photo = await picker.pickImage(source: ImageSource.camera);
-    await _saveImages([photo!]);
+
+    if (photo != null) {
+      await _saveImages([photo]);
+    }
   }
 
   Future<void> _saveImages(List<XFile>? images) async {

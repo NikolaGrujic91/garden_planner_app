@@ -16,6 +16,7 @@ import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/date_picker.dart';
 import 'package:garden_planner_app/widgets/plant_type_dropdown.dart';
 import 'package:garden_planner_app/widgets/plant_type_picker.dart';
+import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:garden_planner_app/widgets/text_field_bordered.dart';
 import 'package:provider/provider.dart';
@@ -143,20 +144,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             if (_isMobile)
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        await Navigator.pushReplacementNamed(
-                            context, EditPlantImagesScreen.id);
-                      },
-                      child: const Text(
-                        'Edit Images',
-                        style: TextStyle(
-                          fontFamily: 'Roboto Sans',
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                  StyledOutlinedButton(
+                    text: 'Edit Images',
+                    onPressed: () async {
+                      await Navigator.pushReplacementNamed(
+                          context, EditPlantImagesScreen.id);
+                    },
                   ),
                 ],
               ),
@@ -166,19 +159,9 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               ),
             Row(
               children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      await _showDeleteDialog();
-                    },
-                    child: const Text(
-                      'Delete Plant',
-                      style: TextStyle(
-                        fontFamily: 'Roboto Sans',
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                StyledOutlinedButton(
+                  text: 'Delete Plant',
+                  onPressed: _showDeleteDialog,
                 ),
               ],
             ),
