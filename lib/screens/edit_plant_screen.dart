@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/screens/edit_event_screen.dart';
 import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
@@ -141,7 +142,67 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     _setPlantedDate(newValue);
                   },
                   initialDate: _plantedDate,
-                  text: 'Change Planted Date',
+                  text: 'Edit Planted Date',
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                const StyledText(
+                  text: 'Watering:',
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                StyledText(
+                  text: _plantedDate,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                StyledOutlinedButton(
+                  text: 'Edit Watering Reminder',
+                  onPressed: () async {
+                    await Navigator.pushReplacementNamed(
+                        context, EditEventScreen.id);
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                const StyledText(
+                  text: 'Fertilize:',
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                StyledText(
+                  text: _plantedDate,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                StyledOutlinedButton(
+                  text: 'Edit Fertilize Reminder',
+                  onPressed: () async {
+                    await Navigator.pushReplacementNamed(
+                        context, EditEventScreen.id);
+                  },
                 ),
               ],
             ),

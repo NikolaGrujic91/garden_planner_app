@@ -24,6 +24,24 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/file_picker/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/file_picker/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/file_picker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/camera/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/image_picker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/add_2_calendar/.pub" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

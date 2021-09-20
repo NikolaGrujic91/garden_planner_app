@@ -45,5 +45,7 @@
     <string>Take pictures of plants.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Pick images of plants from photo library.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Schedule plant watering and fertilizing events</string>
 </dict>
 </plist>
