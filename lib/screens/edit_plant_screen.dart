@@ -128,13 +128,20 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 StyledText(
                   text: _plantedDate,
                 ),
-                const Spacer(),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
                 DatePicker(
                   restorationId: EditPlantScreen.id,
                   callback: (String newValue) {
                     _setPlantedDate(newValue);
                   },
                   initialDate: _plantedDate,
+                  text: 'Change Planted Date',
                 ),
               ],
             ),

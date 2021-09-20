@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 
 /// Date picker widget
@@ -8,6 +9,7 @@ class DatePicker extends StatefulWidget {
     Key? key,
     required this.restorationId,
     required this.callback,
+    required this.text,
     required String initialDate,
   }) : super(key: key) {
     if (initialDate.isEmpty) {
@@ -38,6 +40,9 @@ class DatePicker extends StatefulWidget {
   /// Initial year
   late final int year;
 
+  /// The text to display.
+  final String text;
+
   @override
   _DatePickerState createState() => _DatePickerState();
 }
@@ -65,9 +70,11 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: _restorableDatePickerRouteFuture.present,
-      child: const StyledText(text: 'Change date'),
+    return StyledOutlinedButton(
+      onPressed: () async {
+        _restorableDatePickerRouteFuture.present();
+      },
+      text: widget.text,
     );
   }
 
