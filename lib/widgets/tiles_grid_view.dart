@@ -17,85 +17,89 @@ class TilesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStoreHive>(builder: (context, gardensStore, child) {
-      final selectedGarden = gardensStore.getSelectedGarden();
-      final columns = selectedGarden.columns;
-      final itemCount = selectedGarden.columns * selectedGarden.rows;
-      final tiles = selectedGarden.tiles;
+    return Consumer<GardensStoreHive>(
+      builder: (context, gardensStore, child) {
+        final selectedGarden = gardensStore.getSelectedGarden();
+        final columns = selectedGarden.columns;
+        final itemCount = selectedGarden.columns * selectedGarden.rows;
+        final tiles = selectedGarden.tiles;
 
-      return InteractiveViewer(
-        minScale: 0.1,
-        maxScale: 2,
-        child: Center(
-          child: GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: columns,
-            ),
-            itemCount: itemCount,
-            itemBuilder: (context, index) {
-              final drawTopBorder = ((index - columns) >= 0 &&
-                      tiles[index - columns].type != TileType.home) ||
-                  ((index - columns) < 0);
-              final drawBottomBorder = ((index + columns) < tiles.length &&
-                      tiles[index + columns].type != TileType.home) ||
-                  ((index + columns) > tiles.length);
-              final drawLeftBorder =
-                  (index - 1) >= 0 && tiles[index - 1].type != TileType.home;
-              final drawRightBorder = (index + 1) < tiles.length &&
-                  tiles[index + 1].type != TileType.home;
-              final isHomeTile = tiles[index].type == TileType.home;
-              final isPlantTile = tiles[index].type == TileType.plant;
+        return InteractiveViewer(
+          minScale: 0.1,
+          maxScale: 2,
+          child: Center(
+            child: GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columns,
+              ),
+              itemCount: itemCount,
+              itemBuilder: (context, index) {
+                final drawTopBorder = ((index - columns) >= 0 &&
+                        tiles[index - columns].type != TileType.home) ||
+                    ((index - columns) < 0);
+                final drawBottomBorder = ((index + columns) < tiles.length &&
+                        tiles[index + columns].type != TileType.home) ||
+                    ((index + columns) > tiles.length);
+                final drawLeftBorder =
+                    (index - 1) >= 0 && tiles[index - 1].type != TileType.home;
+                final drawRightBorder = (index + 1) < tiles.length &&
+                    tiles[index + 1].type != TileType.home;
+                final isHomeTile = tiles[index].type == TileType.home;
+                final isPlantTile = tiles[index].type == TileType.plant;
 
-              return Container(
-                decoration: isHomeTile
-                    ? BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                            width: drawTopBorder ? kTileHomeBorderWidth : 0.0,
-                            color: drawTopBorder
-                                ? kTileHomeBorderColor
-                                : Colors.white,
+                return Container(
+                  decoration: isHomeTile
+                      ? BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              width: drawTopBorder ? kTileHomeBorderWidth : 0.0,
+                              color: drawTopBorder
+                                  ? kTileHomeBorderColor
+                                  : Colors.white,
+                            ),
+                            bottom: BorderSide(
+                              width:
+                                  drawBottomBorder ? kTileHomeBorderWidth : 0.0,
+                              color: drawBottomBorder
+                                  ? kTileHomeBorderColor
+                                  : Colors.white,
+                            ),
+                            left: BorderSide(
+                              width:
+                                  drawLeftBorder ? kTileHomeBorderWidth : 0.0,
+                              color: drawLeftBorder
+                                  ? kTileHomeBorderColor
+                                  : Colors.white,
+                            ),
+                            right: BorderSide(
+                              width:
+                                  drawRightBorder ? kTileHomeBorderWidth : 0.0,
+                              color: drawRightBorder
+                                  ? kTileHomeBorderColor
+                                  : Colors.white,
+                            ),
                           ),
-                          bottom: BorderSide(
-                            width:
-                                drawBottomBorder ? kTileHomeBorderWidth : 0.0,
-                            color: drawBottomBorder
-                                ? kTileHomeBorderColor
-                                : Colors.white,
-                          ),
-                          left: BorderSide(
-                            width: drawLeftBorder ? kTileHomeBorderWidth : 0.0,
-                            color: drawLeftBorder
-                                ? kTileHomeBorderColor
-                                : Colors.white,
-                          ),
-                          right: BorderSide(
-                            width: drawRightBorder ? kTileHomeBorderWidth : 0.0,
-                            color: drawRightBorder
-                                ? kTileHomeBorderColor
-                                : Colors.white,
-                          ),
+                        )
+                      : null,
+                  child: isPlantTile
+                      ? TileGridViewCellDragTarget(
+                          tile: tiles[index],
+                          tileIndex: index,
+                          gardensStore: gardensStore,
+                        )
+                      : TileGridViewCell(
+                          tile: tiles[index],
+                          tileIndex: index,
+                          gardensStore: gardensStore,
                         ),
-                      )
-                    : null,
-                child: isPlantTile
-                    ? TileGridViewCellDragTarget(
-                        tile: tiles[index],
-                        tileIndex: index,
-                        gardensStore: gardensStore,
-                      )
-                    : TileGridViewCell(
-                        tile: tiles[index],
-                        tileIndex: index,
-                        gardensStore: gardensStore,
-                      ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -197,7 +201,9 @@ class TileGridViewCell extends StatelessWidget {
             if (tile.plants.isEmpty) {
               gardensStore.selectedTileIndex = tileIndex;
               await Navigator.pushReplacementNamed(
-                  context, EditTileTypeScreen.id);
+                context,
+                EditTileTypeScreen.id,
+              );
             }
           },
           onTap: () async {

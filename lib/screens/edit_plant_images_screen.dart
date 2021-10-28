@@ -37,19 +37,20 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
           child: Column(
             children: [
               Consumer<GardensStoreHive>(
-                  builder: (context, gardensStore, child) {
-                final selectedPlant = gardensStore.getSelectedPlant();
-                final images = selectedPlant.images;
+                builder: (context, gardensStore, child) {
+                  final selectedPlant = gardensStore.getSelectedPlant();
+                  final images = selectedPlant.images;
 
-                if (images != null && images.isNotEmpty) {
-                  return ImageCarouselSlider(
-                    images: images,
-                    height: 300,
-                  );
-                } else {
-                  return const StyledText(text: 'No images');
-                }
-              }),
+                  if (images != null && images.isNotEmpty) {
+                    return ImageCarouselSlider(
+                      images: images,
+                      height: 300,
+                    );
+                  } else {
+                    return const StyledText(text: 'No images');
+                  }
+                },
+              ),
               const SizedBox(
                 height: 20,
               ),

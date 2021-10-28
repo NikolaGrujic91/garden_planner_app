@@ -85,11 +85,15 @@ class _DatePickerState extends State<DatePicker> with RestorationMixin {
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_selectedDate, 'selected_date');
     registerForRestoration(
-        _restorableDatePickerRouteFuture, 'date_picker_route_future');
+      _restorableDatePickerRouteFuture,
+      'date_picker_route_future',
+    );
   }
 
   static Route<DateTime> _datePickerRoute(
-      BuildContext context, Object? arguments) {
+    BuildContext context,
+    Object? arguments,
+  ) {
     return DialogRoute<DateTime>(
       context: context,
       builder: (BuildContext context) {

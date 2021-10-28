@@ -16,17 +16,19 @@ class TilesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GardensStoreHive>(builder: (context, gardensStore, child) {
-      return Scaffold(
-        appBar: BaseAppBar(
-          backScreenID: GardensScreen.id,
-          title: gardensStore.getSelectedGarden().name,
-        ),
-        body: const SafeArea(
-          child: TilesGrid(),
-        ),
-        bottomNavigationBar: const TilesBottomBar(),
-      );
-    });
+    return Consumer<GardensStoreHive>(
+      builder: (context, gardensStore, child) {
+        return Scaffold(
+          appBar: BaseAppBar(
+            backScreenID: GardensScreen.id,
+            title: gardensStore.getSelectedGarden().name,
+          ),
+          body: const SafeArea(
+            child: TilesGrid(),
+          ),
+          bottomNavigationBar: const TilesBottomBar(),
+        );
+      },
+    );
   }
 }

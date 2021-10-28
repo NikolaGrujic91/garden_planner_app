@@ -171,7 +171,9 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   text: 'Edit Watering Reminder',
                   onPressed: () async {
                     await Navigator.pushReplacementNamed(
-                        context, EditEventScreen.id);
+                      context,
+                      EditEventScreen.id,
+                    );
                   },
                 ),
               ],
@@ -201,7 +203,9 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   text: 'Edit Fertilize Reminder',
                   onPressed: () async {
                     await Navigator.pushReplacementNamed(
-                        context, EditEventScreen.id);
+                      context,
+                      EditEventScreen.id,
+                    );
                   },
                 ),
               ],
@@ -216,7 +220,9 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     text: 'Edit Images',
                     onPressed: () async {
                       await Navigator.pushReplacementNamed(
-                          context, EditPlantImagesScreen.id);
+                        context,
+                        EditPlantImagesScreen.id,
+                      );
                     },
                   ),
                 ],
@@ -267,10 +273,11 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   Future<void> _save() async {
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedPlant(
-          plantName: _plantName,
-          plantedDate: _plantedDate,
-          plantType: _plantType,
-          description: _description);
+        plantName: _plantName,
+        plantedDate: _plantedDate,
+        plantType: _plantType,
+        description: _description,
+      );
     await gardensStore.saveGardens();
 
     if (!mounted) return;

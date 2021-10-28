@@ -29,48 +29,51 @@ class _GardensListState extends State<GardensList> {
         child: Container(
           color: kBackgroundColor,
           child: Consumer<GardensStoreHive>(
-              builder: (context, gardensStore, child) {
-            return ListView.builder(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(10),
-              itemCount: gardensStore.gardens.length,
-              itemBuilder: (context, index) {
-                return Material(
-                  child: ListTile(
-                    tileColor: kBackgroundColor,
-                    leading: Icon(kGridIcon),
-                    title: StyledText(text: gardensStore.gardens[index].name),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            gardensStore.selectedGardenIndex = index;
-                            await _showDeleteDialog();
-                          },
-                          icon: Icon(kDeleteIcon),
-                          tooltip: 'Delete garden',
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            gardensStore.selectedGardenIndex = index;
-                            Navigator.pushReplacementNamed(
-                                context, EditGardenScreen.id);
-                          },
-                          icon: Icon(kEditIcon),
-                          tooltip: 'Edit garden',
-                        )
-                      ],
+            builder: (context, gardensStore, child) {
+              return ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(10),
+                itemCount: gardensStore.gardens.length,
+                itemBuilder: (context, index) {
+                  return Material(
+                    child: ListTile(
+                      tileColor: kBackgroundColor,
+                      leading: Icon(kGridIcon),
+                      title: StyledText(text: gardensStore.gardens[index].name),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              gardensStore.selectedGardenIndex = index;
+                              await _showDeleteDialog();
+                            },
+                            icon: Icon(kDeleteIcon),
+                            tooltip: 'Delete garden',
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              gardensStore.selectedGardenIndex = index;
+                              Navigator.pushReplacementNamed(
+                                context,
+                                EditGardenScreen.id,
+                              );
+                            },
+                            icon: Icon(kEditIcon),
+                            tooltip: 'Edit garden',
+                          )
+                        ],
+                      ),
+                      onTap: () {
+                        gardensStore.selectedGardenIndex = index;
+                        Navigator.pushReplacementNamed(context, TilesScreen.id);
+                      },
                     ),
-                    onTap: () {
-                      gardensStore.selectedGardenIndex = index;
-                      Navigator.pushReplacementNamed(context, TilesScreen.id);
-                    },
-                  ),
-                );
-              },
-            );
-          }),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

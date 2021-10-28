@@ -44,7 +44,9 @@ class PlantsList extends StatelessWidget {
                       onPressed: () {
                         gardensStore.selectedPlantIndex = index;
                         Navigator.pushReplacementNamed(
-                            context, EditPlantScreen.id);
+                          context,
+                          EditPlantScreen.id,
+                        );
                       },
                       icon: Icon(kEditIcon),
                       tooltip: 'Edit plant',

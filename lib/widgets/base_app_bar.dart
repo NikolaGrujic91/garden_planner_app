@@ -33,11 +33,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     final actions = <Widget>[];
 
     if (saveCallback != null) {
-      actions.add(SaveButton(
-        callback: () async {
-          await saveCallback!();
-        },
-      ));
+      actions.add(
+        SaveButton(
+          callback: () async {
+            await saveCallback!();
+          },
+        ),
+      );
     }
 
     Widget? forwardButton;

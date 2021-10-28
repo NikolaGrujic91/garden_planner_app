@@ -13,7 +13,8 @@ class TextFieldBorderedNumeric extends StatefulWidget {
   }) : super(key: key) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
-        TextPosition(offset: _textEditingController.text.length));
+      TextPosition(offset: _textEditingController.text.length),
+    );
   }
 
   /// Callback function on value changed
