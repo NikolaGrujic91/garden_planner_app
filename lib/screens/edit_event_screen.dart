@@ -29,20 +29,6 @@ class EditEventScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(
-                  child: TextFieldBordered(
-                    text: 'Title',
-                    hintText: 'Title',
-                    callback: null,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
                 const StyledText(
                   text: 'Start:',
                 ),
@@ -65,34 +51,6 @@ class EditEventScreen extends StatelessWidget {
                   },
                   initialDate: '',
                   text: 'Edit Start Date',
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFieldBordered(
-                    text: 'Location',
-                    hintText: 'Location',
-                    callback: null,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFieldBordered(
-                    text: 'Description',
-                    hintText: 'Description',
-                    callback: null,
-                  ),
                 ),
               ],
             ),
