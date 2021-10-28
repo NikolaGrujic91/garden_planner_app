@@ -44,7 +44,7 @@ class DatePicker extends StatefulWidget {
   final String text;
 
   @override
-  _DatePickerState createState() => _DatePickerState();
+  State<DatePicker> createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> with RestorationMixin {

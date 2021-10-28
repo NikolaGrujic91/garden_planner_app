@@ -18,7 +18,7 @@ class EditGardenScreen extends StatefulWidget {
   static const String id = 'edit_garden_screen';
 
   @override
-  _EditGardenScreenState createState() => _EditGardenScreenState();
+  State<EditGardenScreen> createState() => _EditGardenScreenState();
 }
 
 class _EditGardenScreenState extends State<EditGardenScreen> {

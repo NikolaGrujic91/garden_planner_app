@@ -9,7 +9,7 @@ class TilesBottomBar extends StatefulWidget {
   const TilesBottomBar({Key? key}) : super(key: key);
 
   @override
-  _TilesBottomBarState createState() => _TilesBottomBarState();
+  State<TilesBottomBar> createState() => _TilesBottomBarState();
 }
 
 class _TilesBottomBarState extends State<TilesBottomBar> {

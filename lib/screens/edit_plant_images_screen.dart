@@ -19,7 +19,7 @@ class EditPlantImagesScreen extends StatefulWidget {
   static const String id = 'edit_plant_images_screen';
 
   @override
-  _EditPlantImagesScreenState createState() => _EditPlantImagesScreenState();
+  State<EditPlantImagesScreen> createState() => _EditPlantImagesScreenState();
 }
 
 class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {

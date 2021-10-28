@@ -31,7 +31,7 @@ class EditPlantScreen extends StatefulWidget {
   static const String id = 'edit_plant_screen';
 
   @override
-  _EditPlantScreenState createState() => _EditPlantScreenState();
+  State<EditPlantScreen> createState() => _EditPlantScreenState();
 }
 
 class _EditPlantScreenState extends State<EditPlantScreen> {

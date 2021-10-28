@@ -17,7 +17,7 @@ class EditTileTypeScreen extends StatefulWidget {
   static const String id = 'edit_tile_type_screen';
 
   @override
-  _EditTileTypeScreenState createState() => _EditTileTypeScreenState();
+  State<EditTileTypeScreen> createState() => _EditTileTypeScreenState();
 }
 
 class _EditTileTypeScreenState extends State<EditTileTypeScreen> {

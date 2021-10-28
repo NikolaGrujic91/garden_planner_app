@@ -19,7 +19,7 @@ class AddGardenScreen extends StatefulWidget {
   static const String id = 'add_garden_screen';
 
   @override
-  _AddGardenScreenState createState() => _AddGardenScreenState();
+  State<AddGardenScreen> createState() => _AddGardenScreenState();
 }
 
 class _AddGardenScreenState extends State<AddGardenScreen> {
