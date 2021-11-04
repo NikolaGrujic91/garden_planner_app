@@ -24,7 +24,7 @@ environment:
 dependencies:
   add_2_calendar: ^2.1.1
   badges: ^2.0.1
-  camera: ^0.9.4+2
+  camera: ^0.9.4+3
   carousel_slider: ^4.0.0
   cupertino_icons: ^1.0.3
   flutter:
@@ -33,9 +33,9 @@ dependencies:
   flutter_svg: ^0.23.0+1
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  image_picker: ^0.8.4+2
+  image_picker: ^0.8.4+4
   path: ^1.8.0
-  path_provider: ^2.0.5
+  path_provider: ^2.0.6
   provider: ^6.0.1
   uuid: 3.0.5
   very_good_analysis: ^2.4.0
