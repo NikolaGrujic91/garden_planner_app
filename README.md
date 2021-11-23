@@ -31,9 +31,29 @@ Tasks:
 - iOS - check dark mode
 - iOS - Launch screen
 - Schedule for watering/notification, reminder
-    - https://pub.dev/packages/add_2_calendar
-    - https://pub.dev/packages/flutter_local_notifications
-    - https://brainsandbeards.com/blog/how-to-add-local-notifications-to-flutter-app
+    - Model: extend plant.dart with 4 fields
+        1. Watering (start date)
+        2. Frequency (in days)
+        3. Fertilizing (start date)
+        4. Frequency (in days)
+      Add HiveFields for proper serialization
+    - Screens:
+        1. Watering: reuse date_picker.dart
+        2. Frequency: create modal widget with question "Water every _____ day
+        (s)? "
+        3. Fertilizing: reuse date_picker.dart
+        4. Frequency: create modal widget with question "Fertilize every
+        _____ day(s)?"
+
+        2. & 4. can be the same modal widget that accepts different text.
+        There are buttons already created in the edit_plant_screen.dart
+        edit_event_screen.dart can be removed.
+    - Calendar widget
+      Add to the gardens list a calendar button, next to edit and delete button
+      or as the action button while in the tiles view.
+      Investigate if there is a calendar library, there was table_calendar at
+       pub.dev.
+      Display watering and fertilizing information in the calendar.
 - DONE - Photo
     - DONE - save image on local storage
     - DONE - name it as uuid
