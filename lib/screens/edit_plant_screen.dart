@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
-import 'package:garden_planner_app/screens/edit_event_screen.dart';
 import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
@@ -170,10 +169,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 StyledOutlinedButton(
                   text: 'Edit Watering Reminder',
                   onPressed: () async {
-                    await Navigator.pushReplacementNamed(
-                      context,
-                      EditEventScreen.id,
-                    );
+                    // TODO open modal dialog
                   },
                 ),
               ],
@@ -202,10 +198,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 StyledOutlinedButton(
                   text: 'Edit Fertilize Reminder',
                   onPressed: () async {
-                    await Navigator.pushReplacementNamed(
-                      context,
-                      EditEventScreen.id,
-                    );
+                    // TODO open modal dialog
                   },
                 ),
               ],

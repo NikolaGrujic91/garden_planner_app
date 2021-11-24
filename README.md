@@ -47,7 +47,7 @@ Tasks:
 
         2. & 4. can be the same modal widget that accepts different text.
         There are buttons already created in the edit_plant_screen.dart
-        edit_event_screen.dart can be removed.
+        DONE - edit_event_screen.dart can be removed.
     - Calendar widget
       Add to the gardens list a calendar button, next to edit and delete button
       or as the action button while in the tiles view.
