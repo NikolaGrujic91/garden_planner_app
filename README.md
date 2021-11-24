@@ -31,7 +31,7 @@ Tasks:
 - iOS - check dark mode
 - iOS - Launch screen
 - Schedule for watering/notification, reminder
-    - Model: extend plant.dart with 4 fields
+    - DONE - Model: extend plant.dart with 4 fields
         1. Watering (start date)
         2. Frequency (in days)
         3. Fertilizing (start date)
