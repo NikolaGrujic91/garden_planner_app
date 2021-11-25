@@ -38,6 +38,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _plantName;
   late String _plantedDate;
   late String _wateringStartDate;
+  late String _fertilizingStartDate;
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
@@ -54,6 +55,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _plantName = _selectedPlant.name;
     _plantedDate = _selectedPlant.plantedDate;
     _wateringStartDate = _selectedPlant.wateringStartDate;
+    _fertilizingStartDate = _selectedPlant.fertilizingStartDate;
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
@@ -184,13 +186,13 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 const StyledText(
-                  text: 'Fertilize:',
+                  text: 'Fertilizing start date:',
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 StyledText(
-                  text: _plantedDate,
+                  text: _fertilizingStartDate,
                 ),
               ],
             ),
@@ -199,11 +201,13 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             ),
             Row(
               children: [
-                StyledOutlinedButton(
-                  text: 'Edit Fertilize Reminder',
-                  onPressed: () async {
-                    // TODO open modal dialog
+                DatePicker(
+                  restorationId: EditPlantScreen.id,
+                  callback: (String newValue) {
+                    _setFertilizingStartDate(newValue);
                   },
+                  initialDate: _fertilizingStartDate,
+                  text: 'Edit Fertilizing start date',
                 ),
               ],
             ),
@@ -273,12 +277,19 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     });
   }
 
+  void _setFertilizingStartDate(String fertilizingStartDate) {
+    setState(() {
+      _fertilizingStartDate = fertilizingStartDate;
+    });
+  }
+
   Future<void> _save() async {
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedPlant(
         plantName: _plantName,
         plantedDate: _plantedDate,
         wateringStartDate: _wateringStartDate,
+        fertilizingStartDate: _fertilizingStartDate,
         plantType: _plantType,
         description: _description,
       );

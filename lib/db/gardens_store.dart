@@ -32,6 +32,7 @@ abstract class GardensStore {
     required String plantName,
     required String plantedDate,
     required String wateringStartDate,
+    required String fertilizingStartDate,
     required PlantType plantType,
     required String description,
   });
