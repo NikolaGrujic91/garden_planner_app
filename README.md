@@ -38,10 +38,10 @@ Tasks:
         4. Frequency (in days)
       Add HiveFields for proper serialization
     - Screens:
-        1. Watering: reuse date_picker.dart
+        DONE - 1. Watering: reuse date_picker.dart
         2. Frequency: create modal widget with question "Water every _____ day
         (s)? "
-        3. Fertilizing: reuse date_picker.dart
+        DONE - 3. Fertilizing: reuse date_picker.dart
         4. Frequency: create modal widget with question "Fertilize every
         _____ day(s)?"
 
