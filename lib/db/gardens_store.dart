@@ -31,6 +31,7 @@ abstract class GardensStore {
   void updateSelectedPlant({
     required String plantName,
     required String plantedDate,
+    required String wateringStartDate,
     required PlantType plantType,
     required String description,
   });

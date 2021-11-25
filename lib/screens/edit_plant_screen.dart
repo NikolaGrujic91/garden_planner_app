@@ -37,6 +37,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late Plant _selectedPlant;
   late String _plantName;
   late String _plantedDate;
+  late String _wateringStartDate;
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
@@ -52,6 +53,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
 
     _plantName = _selectedPlant.name;
     _plantedDate = _selectedPlant.plantedDate;
+    _wateringStartDate = _selectedPlant.wateringStartDate;
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
@@ -151,13 +153,13 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 const StyledText(
-                  text: 'Watering:',
+                  text: 'Watering start date:',
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 StyledText(
-                  text: _plantedDate,
+                  text: _wateringStartDate,
                 ),
               ],
             ),
@@ -166,11 +168,13 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             ),
             Row(
               children: [
-                StyledOutlinedButton(
-                  text: 'Edit Watering Reminder',
-                  onPressed: () async {
-                    // TODO open modal dialog
+                DatePicker(
+                  restorationId: EditPlantScreen.id,
+                  callback: (String newValue) {
+                    _setWateringStartDate(newValue);
                   },
+                  initialDate: _wateringStartDate,
+                  text: 'Edit Watering start date',
                 ),
               ],
             ),
@@ -263,11 +267,18 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     });
   }
 
+  void _setWateringStartDate(String wateringStartDate) {
+    setState(() {
+      _wateringStartDate = wateringStartDate;
+    });
+  }
+
   Future<void> _save() async {
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedPlant(
         plantName: _plantName,
         plantedDate: _plantedDate,
+        wateringStartDate: _wateringStartDate,
         plantType: _plantType,
         description: _description,
       );
