@@ -48,6 +48,7 @@ class Tile extends HiveObject {
     required String plantsName,
     required String plantedDate,
     required String wateringStartDate,
+    required int wateringFrequency,
     required String fertilizingStartDate,
     required PlantType plantsType,
     required String description,
@@ -60,6 +61,7 @@ class Tile extends HiveObject {
     plants[index].name = plantsName;
     plants[index].plantedDate = plantedDate;
     plants[index].wateringStartDate = wateringStartDate;
+    plants[index].wateringFrequency = wateringFrequency;
     plants[index].fertilizingStartDate = fertilizingStartDate;
     plants[index].description = description;
   }

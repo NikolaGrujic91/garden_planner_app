@@ -38,6 +38,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _plantName;
   late String _plantedDate;
   late String _wateringStartDate;
+  late int _wateringFrequency;
   late String _fertilizingStartDate;
   late String _description;
   late PlantType _plantType;
@@ -55,6 +56,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _plantName = _selectedPlant.name;
     _plantedDate = _selectedPlant.plantedDate;
     _wateringStartDate = _selectedPlant.wateringStartDate;
+    _wateringFrequency = _selectedPlant.wateringFrequency;
     _fertilizingStartDate = _selectedPlant.fertilizingStartDate;
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
@@ -183,6 +185,23 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             const SizedBox(
               height: 20,
             ),
+            StyledText(
+              text: 'Water every ${_wateringFrequency.toString()} day(s)',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                StyledOutlinedButton(
+                  text: 'Edit Watering frequency',
+                  onPressed: _showEditFrequencyDialog,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 const StyledText(
@@ -277,6 +296,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     });
   }
 
+  void _setWateringFrequency(int wateringFrequency) {
+    setState(() {
+      _wateringFrequency = wateringFrequency;
+    });
+  }
+
   void _setFertilizingStartDate(String fertilizingStartDate) {
     setState(() {
       _fertilizingStartDate = fertilizingStartDate;
@@ -289,6 +314,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
         plantName: _plantName,
         plantedDate: _plantedDate,
         wateringStartDate: _wateringStartDate,
+        wateringFrequency: _wateringFrequency,
         fertilizingStartDate: _fertilizingStartDate,
         plantType: _plantType,
         description: _description,
@@ -314,5 +340,16 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
 
     if (!mounted) return;
     await Navigator.pushReplacementNamed(context, PlantsScreen.id);
+  }
+
+  Future<void> _showEditFrequencyDialog() async {
+    const content = 'Edit Frequency';
+
+    return showEditFrequencyDialog(
+      context,
+      content,
+      _setWateringFrequency,
+      _wateringFrequency,
+    );
   }
 }

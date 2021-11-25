@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
+import 'package:garden_planner_app/widgets/text_field_bordered_numeric.dart';
 
 /// Show delete dialog.
 /// Based on platform display Cupertino or Material alert dialog.
@@ -107,5 +108,67 @@ Future<void> _showCupertinoDeleteDialog(
         )
       ],
     ),
+  );
+}
+
+/// Show edit frequency dialog.
+Future<void> showEditFrequencyDialog(
+  BuildContext context,
+  String content,
+  Function(int newValue) callback,
+  int currentValue,
+) async {
+  var value = currentValue;
+
+  return showDialog<void>(
+    context: context,
+
+    /// user must tap button!
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: StyledText(
+          text: content,
+        ),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              const Text('Repeat every'),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFieldBorderedNumeric(
+                text: value.toString(),
+                hintText: '',
+                callback: (int newValue) {
+                  value = newValue;
+                },
+                maxValue: 10000,
+                expanded: false,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text('day(s)'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const StyledText(text: 'Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              callback(value);
+              Navigator.of(context).pop();
+            },
+            child: const StyledText(text: 'Save'),
+          ),
+        ],
+      );
+    },
   );
 }
