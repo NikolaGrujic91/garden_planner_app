@@ -40,6 +40,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _wateringStartDate;
   late int _wateringFrequency;
   late String _fertilizingStartDate;
+  late int _fertilizingFrequency;
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
@@ -58,6 +59,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _wateringStartDate = _selectedPlant.wateringStartDate;
     _wateringFrequency = _selectedPlant.wateringFrequency;
     _fertilizingStartDate = _selectedPlant.fertilizingStartDate;
+    _fertilizingFrequency = _selectedPlant.fertilizingFrequency;
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
@@ -195,7 +197,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               children: [
                 StyledOutlinedButton(
                   text: 'Edit Watering frequency',
-                  onPressed: _showEditFrequencyDialog,
+                  onPressed: _showEditWateringFrequencyDialog,
                 ),
               ],
             ),
@@ -227,6 +229,24 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   },
                   initialDate: _fertilizingStartDate,
                   text: 'Edit Fertilizing start date',
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            StyledText(
+              text:
+                  'Fertilize every ${_fertilizingFrequency.toString()} day(s)',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                StyledOutlinedButton(
+                  text: 'Edit Fertilizing frequency',
+                  onPressed: _showEditFertilizingFrequencyDialog,
                 ),
               ],
             ),
@@ -308,6 +328,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     });
   }
 
+  void _setFertilizingFrequency(int fertilizingFrequency) {
+    setState(() {
+      _fertilizingFrequency = fertilizingFrequency;
+    });
+  }
+
   Future<void> _save() async {
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
       ..updateSelectedPlant(
@@ -316,6 +342,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
         wateringStartDate: _wateringStartDate,
         wateringFrequency: _wateringFrequency,
         fertilizingStartDate: _fertilizingStartDate,
+        fertilizingFrequency: _fertilizingFrequency,
         plantType: _plantType,
         description: _description,
       );
@@ -342,14 +369,21 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     await Navigator.pushReplacementNamed(context, PlantsScreen.id);
   }
 
-  Future<void> _showEditFrequencyDialog() async {
-    const content = 'Edit Frequency';
-
+  Future<void> _showEditWateringFrequencyDialog() async {
     return showEditFrequencyDialog(
       context,
-      content,
+      'Edit Watering Frequency',
       _setWateringFrequency,
       _wateringFrequency,
+    );
+  }
+
+  Future<void> _showEditFertilizingFrequencyDialog() async {
+    return showEditFrequencyDialog(
+      context,
+      'Edit Fertilizing Frequency',
+      _setFertilizingFrequency,
+      _fertilizingFrequency,
     );
   }
 }

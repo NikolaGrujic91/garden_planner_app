@@ -86,6 +86,7 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
     required String wateringStartDate,
     required int wateringFrequency,
     required String fertilizingStartDate,
+    required int fertilizingFrequency,
     required PlantType plantType,
     required String description,
   }) {
@@ -96,6 +97,7 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
           wateringStartDate: wateringStartDate,
           wateringFrequency: wateringFrequency,
           fertilizingStartDate: fertilizingStartDate,
+          fertilizingFrequency: fertilizingFrequency,
           plantsType: plantType,
           description: description,
         );

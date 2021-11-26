@@ -34,6 +34,7 @@ abstract class GardensStore {
     required String wateringStartDate,
     required int wateringFrequency,
     required String fertilizingStartDate,
+    required int fertilizingFrequency,
     required PlantType plantType,
     required String description,
   });
