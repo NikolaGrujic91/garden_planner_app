@@ -15,7 +15,9 @@ class TextFieldBorderedNumeric extends StatefulWidget {
   }) : super(key: key) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
-      TextPosition(offset: _textEditingController.text.length),
+      TextPosition(
+        offset: _textEditingController.text.length,
+      ),
     );
   }
 
@@ -45,46 +47,34 @@ class _TextFieldBorderedNumericState extends State<TextFieldBorderedNumeric> {
   @override
   Widget build(BuildContext context) {
     final isEmpty = widget._textEditingController.value.text.isEmpty;
-    final _decoration = InputDecoration(
+
+    final decoration = InputDecoration(
       border: const OutlineInputBorder(),
       labelText: isEmpty ? '' : widget.hintText,
       hintText: isEmpty ? widget.hintText : '',
     );
 
+    final textField = TextField(
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      decoration: decoration,
+      controller: widget._textEditingController,
+      style: kTextStyle,
+      onChanged: (value) {
+        final intValue = int.tryParse(value);
+
+        if (intValue != null) {
+          widget.callback(
+            intValue > widget.maxValue ? widget.maxValue : intValue,
+          );
+        }
+      },
+    );
+
     return widget.expanded
         ? Expanded(
-            child: TextField(
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              decoration: _decoration,
-              controller: widget._textEditingController,
-              style: kTextStyle,
-              onChanged: (value) {
-                final intValue = int.tryParse(value);
-
-                if (intValue != null) {
-                  widget.callback(
-                    intValue > widget.maxValue ? widget.maxValue : intValue,
-                  );
-                }
-              },
-            ),
+            child: textField,
           )
-        : TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: _decoration,
-            controller: widget._textEditingController,
-            style: kTextStyle,
-            onChanged: (value) {
-              final intValue = int.tryParse(value);
-
-              if (intValue != null) {
-                widget.callback(
-                  intValue > widget.maxValue ? widget.maxValue : intValue,
-                );
-              }
-            },
-          );
+        : textField;
   }
 }
