@@ -46,6 +46,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late String _plantTypeString;
   final _dropdownValues = <String>[kFlower, kFruit, kTree, kVegetable];
   final _isMobile = Platform.isAndroid || Platform.isIOS;
+  final _verticalSpace = const SizedBox(
+    height: 20,
+  );
+  final _horizontalSpace = const SizedBox(
+    width: 10,
+  );
 
   @override
   void initState() {
@@ -94,9 +100,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 Expanded(
@@ -108,9 +112,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 Expanded(
@@ -122,25 +124,19 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 const StyledText(
                   text: 'Planted:',
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                _horizontalSpace,
                 StyledText(
                   text: _plantedDate,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 DatePicker(
@@ -153,25 +149,19 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 const StyledText(
                   text: 'Watering start date:',
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                _horizontalSpace,
                 StyledText(
                   text: _wateringStartDate,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 DatePicker(
@@ -184,15 +174,11 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             StyledText(
               text: 'Water every ${_wateringFrequency.toString()} day(s)',
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 StyledOutlinedButton(
@@ -201,25 +187,19 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 const StyledText(
                   text: 'Fertilizing start date:',
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                _horizontalSpace,
                 StyledText(
                   text: _fertilizingStartDate,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 DatePicker(
@@ -232,16 +212,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             StyledText(
               text:
                   'Fertilize every ${_fertilizingFrequency.toString()} day(s)',
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             Row(
               children: [
                 StyledOutlinedButton(
@@ -250,9 +226,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            _verticalSpace,
             if (_isMobile)
               Row(
                 children: [
@@ -267,10 +241,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                   ),
                 ],
               ),
-            if (_isMobile)
-              const SizedBox(
-                height: 20,
-              ),
+            if (_isMobile) _verticalSpace,
             Row(
               children: [
                 StyledOutlinedButton(
