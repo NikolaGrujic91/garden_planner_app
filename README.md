@@ -37,17 +37,19 @@ Tasks:
         3. Fertilizing (start date)
         4. Frequency (in days)
       Add HiveFields for proper serialization
-    - Screens:
-        DONE - 1. Watering: reuse date_picker.dart
-        2. Frequency: create modal widget with question "Water every _____ day
+    - DONE - Screens:
+        1. Watering: reuse date_picker.dart
+        2. Frequency: create modal widget with question "Water every
+        _____ day
         (s)? "
-        DONE - 3. Fertilizing: reuse date_picker.dart
+        3. Fertilizing: reuse date_picker.dart
         4. Frequency: create modal widget with question "Fertilize every
         _____ day(s)?"
 
-        2. & 4. can be the same modal widget that accepts different text.
+        2. & 4. can be the same modal widget that accepts different
+        text.
         There are buttons already created in the edit_plant_screen.dart
-        DONE - edit_event_screen.dart can be removed.
+        edit_event_screen.dart can be removed.
     - Calendar widget
       Add to the gardens list a calendar button, next to edit and delete button
       or as the action button while in the tiles view.
