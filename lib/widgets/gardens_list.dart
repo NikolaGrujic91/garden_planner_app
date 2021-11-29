@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
+import 'package:garden_planner_app/screens/calendar_screen.dart';
 import 'package:garden_planner_app/screens/edit_garden_screen.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
@@ -61,6 +62,17 @@ class _GardensListState extends State<GardensList> {
                             },
                             icon: Icon(kEditIcon),
                             tooltip: 'Edit garden',
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              gardensStore.selectedGardenIndex = index;
+                              Navigator.pushReplacementNamed(
+                                context,
+                                CalendarScreen.id,
+                              );
+                            },
+                            icon: Icon(kCalendarIcon),
+                            tooltip: 'Calendar',
                           )
                         ],
                       ),

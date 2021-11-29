@@ -17,6 +17,10 @@ IconData kDeleteIcon = _isApple ? CupertinoIcons.delete : Icons.delete;
 /// Edit Icon
 IconData kEditIcon = _isApple ? CupertinoIcons.pencil : Icons.edit;
 
+/// Calendar Icon
+IconData kCalendarIcon =
+    _isApple ? CupertinoIcons.calendar : Icons.calendar_today;
+
 /// Dropdown Arrow Icon
 IconData kDropdownArrow =
     _isApple ? CupertinoIcons.arrow_down : Icons.arrow_downward;
