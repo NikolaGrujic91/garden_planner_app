@@ -22,7 +22,7 @@ environment:
   flutter: ">=2.5.3"
 
 dependencies:
-  badges: ^2.0.1
+  badges: ^2.0.2
   camera: ^0.9.4+5
   carousel_slider: ^4.0.0
   cupertino_icons: ^1.0.4
@@ -36,6 +36,7 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.7
   provider: ^6.0.1
+  table_calendar: ^3.0.3
   uuid: 3.0.5
   very_good_analysis: ^2.4.0
 
