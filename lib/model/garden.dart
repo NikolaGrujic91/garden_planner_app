@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/utils/hive_field_id.dart';
@@ -45,6 +47,18 @@ class Garden extends HiveObject {
   /// Tiles
   @HiveField(kHiveFieldId4)
   List<Tile> tiles = <Tile>[];
+
+  /// Watering dates
+  /// Key - date
+  /// Value - List of plants to water on a date
+  @HiveField(kHiveFieldId10)
+  Map<DateTime, List<String>> wateringDates = <DateTime, List<String>>{};
+
+  /// Fertilizing dates
+  /// Key - date
+  /// Value - List of plants to fertilize on a date
+  @HiveField(kHiveFieldId11)
+  Map<DateTime, List<String>> fertilizingDates = <DateTime, List<String>>{};
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{

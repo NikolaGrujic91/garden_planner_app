@@ -22,13 +22,17 @@ class GardenAdapter extends TypeAdapter<Garden> {
       columns: fields[3] as int,
     )
       ..id = fields[0] as String
-      ..tiles = (fields[4] as List).cast<Tile>();
+      ..tiles = (fields[4] as List).cast<Tile>()
+      ..wateringDates = (fields[10] as Map).map((dynamic k, dynamic v) =>
+          MapEntry(k as DateTime, (v as List).cast<String>()))
+      ..fertilizingDates = (fields[11] as Map).map((dynamic k, dynamic v) =>
+          MapEntry(k as DateTime, (v as List).cast<String>()));
   }
 
   @override
   void write(BinaryWriter writer, Garden obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +42,11 @@ class GardenAdapter extends TypeAdapter<Garden> {
       ..writeByte(3)
       ..write(obj.columns)
       ..writeByte(4)
-      ..write(obj.tiles);
+      ..write(obj.tiles)
+      ..writeByte(10)
+      ..write(obj.wateringDates)
+      ..writeByte(11)
+      ..write(obj.fertilizingDates);
   }
 
   @override

@@ -29,3 +29,9 @@ const int kHiveFieldId8 = 8;
 
 /// field id: 9
 const int kHiveFieldId9 = 9;
+
+/// field id: 10
+const int kHiveFieldId10 = 10;
+
+/// field id: 11
+const int kHiveFieldId11 = 11;
