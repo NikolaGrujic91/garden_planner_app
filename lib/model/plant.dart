@@ -101,4 +101,47 @@ class Plant extends HiveObject {
 
     images!.removeAt(index);
   }
+
+  /// Calculate watering dates
+  void calculateWateringDates() {
+    wateringDates.clear();
+
+    final startDate = _stringToDateTime(wateringStartDate);
+    final dateValue = ['Water $name'];
+
+    for (var i = 0; i < 400; i++) {
+      final dateKey = startDate.add(Duration(days: wateringFrequency * i));
+
+      wateringDates.putIfAbsent(
+        dateKey,
+        () => dateValue,
+      );
+    }
+  }
+
+  /// Calculate fertilizing dates
+  void calculateFertilizingDates() {
+    fertilizingDates.clear();
+
+    final startDate = _stringToDateTime(fertilizingStartDate);
+    final dateValue = ['Fertilize $name'];
+
+    for (var i = 0; i < 400; i++) {
+      final dateKey = startDate.add(Duration(days: fertilizingFrequency * i));
+
+      fertilizingDates.putIfAbsent(
+        dateKey,
+        () => dateValue,
+      );
+    }
+  }
+
+  DateTime _stringToDateTime(String value) {
+    final dateParts = value.split('.');
+    final day = int.parse(dateParts[0]);
+    final month = int.parse(dateParts[1]);
+    final year = int.parse(dateParts[2]);
+
+    return DateTime(year, month, day);
+  }
 }

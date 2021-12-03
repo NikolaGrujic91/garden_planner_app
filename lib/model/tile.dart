@@ -58,6 +58,14 @@ class Tile extends HiveObject {
       return;
     }
 
+    final wateringChanged =
+        plants[index].wateringStartDate != wateringStartDate ||
+            plants[index].wateringFrequency != wateringFrequency;
+
+    final fertilizingChanged =
+        plants[index].fertilizingStartDate != fertilizingStartDate ||
+            plants[index].fertilizingFrequency != fertilizingFrequency;
+
     plants[index].type = plantsType;
     plants[index].name = plantsName;
     plants[index].plantedDate = plantedDate;
@@ -66,6 +74,14 @@ class Tile extends HiveObject {
     plants[index].fertilizingStartDate = fertilizingStartDate;
     plants[index].fertilizingFrequency = fertilizingFrequency;
     plants[index].description = description;
+
+    if (wateringChanged) {
+      plants[index].calculateWateringDates();
+    }
+
+    if (fertilizingChanged) {
+      plants[index].calculateFertilizingDates();
+    }
   }
 
   /// Add plant to tile
