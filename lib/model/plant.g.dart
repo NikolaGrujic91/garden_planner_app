@@ -27,13 +27,17 @@ class PlantAdapter extends TypeAdapter<Plant> {
       ..wateringStartDate = fields[6] as String
       ..wateringFrequency = fields[7] as int
       ..fertilizingStartDate = fields[8] as String
-      ..fertilizingFrequency = fields[9] as int;
+      ..fertilizingFrequency = fields[9] as int
+      ..wateringDates = (fields[10] as Map).map((dynamic k, dynamic v) =>
+          MapEntry(k as DateTime, (v as List).cast<String>()))
+      ..fertilizingDates = (fields[11] as Map).map((dynamic k, dynamic v) =>
+          MapEntry(k as DateTime, (v as List).cast<String>()));
   }
 
   @override
   void write(BinaryWriter writer, Plant obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +57,11 @@ class PlantAdapter extends TypeAdapter<Plant> {
       ..writeByte(8)
       ..write(obj.fertilizingStartDate)
       ..writeByte(9)
-      ..write(obj.fertilizingFrequency);
+      ..write(obj.fertilizingFrequency)
+      ..writeByte(10)
+      ..write(obj.wateringDates)
+      ..writeByte(11)
+      ..write(obj.fertilizingDates);
   }
 
   @override

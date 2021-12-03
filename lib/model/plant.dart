@@ -62,6 +62,18 @@ class Plant extends HiveObject {
   @HiveField(kHiveFieldId9)
   int fertilizingFrequency = 0;
 
+  /// Watering dates
+  /// Key - date
+  /// Value - List of plants to water on a date
+  @HiveField(kHiveFieldId10)
+  Map<DateTime, List<String>> wateringDates = <DateTime, List<String>>{};
+
+  /// Fertilizing dates
+  /// Key - date
+  /// Value - List of plants to fertilize on a date
+  @HiveField(kHiveFieldId11)
+  Map<DateTime, List<String>> fertilizingDates = <DateTime, List<String>>{};
+
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{
         kJsonId: id,

@@ -57,10 +57,10 @@ Tasks:
        pub.dev.
       Display watering and fertilizing information in the calendar.
       - Calculate events dates
-        - Maps are stored on garden level
-        - Create wateringMap = LinkedHashMap<DateTime, List<String>>
-        - Create fertilizingMap = LinkedHashMap<DateTime, List<String>>
-        - Add hive types
+        - DONE Maps are stored on garden level
+        - DONE Create wateringMap = LinkedHashMap<DateTime, List<String>>
+        - DONE Create fertilizingMap = LinkedHashMap<DateTime, List<String>>
+        - DONE Add hive types
         - save plant in edit plant dialog
         - on save calculate dates for events based on start date and frequency
         - calculate dates for next 5 years.
