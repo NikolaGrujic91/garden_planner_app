@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/screens/calendar_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/save_button.dart';
@@ -11,7 +12,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BaseAppBar({
     Key? key,
     this.backScreenID,
-    this.forwardScreenID,
+    this.showCalendarButton,
     required this.title,
     this.saveCallback,
   }) : super(key: key);
@@ -19,8 +20,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Back button screen ID
   final String? backScreenID;
 
-  /// Forward button screen ID
-  final String? forwardScreenID;
+  /// Show calendar button
+  final bool? showCalendarButton;
 
   /// Title in the app bar
   final String title;
@@ -42,17 +43,20 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    Widget? forwardButton;
+    Widget? calendarButton;
 
-    if (forwardScreenID != null) {
-      forwardButton = IconButton(
+    if (showCalendarButton != null && showCalendarButton!) {
+      calendarButton = IconButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, forwardScreenID!);
+          Navigator.pushReplacementNamed(
+            context,
+            CalendarScreen.id,
+          );
         },
-        icon: Icon(kForwardIcon),
+        icon: Icon(kCalendarIcon),
       );
 
-      actions.add(forwardButton);
+      actions.add(calendarButton);
     }
 
     Widget? backButton;

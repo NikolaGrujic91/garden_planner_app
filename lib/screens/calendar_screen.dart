@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/garden.dart';
-import 'package:garden_planner_app/screens/gardens_screen.dart';
+import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        backScreenID: GardensScreen.id,
+        backScreenID: TilesScreen.id,
         title: 'Calendar of ${_selectedGarden.name}',
       ),
       body: Container(

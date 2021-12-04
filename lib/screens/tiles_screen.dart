@@ -22,6 +22,7 @@ class TilesScreen extends StatelessWidget {
           appBar: BaseAppBar(
             backScreenID: GardensScreen.id,
             title: gardensStore.getSelectedGarden().name,
+            showCalendarButton: true,
           ),
           body: const SafeArea(
             child: TilesGrid(),
