@@ -102,8 +102,44 @@ class Plant extends HiveObject {
     images!.removeAt(index);
   }
 
+  /// Update plant data
+  void update({
+    required String name,
+    required String plantedDate,
+    required String wateringStartDate,
+    required int wateringFrequency,
+    required String fertilizingStartDate,
+    required int fertilizingFrequency,
+    required PlantType type,
+    required String description,
+  }) {
+    final wateringChanged = this.wateringStartDate != wateringStartDate ||
+        this.wateringFrequency != wateringFrequency;
+
+    final fertilizingChanged =
+        this.fertilizingStartDate != fertilizingStartDate ||
+            this.fertilizingFrequency != fertilizingFrequency;
+
+    this.name = name;
+    this.plantedDate = plantedDate;
+    this.wateringStartDate = wateringStartDate;
+    this.wateringFrequency = wateringFrequency;
+    this.fertilizingStartDate = fertilizingStartDate;
+    this.fertilizingFrequency = fertilizingFrequency;
+    this.type = type;
+    this.description = description;
+
+    if (wateringChanged) {
+      _calculateWateringDates();
+    }
+
+    if (fertilizingChanged) {
+      _calculateFertilizingDates();
+    }
+  }
+
   /// Calculate watering dates
-  void calculateWateringDates() {
+  void _calculateWateringDates() {
     wateringDates.clear();
 
     final startDate = _stringToDateTime(wateringStartDate);
@@ -120,7 +156,7 @@ class Plant extends HiveObject {
   }
 
   /// Calculate fertilizing dates
-  void calculateFertilizingDates() {
+  void _calculateFertilizingDates() {
     fertilizingDates.clear();
 
     final startDate = _stringToDateTime(fertilizingStartDate);
