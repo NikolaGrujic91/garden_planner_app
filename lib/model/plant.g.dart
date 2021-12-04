@@ -28,10 +28,8 @@ class PlantAdapter extends TypeAdapter<Plant> {
       ..wateringFrequency = fields[7] as int
       ..fertilizingStartDate = fields[8] as String
       ..fertilizingFrequency = fields[9] as int
-      ..wateringDates = (fields[10] as Map).map((dynamic k, dynamic v) =>
-          MapEntry(k as DateTime, (v as List).cast<String>()))
-      ..fertilizingDates = (fields[11] as Map).map((dynamic k, dynamic v) =>
-          MapEntry(k as DateTime, (v as List).cast<String>()));
+      ..wateringDates = (fields[10] as Map).cast<DateTime, String>()
+      ..fertilizingDates = (fields[11] as Map).cast<DateTime, String>();
   }
 
   @override

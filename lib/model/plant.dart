@@ -66,13 +66,13 @@ class Plant extends HiveObject {
   /// Key - date
   /// Value - List of plants to water on a date
   @HiveField(kHiveFieldId10)
-  Map<DateTime, List<String>> wateringDates = <DateTime, List<String>>{};
+  Map<DateTime, String> wateringDates = <DateTime, String>{};
 
   /// Fertilizing dates
   /// Key - date
   /// Value - List of plants to fertilize on a date
   @HiveField(kHiveFieldId11)
-  Map<DateTime, List<String>> fertilizingDates = <DateTime, List<String>>{};
+  Map<DateTime, String> fertilizingDates = <DateTime, String>{};
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -143,7 +143,7 @@ class Plant extends HiveObject {
     wateringDates.clear();
 
     final startDate = _stringToDateTime(wateringStartDate);
-    final dateValue = ['Water $name'];
+    final dateValue = 'Water $name';
 
     for (var i = 0; i < 400; i++) {
       final dateKey = startDate.add(Duration(days: wateringFrequency * i));
@@ -160,7 +160,7 @@ class Plant extends HiveObject {
     fertilizingDates.clear();
 
     final startDate = _stringToDateTime(fertilizingStartDate);
-    final dateValue = ['Fertilize $name'];
+    final dateValue = 'Fertilize $name';
 
     for (var i = 0; i < 400; i++) {
       final dateKey = startDate.add(Duration(days: fertilizingFrequency * i));

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/db/gardens_store_hive.dart';
+import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/screens/gardens_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 /// Calendar Screen Widget
@@ -21,10 +24,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   late final ValueNotifier<List<String>> _selectedEvents;
+  late final Garden _selectedGarden;
 
   @override
   void initState() {
     super.initState();
+
+    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false);
+    _selectedGarden = gardensStore.getSelectedGarden();
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
@@ -33,9 +40,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BaseAppBar(
+      appBar: BaseAppBar(
         backScreenID: GardensScreen.id,
-        title: 'Calendar',
+        title: 'Calendar of ${_selectedGarden.name}',
       ),
       body: Container(
         color: kBackgroundColor,
@@ -48,17 +55,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
               calendarFormat: _calendarFormat,
               eventLoader: _getEventsForDay,
               selectedDayPredicate: (day) {
-                // Use `selectedDayPredicate` to determine which day is currently
-                // selected.
-                // If this returns true, then `day` will be marked as selected.
-
-                // Using `isSameDay` is recommended to disregard
-                // the time-part of compared DateTime objects.
                 return isSameDay(_selectedDay, day);
               },
               onDaySelected: (selectedDay, focusedDay) {
                 if (!isSameDay(_selectedDay, selectedDay)) {
-                  // Call `setState()` when updating the selected day
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
@@ -69,14 +69,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
               },
               onFormatChanged: (format) {
                 if (_calendarFormat != format) {
-                  // Call `setState()` when updating calendar format
                   setState(() {
                     _calendarFormat = format;
                   });
                 }
               },
               onPageChanged: (focusedDay) {
-                // No need to call `setState()` here
                 _focusedDay = focusedDay;
               },
             ),
@@ -90,15 +88,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     itemBuilder: (context, index) {
                       return Container(
                         margin: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 4.0,
+                          horizontal: 12,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: ListTile(
-                          onTap: () => print(value[index]),
                           title: Text(value[index]),
                         ),
                       );
@@ -113,15 +110,23 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  List<String> _getEventsForDay(DateTime day) {
-    // Implementation example
-    //return kEvents[day] ?? [];
-    final list = [
-      'Water plant 1',
-      'Water plant 2',
-      'Water plant 3',
-      'Water plant 4',
-    ];
-    return list;
+  List<String> _getEventsForDay(DateTime date) {
+    final dateKey = DateTime(date.year, date.month, date.day);
+
+    final events = <String>[];
+
+    for (final tile in _selectedGarden.tiles) {
+      for (final plant in tile.plants) {
+        if (plant.wateringDates.containsKey(dateKey)) {
+          events.add(plant.wateringDates[dateKey]!);
+        }
+
+        if (plant.fertilizingDates.containsKey(dateKey)) {
+          events.add(plant.fertilizingDates[dateKey]!);
+        }
+      }
+    }
+
+    return events;
   }
 }
