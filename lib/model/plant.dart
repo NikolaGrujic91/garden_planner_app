@@ -146,7 +146,14 @@ class Plant extends HiveObject {
     final dateValue = 'Water $name';
 
     for (var i = 0; i < 400; i++) {
-      final dateKey = startDate.add(Duration(days: wateringFrequency * i));
+      final increasedDate =
+          startDate.add(Duration(days: wateringFrequency * i));
+
+      final dateKey = DateTime(
+        increasedDate.year,
+        increasedDate.month,
+        increasedDate.day,
+      );
 
       wateringDates.putIfAbsent(
         dateKey,
@@ -163,7 +170,14 @@ class Plant extends HiveObject {
     final dateValue = 'Fertilize $name';
 
     for (var i = 0; i < 400; i++) {
-      final dateKey = startDate.add(Duration(days: fertilizingFrequency * i));
+      final increasedDate =
+          startDate.add(Duration(days: fertilizingFrequency * i));
+
+      final dateKey = DateTime(
+        increasedDate.year,
+        increasedDate.month,
+        increasedDate.day,
+      );
 
       fertilizingDates.putIfAbsent(
         dateKey,
