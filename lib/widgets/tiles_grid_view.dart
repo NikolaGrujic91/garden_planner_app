@@ -185,9 +185,14 @@ class TileGridViewCell extends StatelessWidget {
     final plantIcons = <Widget>[];
     for (final plantType in plantTypesUnique) {
       plantIcons.add(
-        Badge(
-          badgeContent: Text(plantTypesCounter[plantType].toString()),
-          child: plantTypeToSvgPicture(plantType),
+        Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: Badge(
+            position: BadgePosition.topEnd(top: -5, end: -2),
+            badgeColor: Colors.orange,
+            badgeContent: Text(plantTypesCounter[plantType].toString()),
+            child: plantTypeToSvgPicture(plantType),
+          ),
         ),
       );
     }
