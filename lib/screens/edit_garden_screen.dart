@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
-import 'package:garden_planner_app/screens/gardens_screen.dart';
-import 'package:garden_planner_app/utils/color_constants.dart';
-import 'package:garden_planner_app/widgets/base_app_bar.dart';
-import 'package:garden_planner_app/widgets/preview_grid_view.dart';
-import 'package:garden_planner_app/widgets/styled_text.dart';
-import 'package:garden_planner_app/widgets/text_field_bordered.dart';
-import 'package:garden_planner_app/widgets/text_field_bordered_numeric.dart';
+import 'package:garden_planner_app/widgets/garden_editor.dart';
 import 'package:provider/provider.dart';
 
 /// Edit Garden Screen Widget
@@ -22,9 +16,9 @@ class EditGardenScreen extends StatefulWidget {
 }
 
 class _EditGardenScreenState extends State<EditGardenScreen> {
-  String _name = 'Edit Garden';
-  int _columns = 5;
-  int _rows = 5;
+  late String _name;
+  late int _columns;
+  late int _rows;
 
   @override
   void initState() {
@@ -39,88 +33,12 @@ class _EditGardenScreenState extends State<EditGardenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        backScreenID: GardensScreen.id,
-        title: 'Edit $_name',
-        saveCallback: _save,
-      ),
-      body: Container(
-        color: kBackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFieldBordered(
-                text: _name,
-                hintText: 'Garden name',
-                callback: _setName,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  TextFieldBorderedNumeric(
-                    text: _rows.toString(),
-                    hintText: 'Rows',
-                    callback: _setRows,
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const StyledText(
-                    text: 'X',
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  TextFieldBorderedNumeric(
-                    text: _columns.toString(),
-                    hintText: 'Columns',
-                    callback: _setColumns,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              PreviewGridView(
-                columns: _columns,
-                rows: _rows,
-              ),
-            ],
-          ),
-        ),
-      ),
+    return GardenEditor(
+      name: _name,
+      columns: _columns,
+      rows: _rows,
+      title: 'Edit $_name',
+      isEditMode: true,
     );
-  }
-
-  void _setRows(int rows) {
-    setState(() {
-      _rows = rows;
-    });
-  }
-
-  void _setColumns(int columns) {
-    setState(() {
-      _columns = columns;
-    });
-  }
-
-  void _setName(String name) {
-    setState(() {
-      _name = name;
-    });
-  }
-
-  Future<void> _save() async {
-    final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
-      ..updateSelectedGarden(name: _name, rows: _rows, columns: _columns);
-    await gardensStore.saveGardens();
-
-    if (!mounted) return;
-    await Navigator.pushReplacementNamed(context, GardensScreen.id);
   }
 }
