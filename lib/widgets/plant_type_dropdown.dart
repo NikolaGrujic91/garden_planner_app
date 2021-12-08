@@ -62,7 +62,7 @@ class PlantTypeDropdown extends StatelessWidget {
                   top: 7,
                 ),
                 child: StyledText(text: value),
-              )
+              ),
             ],
           ),
         );

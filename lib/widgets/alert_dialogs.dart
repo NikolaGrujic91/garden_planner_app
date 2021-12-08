@@ -105,7 +105,7 @@ Future<void> _showCupertinoDeleteDialog(
           onPressed: () async {
             await onDeletePressed();
           },
-        )
+        ),
       ],
     ),
   );

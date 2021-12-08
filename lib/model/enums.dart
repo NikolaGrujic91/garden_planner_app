@@ -21,7 +21,7 @@ enum TileType {
 
   /// Tile represents path
   @HiveField(kHiveFieldId3)
-  path
+  path,
 }
 
 /// Enumeration of plant types
@@ -41,5 +41,5 @@ enum PlantType {
 
   /// Plant represents flower
   @HiveField(kHiveFieldId3)
-  flower
+  flower,
 }

@@ -52,7 +52,7 @@ class Garden extends HiveObject {
         kJsonName: name,
         kJsonRows: rows,
         kJsonColumns: columns,
-        kJsonTiles: tiles
+        kJsonTiles: tiles,
       };
 
   /// Update tiles list after number of columns or rows has changed
