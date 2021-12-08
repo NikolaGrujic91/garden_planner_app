@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/screens/edit_plant_images_screen.dart';
 import 'package:garden_planner_app/screens/plants_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
@@ -306,17 +307,19 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   }
 
   Future<void> _save() async {
+    final parameter = PlantParameterObject(
+      type: _plantType,
+      name: _plantName,
+      plantedDate: _plantedDate,
+      description: _description,
+      wateringStartDate: _wateringStartDate,
+      wateringFrequency: _wateringFrequency,
+      fertilizingStartDate: _fertilizingStartDate,
+      fertilizingFrequency: _fertilizingFrequency,
+    );
+
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
-      ..updateSelectedPlant(
-        plantName: _plantName,
-        plantedDate: _plantedDate,
-        wateringStartDate: _wateringStartDate,
-        wateringFrequency: _wateringFrequency,
-        fertilizingStartDate: _fertilizingStartDate,
-        fertilizingFrequency: _fertilizingFrequency,
-        plantType: _plantType,
-        description: _description,
-      );
+      ..updateSelectedPlant(parameter: parameter);
     await gardensStore.saveGardens();
 
     if (!mounted) return;

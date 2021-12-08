@@ -1,5 +1,6 @@
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/utils/hive_field_id.dart';
 import 'package:garden_planner_app/utils/hive_type_id.dart';
 import 'package:garden_planner_app/utils/json_constants.dart';
@@ -43,31 +44,12 @@ class Tile extends HiveObject {
       };
 
   /// Update tile plants based on given input
-  void updatePlant({
-    required int index,
-    required String plantsName,
-    required String plantedDate,
-    required String wateringStartDate,
-    required int wateringFrequency,
-    required String fertilizingStartDate,
-    required int fertilizingFrequency,
-    required PlantType plantsType,
-    required String description,
-  }) {
-    if (index >= plants.length) {
+  void updatePlant({required PlantParameterObject parameter}) {
+    if (parameter.index >= plants.length) {
       return;
     }
 
-    plants[index].update(
-      name: plantsName,
-      plantedDate: plantedDate,
-      wateringStartDate: wateringStartDate,
-      wateringFrequency: wateringFrequency,
-      fertilizingStartDate: fertilizingStartDate,
-      fertilizingFrequency: fertilizingFrequency,
-      type: plantsType,
-      description: description,
-    );
+    plants[parameter.index].update(parameter: parameter);
   }
 
   /// Add plant to tile

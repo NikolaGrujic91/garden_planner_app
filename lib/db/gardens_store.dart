@@ -1,6 +1,7 @@
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/model/tile.dart';
 
 /// Store interface declaration
@@ -28,16 +29,7 @@ abstract class GardensStore {
   void updateSelectedTileType({required TileType type});
 
   /// Update selected tile plants
-  void updateSelectedPlant({
-    required String plantName,
-    required String plantedDate,
-    required String wateringStartDate,
-    required int wateringFrequency,
-    required String fertilizingStartDate,
-    required int fertilizingFrequency,
-    required PlantType plantType,
-    required String description,
-  });
+  void updateSelectedPlant({required PlantParameterObject parameter});
 
   /// Get selected plant
   Plant getSelectedPlant();

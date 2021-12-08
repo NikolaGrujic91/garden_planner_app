@@ -3,6 +3,7 @@ import 'package:garden_planner_app/db/gardens_store.dart';
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/model/plant.dart';
+import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/utils/hive_constants.dart';
 import 'package:garden_planner_app/utils/json_constants.dart';
@@ -80,27 +81,11 @@ class GardensStoreHive extends ChangeNotifier implements GardensStore {
   }
 
   @override
-  void updateSelectedPlant({
-    required String plantName,
-    required String plantedDate,
-    required String wateringStartDate,
-    required int wateringFrequency,
-    required String fertilizingStartDate,
-    required int fertilizingFrequency,
-    required PlantType plantType,
-    required String description,
-  }) {
-    gardens[selectedGardenIndex].tiles[selectedTileIndex].updatePlant(
-          index: selectedPlantIndex,
-          plantsName: plantName,
-          plantedDate: plantedDate,
-          wateringStartDate: wateringStartDate,
-          wateringFrequency: wateringFrequency,
-          fertilizingStartDate: fertilizingStartDate,
-          fertilizingFrequency: fertilizingFrequency,
-          plantsType: plantType,
-          description: description,
-        );
+  void updateSelectedPlant({required PlantParameterObject parameter}) {
+    parameter.index = selectedPlantIndex;
+    gardens[selectedGardenIndex]
+        .tiles[selectedTileIndex]
+        .updatePlant(parameter: parameter);
     notifyListeners();
   }
 

@@ -1,4 +1,5 @@
 import 'package:garden_planner_app/model/enums.dart';
+import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/utils/hive_field_id.dart';
 import 'package:garden_planner_app/utils/hive_type_id.dart';
 import 'package:garden_planner_app/utils/json_constants.dart';
@@ -103,31 +104,22 @@ class Plant extends HiveObject {
   }
 
   /// Update plant data
-  void update({
-    required String name,
-    required String plantedDate,
-    required String wateringStartDate,
-    required int wateringFrequency,
-    required String fertilizingStartDate,
-    required int fertilizingFrequency,
-    required PlantType type,
-    required String description,
-  }) {
-    final wateringChanged = this.wateringStartDate != wateringStartDate ||
-        this.wateringFrequency != wateringFrequency;
+  void update({required PlantParameterObject parameter}) {
+    final wateringChanged = wateringStartDate != parameter.wateringStartDate ||
+        wateringFrequency != parameter.wateringFrequency;
 
     final fertilizingChanged =
-        this.fertilizingStartDate != fertilizingStartDate ||
-            this.fertilizingFrequency != fertilizingFrequency;
+        fertilizingStartDate != parameter.fertilizingStartDate ||
+            fertilizingFrequency != parameter.fertilizingFrequency;
 
-    this.name = name;
-    this.plantedDate = plantedDate;
-    this.wateringStartDate = wateringStartDate;
-    this.wateringFrequency = wateringFrequency;
-    this.fertilizingStartDate = fertilizingStartDate;
-    this.fertilizingFrequency = fertilizingFrequency;
-    this.type = type;
-    this.description = description;
+    name = parameter.name;
+    plantedDate = parameter.plantedDate;
+    wateringStartDate = parameter.wateringStartDate;
+    wateringFrequency = parameter.wateringFrequency;
+    fertilizingStartDate = parameter.fertilizingStartDate;
+    fertilizingFrequency = parameter.fertilizingFrequency;
+    type = parameter.type;
+    description = parameter.description;
 
     if (wateringChanged) {
       _calculateWateringDates();
