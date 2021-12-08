@@ -214,7 +214,10 @@ class TileGridViewCell extends StatelessWidget {
           onTap: () async {
             if (tile.type == TileType.plant && tile.plants.isNotEmpty) {
               gardensStore.selectedTileIndex = tileIndex;
-              await Navigator.pushReplacementNamed(context, PlantsScreen.id);
+              await Navigator.pushReplacementNamed(
+                context,
+                PlantsScreen.id,
+              );
             }
           },
           child: Container(
