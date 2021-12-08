@@ -13,11 +13,9 @@ Future<void> showDeleteDialog(
   String content,
   AsyncCallback onDeletePressed,
 ) async {
-  if (Platform.isIOS || Platform.isMacOS) {
-    return _showCupertinoDeleteDialog(context, content, onDeletePressed);
-  } else {
-    return _showMaterialDeleteDialog(context, content, onDeletePressed);
-  }
+  return Platform.isIOS || Platform.isMacOS
+      ? _showCupertinoDeleteDialog(context, content, onDeletePressed)
+      : _showMaterialDeleteDialog(context, content, onDeletePressed);
 }
 
 Future<void> _showMaterialDeleteDialog(

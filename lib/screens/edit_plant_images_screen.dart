@@ -41,14 +41,9 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
                   final selectedPlant = gardensStore.getSelectedPlant();
                   final images = selectedPlant.images;
 
-                  if (images != null && images.isNotEmpty) {
-                    return ImageCarouselSlider(
-                      images: images,
-                      height: 300,
-                    );
-                  } else {
-                    return const StyledText(text: 'No images');
-                  }
+                  return images != null && images.isNotEmpty
+                      ? ImageCarouselSlider(images: images, height: 300)
+                      : const StyledText(text: 'No images');
                 },
               ),
               const SizedBox(
