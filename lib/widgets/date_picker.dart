@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
@@ -49,7 +52,9 @@ class _DatePickerState extends State<DatePicker> {
     return StyledOutlinedButton(
       text: widget.text,
       onPressed: () async {
-        await _showMaterialDatePicker();
+        return Platform.isIOS || Platform.isMacOS
+            ? await _showCupertinoDatePicker()
+            : await _showMaterialDatePicker();
       },
     );
   }
@@ -80,5 +85,35 @@ class _DatePickerState extends State<DatePicker> {
       final date = '${picked.day}.${picked.month}.${picked.year}';
       widget.callback(date);
     }
+  }
+
+  Future<void> _showCupertinoDatePicker() async {
+    return showCupertinoModalPopup(
+      context: context,
+      builder: (_) => Container(
+        height: 500,
+        color: kBackgroundColor,
+        child: Column(
+          children: [
+            Expanded(
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                dateOrder: DatePickerDateOrder.dmy,
+                initialDateTime: DateTime.now(),
+                backgroundColor: kBackgroundColor,
+                onDateTimeChanged: (val) {
+                  final date = '${val.day}.${val.month}.${val.year}';
+                  widget.callback(date);
+                },
+              ),
+            ),
+            CupertinoButton(
+              child: const Text('Save'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
