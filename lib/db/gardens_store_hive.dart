@@ -7,7 +7,6 @@ import 'package:garden_planner_app/model/plant_parameter_object.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/utils/hive_constants.dart';
 import 'package:garden_planner_app/utils/json_constants.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Store responsible for handling the gardens data
