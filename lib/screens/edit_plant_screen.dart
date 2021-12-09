@@ -141,7 +141,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 DatePicker(
-                  restorationId: EditPlantScreen.id,
                   callback: (String newValue) {
                     _setPlantedDate(newValue);
                   },
@@ -166,7 +165,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 DatePicker(
-                  restorationId: EditPlantScreen.id,
                   callback: (String newValue) {
                     _setWateringStartDate(newValue);
                   },
@@ -204,7 +202,6 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 DatePicker(
-                  restorationId: EditPlantScreen.id,
                   callback: (String newValue) {
                     _setFertilizingStartDate(newValue);
                   },

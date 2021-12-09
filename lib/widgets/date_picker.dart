@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
-import 'package:garden_planner_app/widgets/styled_text.dart';
 
 /// Date picker widget
 class DatePicker extends StatefulWidget {
   /// Creates a new instance
   DatePicker({
     Key? key,
-    required this.restorationId,
     required this.callback,
     required this.text,
     required String initialDate,
@@ -24,9 +23,6 @@ class DatePicker extends StatefulWidget {
       year = int.parse(dateParts[2]);
     }
   }
-
-  /// Id of screen
-  final String restorationId;
 
   /// Callback function
   final Function(String plantedDate) callback;
@@ -47,80 +43,42 @@ class DatePicker extends StatefulWidget {
   State<DatePicker> createState() => _DatePickerState();
 }
 
-class _DatePickerState extends State<DatePicker> with RestorationMixin {
-  late RestorableDateTime _selectedDate;
-
-  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
-      RestorableRouteFuture<DateTime?>(
-    onComplete: _selectDate,
-    onPresent: (NavigatorState navigator, Object? arguments) {
-      return navigator.restorablePush(
-        _datePickerRoute,
-        arguments: _selectedDate.value.millisecondsSinceEpoch,
-      );
-    },
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDate =
-        RestorableDateTime(DateTime(widget.year, widget.month, widget.day));
-  }
-
+class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return StyledOutlinedButton(
-      onPressed: () async {
-        _restorableDatePickerRouteFuture.present();
-      },
       text: widget.text,
-    );
-  }
-
-  @override
-  String? get restorationId => widget.restorationId;
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_selectedDate, 'selected_date');
-    registerForRestoration(
-      _restorableDatePickerRouteFuture,
-      'date_picker_route_future',
-    );
-  }
-
-  static Route<DateTime> _datePickerRoute(
-    BuildContext context,
-    Object? arguments,
-  ) {
-    return DialogRoute<DateTime>(
-      context: context,
-      builder: (BuildContext context) {
-        return DatePickerDialog(
-          restorationId: 'date_picker_dialog',
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2100),
-        );
+      onPressed: () async {
+        await _showMaterialDatePicker();
       },
     );
   }
 
-  void _selectDate(DateTime? newSelectedDate) {
-    if (newSelectedDate != null) {
-      setState(() {
-        _selectedDate.value = newSelectedDate;
-        final date = '${_selectedDate.value.day}.${_selectedDate.value.month}'
-            '.${_selectedDate.value.year}';
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: StyledText(text: 'Selected: $date'),
+  Future<void> _showMaterialDatePicker() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(widget.year, widget.month, widget.day),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      helpText: 'Select date',
+      cancelText: 'Not now',
+      confirmText: 'Save',
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: kAppBarBackgroundColor,
+              surface: kBackgroundColor,
+            ),
           ),
+          child: child!,
         );
-        widget.callback(date);
-      });
+      },
+    );
+    if (picked != null) {
+      final date = '${picked.day}.${picked.month}.${picked.year}';
+      widget.callback(date);
     }
   }
 }
