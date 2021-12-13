@@ -11,7 +11,7 @@ class TextFieldBorderedNumeric extends StatefulWidget {
     required this.hintText,
     required this.callback,
     this.expanded = true,
-    this.maxValue = 5,
+    this.maxValue = 10,
   }) : super(key: key) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(

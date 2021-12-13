@@ -24,8 +24,15 @@ class GardensScreen extends StatelessWidget {
           await Navigator.pushReplacementNamed(context, AddGardenScreen.id);
         },
         tooltip: 'Add garden',
-        backgroundColor: kFloatingActionButtonColor,
-        child: Icon(kAddIcon),
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: kRedColorGradient,
+          ),
+          child: Icon(kAddIcon),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

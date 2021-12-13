@@ -3,6 +3,7 @@ import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/screens/tiles_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
+import 'package:garden_planner_app/utils/icon_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -25,6 +26,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime? _selectedDay;
   late final ValueNotifier<List<String>> _selectedEvents;
   late final Garden _selectedGarden;
+  late final CalendarStyle _calendarStyle;
 
   @override
   void initState() {
@@ -35,6 +37,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+
+    _calendarStyle = const CalendarStyle(
+      todayDecoration: BoxDecoration(
+        color: kRedColor,
+        shape: BoxShape.circle,
+      ),
+      selectedDecoration: BoxDecoration(
+        color: kRedColor,
+        gradient: kRedColorGradient,
+        shape: BoxShape.circle,
+      ),
+      markersAutoAligned: false,
+      markersMaxCount: 1,
+      markerDecoration: BoxDecoration(
+        color: kMarkerColor,
+        shape: BoxShape.circle,
+      ),
+      markersOffset: PositionedOffset(
+        bottom: 0,
+      ),
+      markerSize: 5,
+    );
   }
 
   @override
@@ -53,6 +77,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               firstDay: DateTime(2021),
               lastDay: DateTime(2100),
               calendarFormat: _calendarFormat,
+              calendarStyle: _calendarStyle,
               eventLoader: _getEventsForDay,
               selectedDayPredicate: (day) {
                 return isSameDay(_selectedDay, day);
@@ -79,6 +104,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               },
             ),
             const SizedBox(height: 8),
+            const Divider(),
             Expanded(
               child: ValueListenableBuilder<List<String>>(
                 valueListenable: _selectedEvents,
@@ -91,12 +117,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           horizontal: 12,
                           vertical: 4,
                         ),
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
                         child: ListTile(
-                          title: Text(value[index]),
+                          leading: Icon(kWater),
+                          title: Text(
+                            value[index],
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.black54,
+                            ),
+                          ),
                         ),
                       );
                     },

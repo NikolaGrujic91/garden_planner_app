@@ -38,19 +38,14 @@ class _GardensListState extends State<GardensList> {
                   return Material(
                     child: ListTile(
                       tileColor: kBackgroundColor,
-                      leading: Icon(kGridIcon),
+                      leading: Icon(
+                        kGridIcon,
+                        color: kRedColor,
+                      ),
                       title: StyledText(text: gardensStore.gardens[index].name),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(
-                            onPressed: () async {
-                              gardensStore.selectedGardenIndex = index;
-                              await _showDeleteDialog();
-                            },
-                            icon: Icon(kDeleteIcon),
-                            tooltip: 'Delete garden',
-                          ),
                           IconButton(
                             onPressed: () {
                               gardensStore.selectedGardenIndex = index;
@@ -61,6 +56,14 @@ class _GardensListState extends State<GardensList> {
                             },
                             icon: Icon(kEditIcon),
                             tooltip: 'Edit garden',
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              gardensStore.selectedGardenIndex = index;
+                              await _showDeleteDialog();
+                            },
+                            icon: Icon(kDeleteIcon, size: 20),
+                            tooltip: 'Delete garden',
                           ),
                         ],
                       ),

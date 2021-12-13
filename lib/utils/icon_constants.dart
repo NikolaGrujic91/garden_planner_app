@@ -26,10 +26,19 @@ IconData kDropdownArrow =
     _isApple ? CupertinoIcons.arrow_down : Icons.arrow_downward;
 
 /// Grid Icon
-IconData kGridIcon = _isApple ? CupertinoIcons.grid : Icons.grid_4x4;
+IconData kGridIcon = _isApple ? CupertinoIcons.circle_grid_3x3 : Icons.grid_4x4;
 
 /// Camera Icon
 IconData kCameraIcon = _isApple ? CupertinoIcons.camera_fill : Icons.camera_alt;
 
 /// Add Icon
 IconData kAddIcon = _isApple ? CupertinoIcons.add : Icons.add;
+
+/// Water
+IconData kWater = CupertinoIcons.drop;
+
+/// Insects
+IconData kAnt = CupertinoIcons.ant;
+
+/// Fertilize
+IconData kFertilize = Icons.agriculture;
