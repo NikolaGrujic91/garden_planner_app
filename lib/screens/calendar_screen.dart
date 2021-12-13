@@ -8,6 +8,21 @@ import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+/// Private helper class for storing icon data and string
+class _IconDataStringPair {
+  /// Creates a new instance
+  _IconDataStringPair({
+    required this.iconData,
+    required this.text,
+  });
+
+  /// Icon data
+  IconData iconData;
+
+  /// String text
+  String text;
+}
+
 /// Calendar Screen Widget
 class CalendarScreen extends StatefulWidget {
   /// Creates a new instance
@@ -24,7 +39,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  late final ValueNotifier<List<String>> _selectedEvents;
+  late final ValueNotifier<List<_IconDataStringPair>> _selectedEvents;
   late final Garden _selectedGarden;
   late final CalendarStyle _calendarStyle;
 
@@ -106,7 +121,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             const SizedBox(height: 8),
             const Divider(),
             Expanded(
-              child: ValueListenableBuilder<List<String>>(
+              child: ValueListenableBuilder<List<_IconDataStringPair>>(
                 valueListenable: _selectedEvents,
                 builder: (context, value, _) {
                   return ListView.builder(
@@ -118,9 +133,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           vertical: 4,
                         ),
                         child: ListTile(
-                          leading: Icon(kWater),
+                          leading: Icon(value[index].iconData),
                           title: Text(
-                            value[index],
+                            value[index].text,
                             style: const TextStyle(
                               fontSize: 15,
                               color: Colors.black54,
@@ -139,19 +154,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  List<String> _getEventsForDay(DateTime date) {
+  List<_IconDataStringPair> _getEventsForDay(DateTime date) {
     final dateKey = DateTime(date.year, date.month, date.day);
 
-    final events = <String>[];
+    final events = <_IconDataStringPair>[];
 
     for (final tile in _selectedGarden.tiles) {
       for (final plant in tile.plants) {
         if (plant.wateringDates.containsKey(dateKey)) {
-          events.add(plant.wateringDates[dateKey]!);
+          events.add(
+            _IconDataStringPair(
+              iconData: kWater,
+              text: plant.wateringDates[dateKey]!,
+            ),
+          );
         }
 
         if (plant.fertilizingDates.containsKey(dateKey)) {
-          events.add(plant.fertilizingDates[dateKey]!);
+          events.add(
+            _IconDataStringPair(
+              iconData: kFertilize,
+              text: plant.fertilizingDates[dateKey]!,
+            ),
+          );
         }
       }
     }
