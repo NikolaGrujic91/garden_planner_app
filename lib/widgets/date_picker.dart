@@ -88,6 +88,8 @@ class _DatePickerState extends State<DatePicker> {
   }
 
   Future<void> _showCupertinoDatePicker() async {
+    DateTime? selectedDate;
+
     return showCupertinoModalPopup(
       context: context,
       builder: (_) => Container(
@@ -102,14 +104,20 @@ class _DatePickerState extends State<DatePicker> {
                 initialDateTime: DateTime.now(),
                 backgroundColor: kBackgroundColor,
                 onDateTimeChanged: (val) {
-                  final date = '${val.day}.${val.month}.${val.year}';
-                  widget.callback(date);
+                  selectedDate = val;
                 },
               ),
             ),
             CupertinoButton(
               child: const Text('Save'),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                selectedDate ??= DateTime.now();
+                final date = '${selectedDate?.day}.${selectedDate?.month}'
+                    '.${selectedDate?.year}';
+                widget.callback(date);
+
+                Navigator.of(context).pop();
+              },
             ),
           ],
         ),
