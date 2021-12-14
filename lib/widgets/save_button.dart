@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/color_constants.dart';
 
 /// This widget represents reusable save button
 class SaveButton extends StatelessWidget {
@@ -19,7 +20,7 @@ class SaveButton extends StatelessWidget {
         'SAVE',
         style: TextStyle(
           fontFamily: 'Roboto Sans',
-          color: Colors.white,
+          color: kWhiteColor,
         ),
       ),
     );

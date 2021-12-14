@@ -59,7 +59,7 @@ class TilesGrid extends StatelessWidget {
                                     drawTopBorder ? kTileHomeBorderWidth : 0.0,
                                 color: drawTopBorder
                                     ? kTileHomeBorderColor
-                                    : Colors.white,
+                                    : kWhiteColor,
                               ),
                               bottom: BorderSide(
                                 width: drawBottomBorder
@@ -67,14 +67,14 @@ class TilesGrid extends StatelessWidget {
                                     : 0.0,
                                 color: drawBottomBorder
                                     ? kTileHomeBorderColor
-                                    : Colors.white,
+                                    : kWhiteColor,
                               ),
                               left: BorderSide(
                                 width:
                                     drawLeftBorder ? kTileHomeBorderWidth : 0.0,
                                 color: drawLeftBorder
                                     ? kTileHomeBorderColor
-                                    : Colors.white,
+                                    : kWhiteColor,
                               ),
                               right: BorderSide(
                                 width: drawRightBorder
@@ -82,7 +82,7 @@ class TilesGrid extends StatelessWidget {
                                     : 0.0,
                                 color: drawRightBorder
                                     ? kTileHomeBorderColor
-                                    : Colors.white,
+                                    : kWhiteColor,
                               ),
                             ),
                           )
@@ -198,8 +198,8 @@ class TileGridViewCell extends StatelessWidget {
             badgeColor: kRedColor,
             badgeContent: Text(
               plantTypesCounter[plantType].toString(),
-              style: TextStyle(
-                color: Colors.white,
+              style: const TextStyle(
+                color: kWhiteColor,
               ),
             ),
             child: plantTypeToSvgPicture(plantType),

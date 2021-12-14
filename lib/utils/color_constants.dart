@@ -34,6 +34,9 @@ const Color kTileHomeBorderColor = Color.fromARGB(255, 99, 98, 98);
 const Color kMarkerColor = Color.fromARGB(255, 139, 139, 139);
 
 /// Red Color
+const Color kWhiteColor = Colors.white;
+
+/// Red Color
 const Color kRedColor = Color.fromARGB(255, 209, 92, 71);
 
 /// Red Color Gradient
