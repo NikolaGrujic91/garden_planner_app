@@ -33,3 +33,9 @@ const String kSave = 'Save';
 
 /// String SAVE constant
 const String kSaveUpper = 'SAVE';
+
+/// String Rows constant
+const String kRows = 'Rows';
+
+/// String Columns constant
+const String kColumns = 'Columns';

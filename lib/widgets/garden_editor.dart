@@ -3,6 +3,7 @@ import 'package:garden_planner_app/db/gardens_store_hive.dart';
 import 'package:garden_planner_app/model/garden.dart';
 import 'package:garden_planner_app/screens/gardens_screen.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:garden_planner_app/widgets/preview_grid_view.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
@@ -88,7 +89,7 @@ class _GardenEditorState extends State<GardenEditor> {
                 children: [
                   TextFieldBorderedNumeric(
                     text: _rows.toString(),
-                    hintText: 'Rows',
+                    hintText: kRows,
                     callback: _setRows,
                   ),
                   _horizontalSpace,
@@ -98,7 +99,7 @@ class _GardenEditorState extends State<GardenEditor> {
                   _horizontalSpace,
                   TextFieldBorderedNumeric(
                     text: _columns.toString(),
-                    hintText: 'Columns',
+                    hintText: kColumns,
                     callback: _setColumns,
                   ),
                 ],
