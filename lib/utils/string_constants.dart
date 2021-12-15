@@ -21,3 +21,15 @@ const String kVegetable = 'vegetable';
 
 /// String flower constant
 const String kFlower = 'flower';
+
+/// String Delete constant
+const String kDelete = 'Delete';
+
+/// String Cancel constant
+const String kCancel = 'Cancel';
+
+/// String Save constant
+const String kSave = 'Save';
+
+/// String SAVE constant
+const String kSaveUpper = 'SAVE';

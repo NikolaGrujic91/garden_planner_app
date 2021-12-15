@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
 
 /// Date picker widget
@@ -68,7 +69,7 @@ class _DatePickerState extends State<DatePicker> {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       helpText: 'Select date',
       cancelText: 'Not now',
-      confirmText: 'Save',
+      confirmText: kSave,
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -109,7 +110,7 @@ class _DatePickerState extends State<DatePicker> {
               ),
             ),
             CupertinoButton(
-              child: const Text('Save'),
+              child: const Text(kSave),
               onPressed: () {
                 selectedDate ??= DateTime.now();
                 final date = '${selectedDate?.day}.${selectedDate?.month}'

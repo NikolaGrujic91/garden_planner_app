@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_planner_app/utils/color_constants.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 
 /// This widget represents reusable save button
 class SaveButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class SaveButton extends StatelessWidget {
     return TextButton(
       onPressed: callback,
       child: const Text(
-        'SAVE',
+        kSaveUpper,
         style: TextStyle(
           fontFamily: 'Roboto Sans',
           color: kWhiteColor,

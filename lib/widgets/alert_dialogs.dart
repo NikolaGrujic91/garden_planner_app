@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:garden_planner_app/utils/string_constants.dart';
 import 'package:garden_planner_app/widgets/styled_text.dart';
 import 'package:garden_planner_app/widgets/text_field_bordered_numeric.dart';
 
@@ -48,28 +49,28 @@ Future<void> _showMaterialDeleteDialog(
               onPressed: () async {
                 await onDeletePressed();
               },
-              child: const StyledText(text: 'Delete'),
+              child: const StyledText(text: kDelete),
             )
           else
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const StyledText(text: 'Cancel'),
+              child: const StyledText(text: kCancel),
             ),
           if (Platform.isWindows)
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const StyledText(text: 'Cancel'),
+              child: const StyledText(text: kCancel),
             )
           else
             TextButton(
               onPressed: () async {
                 await onDeletePressed();
               },
-              child: const StyledText(text: 'Delete'),
+              child: const StyledText(text: kDelete),
             ),
         ],
       );
@@ -92,14 +93,14 @@ Future<void> _showCupertinoDeleteDialog(
       content: Text(content),
       actions: <CupertinoDialogAction>[
         CupertinoDialogAction(
-          child: const Text('Cancel'),
+          child: const Text(kCancel),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         CupertinoDialogAction(
           isDestructiveAction: true,
-          child: const Text('Delete'),
+          child: const Text(kDelete),
           onPressed: () async {
             await onDeletePressed();
           },
@@ -156,14 +157,14 @@ Future<void> showEditFrequencyDialog(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const StyledText(text: 'Cancel'),
+            child: const StyledText(text: kCancel),
           ),
           TextButton(
             onPressed: () async {
               callback(value);
               Navigator.of(context).pop();
             },
-            child: const StyledText(text: 'Save'),
+            child: const StyledText(text: kSave),
           ),
         ],
       );
