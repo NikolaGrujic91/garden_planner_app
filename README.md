@@ -50,12 +50,12 @@ Tasks:
         text.
         There are buttons already created in the edit_plant_screen.dart
         edit_event_screen.dart can be removed.
-    - Calendar widget
+    - DONE -Calendar widget
       Add to the gardens list a calendar button, next to edit and delete button
       or as the action button while in the tiles view.
       Investigate if there is a calendar library, there was table_calendar at
        pub.dev.
-      Display watering and fertilizing information in the calendar.
+      DONE - Display watering and fertilizing information in the calendar.
       - Calculate events dates
         - DONE Maps are stored on garden level
         - DONE Create wateringMap = LinkedHashMap<DateTime, List<String>>
@@ -71,3 +71,4 @@ Tasks:
     - DONE - name it as uuid
     - DONE - add image_uuid field to plant.dart
     - DONE - pick image from gallery
+- Add pesticide info
