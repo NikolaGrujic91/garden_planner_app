@@ -12,6 +12,8 @@ class PlantParameterObject {
     required this.wateringFrequency,
     required this.fertilizingStartDate,
     required this.fertilizingFrequency,
+    required this.pesticideStartDate,
+    required this.pesticideFrequency,
   });
 
   /// Plant index
@@ -40,4 +42,10 @@ class PlantParameterObject {
 
   /// Fertilizing frequency in days
   int fertilizingFrequency;
+
+  /// Fertilizing start date
+  String pesticideStartDate;
+
+  /// Fertilizing frequency in days
+  int pesticideFrequency;
 }

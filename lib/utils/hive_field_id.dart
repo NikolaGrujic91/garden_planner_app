@@ -35,3 +35,12 @@ const int kHiveFieldId10 = 10;
 
 /// field id: 11
 const int kHiveFieldId11 = 11;
+
+/// field id: 12
+const int kHiveFieldId12 = 12;
+
+/// field id: 13
+const int kHiveFieldId13 = 13;
+
+/// field id: 14
+const int kHiveFieldId14 = 14;

@@ -63,6 +63,14 @@ class Plant extends HiveObject {
   @HiveField(kHiveFieldId9)
   int fertilizingFrequency = 0;
 
+  /// Pesticide start date
+  @HiveField(kHiveFieldId12)
+  String pesticideStartDate = '';
+
+  /// Pesticide frequency in days
+  @HiveField(kHiveFieldId13)
+  int pesticideFrequency = 0;
+
   /// Watering dates
   /// Key - date
   /// Value - List of plants to water on a date
@@ -74,6 +82,12 @@ class Plant extends HiveObject {
   /// Value - List of plants to fertilize on a date
   @HiveField(kHiveFieldId11)
   Map<DateTime, String> fertilizingDates = <DateTime, String>{};
+
+  /// Pesticide dates
+  /// Key - date
+  /// Value - List of plants to apply pesticide on a date
+  @HiveField(kHiveFieldId14)
+  Map<DateTime, String> pesticideDates = <DateTime, String>{};
 
   /// Convert object data to JSON
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -112,34 +126,61 @@ class Plant extends HiveObject {
         fertilizingStartDate != parameter.fertilizingStartDate ||
             fertilizingFrequency != parameter.fertilizingFrequency;
 
+    final pesticideChanged =
+        pesticideStartDate != parameter.pesticideStartDate ||
+            pesticideFrequency != parameter.pesticideFrequency;
+
     name = parameter.name;
     plantedDate = parameter.plantedDate;
     wateringStartDate = parameter.wateringStartDate;
     wateringFrequency = parameter.wateringFrequency;
     fertilizingStartDate = parameter.fertilizingStartDate;
     fertilizingFrequency = parameter.fertilizingFrequency;
+    pesticideStartDate = parameter.pesticideStartDate;
+    pesticideFrequency = parameter.pesticideFrequency;
     type = parameter.type;
     description = parameter.description;
 
     if (wateringChanged) {
-      _calculateWateringDates();
+      _calculateDates(
+        wateringStartDate,
+        wateringFrequency,
+        wateringDates,
+        'Water $name',
+      );
     }
 
     if (fertilizingChanged) {
-      _calculateFertilizingDates();
+      _calculateDates(
+        fertilizingStartDate,
+        fertilizingFrequency,
+        fertilizingDates,
+        'Fertilize $name',
+      );
+    }
+
+    if (pesticideChanged) {
+      _calculateDates(
+        pesticideStartDate,
+        pesticideFrequency,
+        pesticideDates,
+        'Pesticide $name',
+      );
     }
   }
 
-  /// Calculate watering dates
-  void _calculateWateringDates() {
-    wateringDates.clear();
+  void _calculateDates(
+    String startDate,
+    int frequency,
+    Map<DateTime, String> dates,
+    String text,
+  ) {
+    dates.clear();
 
-    final startDate = _stringToDateTime(wateringStartDate);
-    final dateValue = 'Water $name';
+    final startDateTime = _stringToDateTime(startDate);
 
     for (var i = 0; i < 400; i++) {
-      final increasedDate =
-          startDate.add(Duration(days: wateringFrequency * i));
+      final increasedDate = startDateTime.add(Duration(days: frequency * i));
 
       final dateKey = DateTime(
         increasedDate.year,
@@ -147,33 +188,9 @@ class Plant extends HiveObject {
         increasedDate.day,
       );
 
-      wateringDates.putIfAbsent(
+      dates.putIfAbsent(
         dateKey,
-        () => dateValue,
-      );
-    }
-  }
-
-  /// Calculate fertilizing dates
-  void _calculateFertilizingDates() {
-    fertilizingDates.clear();
-
-    final startDate = _stringToDateTime(fertilizingStartDate);
-    final dateValue = 'Fertilize $name';
-
-    for (var i = 0; i < 400; i++) {
-      final increasedDate =
-          startDate.add(Duration(days: fertilizingFrequency * i));
-
-      final dateKey = DateTime(
-        increasedDate.year,
-        increasedDate.month,
-        increasedDate.day,
-      );
-
-      fertilizingDates.putIfAbsent(
-        dateKey,
-        () => dateValue,
+        () => text,
       );
     }
   }

@@ -311,6 +311,12 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
       wateringFrequency: _wateringFrequency,
       fertilizingStartDate: _fertilizingStartDate,
       fertilizingFrequency: _fertilizingFrequency,
+      pesticideStartDate: '',
+
+      /// TODO
+      pesticideFrequency: 0,
+
+      /// TODO
     );
 
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
