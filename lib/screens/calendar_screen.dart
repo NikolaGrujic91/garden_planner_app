@@ -178,6 +178,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           );
         }
+
+        if (plant.pesticideDates.containsKey(dateKey)) {
+          events.add(
+            _IconDataStringPair(
+              iconData: kAnt,
+              text: plant.pesticideDates[dateKey]!,
+            ),
+          );
+        }
       }
     }
 

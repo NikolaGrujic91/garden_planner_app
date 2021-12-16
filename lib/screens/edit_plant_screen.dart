@@ -40,6 +40,8 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   late int _wateringFrequency;
   late String _fertilizingStartDate;
   late int _fertilizingFrequency;
+  late String _pesticideStartDate;
+  late int _pesticideFrequency;
   late String _description;
   late PlantType _plantType;
   late String _plantTypeString;
@@ -65,6 +67,8 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     _wateringFrequency = _selectedPlant.wateringFrequency;
     _fertilizingStartDate = _selectedPlant.fertilizingStartDate;
     _fertilizingFrequency = _selectedPlant.fertilizingFrequency;
+    _pesticideStartDate = _selectedPlant.pesticideStartDate;
+    _pesticideFrequency = _selectedPlant.pesticideFrequency;
     _description = _selectedPlant.description;
     _plantType = _selectedPlant.type;
     _plantTypeString = plantTypeToString(_selectedPlant.type);
@@ -223,6 +227,43 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               ],
             ),
             _verticalSpace,
+            Row(
+              children: [
+                const StyledText(
+                  text: 'Pesticide start date:',
+                ),
+                _horizontalSpace,
+                StyledText(
+                  text: _pesticideStartDate,
+                ),
+              ],
+            ),
+            _verticalSpace,
+            Row(
+              children: [
+                DatePicker(
+                  callback: (String newValue) {
+                    _setPesticideStartDate(newValue);
+                  },
+                  initialDate: _pesticideStartDate,
+                  text: 'Edit Pesticide start date',
+                ),
+              ],
+            ),
+            _verticalSpace,
+            StyledText(
+              text: 'Pesticide every ${_pesticideFrequency.toString()} day(s)',
+            ),
+            _verticalSpace,
+            Row(
+              children: [
+                StyledOutlinedButton(
+                  text: 'Edit Pesticide frequency',
+                  onPressed: _showEditPesticideFrequencyDialog,
+                ),
+              ],
+            ),
+            _verticalSpace,
             if (_isMobile)
               Row(
                 children: [
@@ -301,6 +342,18 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
     });
   }
 
+  void _setPesticideStartDate(String pesticideStartDate) {
+    setState(() {
+      _pesticideStartDate = pesticideStartDate;
+    });
+  }
+
+  void _setPesticideFrequency(int pesticideFrequency) {
+    setState(() {
+      _pesticideFrequency = pesticideFrequency;
+    });
+  }
+
   Future<void> _save() async {
     final parameter = PlantParameterObject(
       type: _plantType,
@@ -311,12 +364,8 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
       wateringFrequency: _wateringFrequency,
       fertilizingStartDate: _fertilizingStartDate,
       fertilizingFrequency: _fertilizingFrequency,
-      pesticideStartDate: '',
-
-      /// TODO
-      pesticideFrequency: 0,
-
-      /// TODO
+      pesticideStartDate: _pesticideStartDate,
+      pesticideFrequency: _pesticideFrequency,
     );
 
     final gardensStore = Provider.of<GardensStoreHive>(context, listen: false)
@@ -359,6 +408,15 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
       'Edit Fertilizing Frequency',
       _setFertilizingFrequency,
       _fertilizingFrequency,
+    );
+  }
+
+  Future<void> _showEditPesticideFrequencyDialog() async {
+    return showEditFrequencyDialog(
+      context,
+      'Edit Pesticide Frequency',
+      _setPesticideFrequency,
+      _pesticideFrequency,
     );
   }
 }
