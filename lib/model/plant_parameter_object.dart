@@ -43,9 +43,9 @@ class PlantParameterObject {
   /// Fertilizing frequency in days
   int fertilizingFrequency;
 
-  /// Fertilizing start date
+  /// Pesticide start date
   String pesticideStartDate;
 
-  /// Fertilizing frequency in days
+  /// Pesticide frequency in days
   int pesticideFrequency;
 }
