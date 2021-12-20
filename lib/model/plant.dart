@@ -175,6 +175,10 @@ class Plant extends HiveObject {
     Map<DateTime, String> dates,
     String text,
   ) {
+    if (startDate.isEmpty) {
+      return;
+    }
+
     dates.clear();
 
     final startDateTime = _stringToDateTime(startDate);
@@ -196,6 +200,10 @@ class Plant extends HiveObject {
   }
 
   DateTime _stringToDateTime(String value) {
+    if (value.isEmpty) {
+      return DateTime.now();
+    }
+
     final dateParts = value.split('.');
     final day = int.parse(dateParts[0]);
     final month = int.parse(dateParts[1]);
