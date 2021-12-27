@@ -6,7 +6,7 @@
 #npm install -g jscpd
 
 # in case of permission problems run this first
-# chmod +x ./duplicateCodeCheck.sh
+# chmod +x ./script_duplicate_code_check.sh
 
 #usage
 npx jscpd --reporters "consoleFull" --format "dart" lib
