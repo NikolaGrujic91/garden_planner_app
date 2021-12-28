@@ -90,44 +90,46 @@ class _GardenEditorState extends State<GardenEditor> {
         title: widget.title,
         saveCallback: _save,
       ),
-      body: Container(
-        color: kBackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFieldBordered(
-                text: _name,
-                hintText: 'Garden name',
-                callback: _setName,
-              ),
-              _verticalSpace,
-              Row(
-                children: [
-                  TextFieldBorderedNumeric(
-                    text: _rows.toString(),
-                    hintText: kRows,
-                    callback: _setRows,
-                  ),
-                  _horizontalSpace,
-                  const StyledText(
-                    text: 'X',
-                  ),
-                  _horizontalSpace,
-                  TextFieldBorderedNumeric(
-                    text: _columns.toString(),
-                    hintText: kColumns,
-                    callback: _setColumns,
-                  ),
-                ],
-              ),
-              _verticalSpace,
-              PreviewGridView(
-                columns: _columns,
-                rows: _rows,
-              ),
-            ],
+      body: SafeArea(
+        child: Container(
+          color: kBackgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFieldBordered(
+                  text: _name,
+                  hintText: 'Garden name',
+                  callback: _setName,
+                ),
+                _verticalSpace,
+                Row(
+                  children: [
+                    TextFieldBorderedNumeric(
+                      text: _rows.toString(),
+                      hintText: kRows,
+                      callback: _setRows,
+                    ),
+                    _horizontalSpace,
+                    const StyledText(
+                      text: 'X',
+                    ),
+                    _horizontalSpace,
+                    TextFieldBorderedNumeric(
+                      text: _columns.toString(),
+                      hintText: kColumns,
+                      callback: _setColumns,
+                    ),
+                  ],
+                ),
+                _verticalSpace,
+                PreviewGridView(
+                  columns: _columns,
+                  rows: _rows,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -34,11 +34,13 @@ class GardensScreen extends StatelessWidget {
           child: Icon(kAddIcon),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          GardensList(),
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const [
+            GardensList(),
+          ],
+        ),
       ),
     );
   }

@@ -68,72 +68,74 @@ class _CalendarScreenState extends State<CalendarScreen> {
         backScreenID: TilesScreen.id,
         title: 'Calendar of ${_selectedGarden.name}',
       ),
-      body: Container(
-        color: kBackgroundColor,
-        child: Column(
-          children: [
-            TableCalendar<dynamic>(
-              focusedDay: _focusedDay,
-              firstDay: DateTime(2021),
-              lastDay: DateTime(2100),
-              calendarFormat: _calendarFormat,
-              calendarStyle: _calendarStyle,
-              eventLoader: _getEventsForDay,
-              selectedDayPredicate: (day) {
-                return isSameDay(_selectedDay, day);
-              },
-              onDaySelected: (selectedDay, focusedDay) {
-                if (!isSameDay(_selectedDay, selectedDay)) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
+      body: SafeArea(
+        child: Container(
+          color: kBackgroundColor,
+          child: Column(
+            children: [
+              TableCalendar<dynamic>(
+                focusedDay: _focusedDay,
+                firstDay: DateTime(2021),
+                lastDay: DateTime(2100),
+                calendarFormat: _calendarFormat,
+                calendarStyle: _calendarStyle,
+                eventLoader: _getEventsForDay,
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
 
-                  _selectedEvents.value = _getEventsForDay(selectedDay);
-                }
-              },
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-            ),
-            const SizedBox(height: 8),
-            const Divider(),
-            Expanded(
-              child: ValueListenableBuilder<List<_IconDataStringPair>>(
-                valueListenable: _selectedEvents,
-                builder: (context, value, _) {
-                  return ListView.builder(
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 4,
-                        ),
-                        child: ListTile(
-                          leading: Icon(value[index].iconData),
-                          title: Text(
-                            value[index].text,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                    _selectedEvents.value = _getEventsForDay(selectedDay);
+                  }
+                },
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  _focusedDay = focusedDay;
                 },
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              const Divider(),
+              Expanded(
+                child: ValueListenableBuilder<List<_IconDataStringPair>>(
+                  valueListenable: _selectedEvents,
+                  builder: (context, value, _) {
+                    return ListView.builder(
+                      itemCount: value.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          child: ListTile(
+                            leading: Icon(value[index].iconData),
+                            title: Text(
+                              value[index].text,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

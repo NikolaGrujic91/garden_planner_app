@@ -82,212 +82,215 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
         title: 'Edit plant info',
         saveCallback: _save,
       ),
-      body: Container(
-        color: kBackgroundColor,
-        child: ListView(
-          padding: const EdgeInsets.all(8),
-          children: [
-            Row(
-              children: [
-                if (Platform.isMacOS || Platform.isWindows)
-                  PlantTypeDropdown(
-                    dropdownValues: _dropdownValues,
-                    value: _plantTypeString,
-                    callback: _setPlantType,
-                  )
-                else
-                  PlantTypePicker(
-                    dropdownValues: _dropdownValues,
-                    value: _plantTypeString,
-                    callback: _setPlantType,
-                  ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                Expanded(
-                  child: TextFieldBordered(
-                    text: _plantName,
-                    hintText: 'Plant name',
-                    callback: _setPlantName,
-                  ),
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                Expanded(
-                  child: TextFieldBordered(
-                    text: _description,
-                    hintText: 'Description',
-                    callback: _setDescription,
-                  ),
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                const StyledText(
-                  text: 'Planted:',
-                ),
-                _horizontalSpace,
-                StyledText(
-                  text: _plantedDate,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                DatePicker(
-                  callback: (String newValue) {
-                    _setPlantedDate(newValue);
-                  },
-                  initialDate: _plantedDate,
-                  text: 'Edit Planted Date',
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                const StyledText(
-                  text: 'Watering start date:',
-                ),
-                _horizontalSpace,
-                StyledText(
-                  text: _wateringStartDate,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                DatePicker(
-                  callback: (String newValue) {
-                    _setWateringStartDate(newValue);
-                  },
-                  initialDate: _wateringStartDate,
-                  text: 'Edit Watering start date',
-                ),
-              ],
-            ),
-            _verticalSpace,
-            StyledText(
-              text: 'Water every ${_wateringFrequency.toString()} day(s)',
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                StyledOutlinedButton(
-                  text: 'Edit Watering frequency',
-                  onPressed: _showEditWateringFrequencyDialog,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                const StyledText(
-                  text: 'Fertilizing start date:',
-                ),
-                _horizontalSpace,
-                StyledText(
-                  text: _fertilizingStartDate,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                DatePicker(
-                  callback: (String newValue) {
-                    _setFertilizingStartDate(newValue);
-                  },
-                  initialDate: _fertilizingStartDate,
-                  text: 'Edit Fertilizing start date',
-                ),
-              ],
-            ),
-            _verticalSpace,
-            StyledText(
-              text:
-                  'Fertilize every ${_fertilizingFrequency.toString()} day(s)',
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                StyledOutlinedButton(
-                  text: 'Edit Fertilizing frequency',
-                  onPressed: _showEditFertilizingFrequencyDialog,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                const StyledText(
-                  text: 'Pesticide start date:',
-                ),
-                _horizontalSpace,
-                StyledText(
-                  text: _pesticideStartDate,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                DatePicker(
-                  callback: (String newValue) {
-                    _setPesticideStartDate(newValue);
-                  },
-                  initialDate: _pesticideStartDate,
-                  text: 'Edit Pesticide start date',
-                ),
-              ],
-            ),
-            _verticalSpace,
-            StyledText(
-              text: 'Pesticide every ${_pesticideFrequency.toString()} day(s)',
-            ),
-            _verticalSpace,
-            Row(
-              children: [
-                StyledOutlinedButton(
-                  text: 'Edit Pesticide frequency',
-                  onPressed: _showEditPesticideFrequencyDialog,
-                ),
-              ],
-            ),
-            _verticalSpace,
-            if (_isMobile)
+      body: SafeArea(
+        child: Container(
+          color: kBackgroundColor,
+          child: ListView(
+            padding: const EdgeInsets.all(8),
+            children: [
               Row(
                 children: [
-                  StyledOutlinedButton(
-                    text: 'Edit Images',
-                    onPressed: () async {
-                      await Navigator.pushReplacementNamed(
-                        context,
-                        EditPlantImagesScreen.id,
-                      );
-                    },
+                  if (Platform.isMacOS || Platform.isWindows)
+                    PlantTypeDropdown(
+                      dropdownValues: _dropdownValues,
+                      value: _plantTypeString,
+                      callback: _setPlantType,
+                    )
+                  else
+                    PlantTypePicker(
+                      dropdownValues: _dropdownValues,
+                      value: _plantTypeString,
+                      callback: _setPlantType,
+                    ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFieldBordered(
+                      text: _plantName,
+                      hintText: 'Plant name',
+                      callback: _setPlantName,
+                    ),
                   ),
                 ],
               ),
-            if (_isMobile) _verticalSpace,
-            Row(
-              children: [
-                StyledOutlinedButton(
-                  text: 'Delete Plant',
-                  onPressed: _showDeleteDialog,
+              _verticalSpace,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFieldBordered(
+                      text: _description,
+                      hintText: 'Description',
+                      callback: _setDescription,
+                    ),
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  const StyledText(
+                    text: 'Planted:',
+                  ),
+                  _horizontalSpace,
+                  StyledText(
+                    text: _plantedDate,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  DatePicker(
+                    callback: (String newValue) {
+                      _setPlantedDate(newValue);
+                    },
+                    initialDate: _plantedDate,
+                    text: 'Edit Planted Date',
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  const StyledText(
+                    text: 'Watering start date:',
+                  ),
+                  _horizontalSpace,
+                  StyledText(
+                    text: _wateringStartDate,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  DatePicker(
+                    callback: (String newValue) {
+                      _setWateringStartDate(newValue);
+                    },
+                    initialDate: _wateringStartDate,
+                    text: 'Edit Watering start date',
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              StyledText(
+                text: 'Water every ${_wateringFrequency.toString()} day(s)',
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Edit Watering frequency',
+                    onPressed: _showEditWateringFrequencyDialog,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  const StyledText(
+                    text: 'Fertilizing start date:',
+                  ),
+                  _horizontalSpace,
+                  StyledText(
+                    text: _fertilizingStartDate,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  DatePicker(
+                    callback: (String newValue) {
+                      _setFertilizingStartDate(newValue);
+                    },
+                    initialDate: _fertilizingStartDate,
+                    text: 'Edit Fertilizing start date',
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              StyledText(
+                text:
+                    'Fertilize every ${_fertilizingFrequency.toString()} day(s)',
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Edit Fertilizing frequency',
+                    onPressed: _showEditFertilizingFrequencyDialog,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  const StyledText(
+                    text: 'Pesticide start date:',
+                  ),
+                  _horizontalSpace,
+                  StyledText(
+                    text: _pesticideStartDate,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  DatePicker(
+                    callback: (String newValue) {
+                      _setPesticideStartDate(newValue);
+                    },
+                    initialDate: _pesticideStartDate,
+                    text: 'Edit Pesticide start date',
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              StyledText(
+                text:
+                    'Pesticide every ${_pesticideFrequency.toString()} day(s)',
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Edit Pesticide frequency',
+                    onPressed: _showEditPesticideFrequencyDialog,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              if (_isMobile)
+                Row(
+                  children: [
+                    StyledOutlinedButton(
+                      text: 'Edit Images',
+                      onPressed: () async {
+                        await Navigator.pushReplacementNamed(
+                          context,
+                          EditPlantImagesScreen.id,
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              if (_isMobile) _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Delete Plant',
+                    onPressed: _showDeleteDialog,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
