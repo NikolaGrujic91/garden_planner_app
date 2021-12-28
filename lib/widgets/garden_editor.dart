@@ -23,6 +23,24 @@ class GardenEditor extends StatefulWidget {
     required this.isEditMode,
   }) : super(key: key);
 
+  /// Creates a new instance for adding new garden
+  factory GardenEditor.add(String name, int columns, int rows) => GardenEditor(
+        name: name,
+        columns: columns,
+        rows: rows,
+        title: 'Add $name',
+        isEditMode: false,
+      );
+
+  /// Creates a new instance for editing existing garden
+  factory GardenEditor.edit(String name, int columns, int rows) => GardenEditor(
+        name: name,
+        columns: columns,
+        rows: rows,
+        title: 'Edit $name',
+        isEditMode: true,
+      );
+
   /// Name of the garden
   final String name;
 
