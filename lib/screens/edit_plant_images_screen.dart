@@ -23,6 +23,10 @@ class EditPlantImagesScreen extends StatefulWidget {
 }
 
 class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
+  final _verticalSpace = const SizedBox(
+    height: 20,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +50,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
                       : const StyledText(text: 'No images');
                 },
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              _verticalSpace,
               Row(
                 children: [
                   StyledOutlinedButton(
@@ -57,9 +59,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              _verticalSpace,
               Row(
                 children: [
                   StyledOutlinedButton(
@@ -68,9 +68,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              _verticalSpace,
               Row(
                 children: [
                   StyledOutlinedButton(
