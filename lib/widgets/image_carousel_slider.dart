@@ -54,7 +54,7 @@ class ImageCarouselSlider extends StatelessWidget {
             ),
             DecoratedBox(
               decoration: const BoxDecoration(
-                color: Colors.lightBlue,
+                color: Colors.transparent,
               ),
               child: StyledText(
                 text: '${imageIndex + 1}/${images.length}',
