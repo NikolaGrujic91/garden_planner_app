@@ -8,21 +8,6 @@ import 'package:garden_planner_app/widgets/base_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-/// Private helper class for storing icon data and string
-class _IconDataStringPair {
-  /// Creates a new instance
-  _IconDataStringPair({
-    required this.iconData,
-    required this.text,
-  });
-
-  /// Icon data
-  IconData iconData;
-
-  /// String text
-  String text;
-}
-
 /// Calendar Screen Widget
 class CalendarScreen extends StatefulWidget {
   /// Creates a new instance
@@ -163,27 +148,24 @@ class _CalendarScreenState extends State<CalendarScreen> {
       for (final plant in tile.plants) {
         if (plant.wateringDates.containsKey(dateKey)) {
           events.add(
-            _IconDataStringPair(
-              iconData: kWater,
-              text: plant.wateringDates[dateKey]!,
+            _IconDataStringPair.water(
+              plant.wateringDates[dateKey]!,
             ),
           );
         }
 
         if (plant.fertilizingDates.containsKey(dateKey)) {
           events.add(
-            _IconDataStringPair(
-              iconData: kFertilize,
-              text: plant.fertilizingDates[dateKey]!,
+            _IconDataStringPair.fertilize(
+              plant.fertilizingDates[dateKey]!,
             ),
           );
         }
 
         if (plant.pesticideDates.containsKey(dateKey)) {
           events.add(
-            _IconDataStringPair(
-              iconData: kAnt,
-              text: plant.pesticideDates[dateKey]!,
+            _IconDataStringPair.pesticide(
+              plant.pesticideDates[dateKey]!,
             ),
           );
         }
@@ -192,4 +174,34 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     return events;
   }
+}
+
+/// Private helper class for storing icon data and string
+class _IconDataStringPair {
+  /// Creates a new instance
+  _IconDataStringPair({
+    required this.iconData,
+    required this.text,
+  });
+
+  factory _IconDataStringPair.water(String text) => _IconDataStringPair(
+        iconData: kWater,
+        text: text,
+      );
+
+  factory _IconDataStringPair.fertilize(String text) => _IconDataStringPair(
+        iconData: kFertilize,
+        text: text,
+      );
+
+  factory _IconDataStringPair.pesticide(String text) => _IconDataStringPair(
+        iconData: kAnt,
+        text: text,
+      );
+
+  /// Icon data
+  IconData iconData;
+
+  /// String text
+  String text;
 }
