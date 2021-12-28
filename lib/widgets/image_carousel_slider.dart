@@ -47,7 +47,7 @@ class ImageCarouselSlider extends StatelessWidget {
               File(images[imageIndex]),
 
               /// Set width that is way larger that screen width
-              width: 2000,
+              width: MediaQuery.of(context).size.width,
 
               /// Set fitWidth so that image covers full width
               fit: BoxFit.fitWidth,

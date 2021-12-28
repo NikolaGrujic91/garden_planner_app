@@ -27,20 +27,21 @@ class PlantsList extends StatelessWidget {
         color: kBackgroundColor,
         child: ListView.separated(
           controller: _scrollController,
-          padding: const EdgeInsets.all(10),
           separatorBuilder: (context, index) => const Divider(),
+          padding: const EdgeInsets.only(
+            bottom: 10,
+          ),
           itemCount: plants.length,
           itemBuilder: (context, index) {
-            return Card(
-              color: Colors.grey,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    leading: plantTypeToSvgPicture(plants[index].type),
-                    title: Text(plants[index].name),
-                    trailing: IconButton(
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    plantTypeToSvgPicture(plants[index].type),
+                    Text(plants[index].name),
+                    const Spacer(),
+                    IconButton(
                       onPressed: () {
                         gardensStore.selectedPlantIndex = index;
                         Navigator.pushReplacementNamed(
@@ -51,31 +52,56 @@ class PlantsList extends StatelessWidget {
                       icon: Icon(kEditIcon),
                       tooltip: 'Edit plant',
                     ),
-                  ),
-                  if (plants[index].images != null &&
-                      plants[index].images!.isNotEmpty)
-                    ImageCarouselSlider(
-                      images: plants[index].images!,
-                      height: 300,
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: StyledText(
-                      text: plants[index].description,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: StyledText(
-                      text: plants[index].plantedDate,
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+                SubtitleRow(text: plants[index].description),
+                SubtitleRow(text: plants[index].plantedDate),
+                Row(
+                  children: [
+                    if (plants[index].images != null &&
+                        plants[index].images!.isNotEmpty)
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: ImageCarouselSlider(
+                          images: plants[index].images!,
+                          height: 300,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
             );
           },
         ),
       ),
+    );
+  }
+}
+
+/// This widget represents subtitle row
+class SubtitleRow extends StatelessWidget {
+  /// Creates a new instance
+  const SubtitleRow({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  /// Text to be displayed
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            left: 10,
+            bottom: 10,
+          ),
+          child: StyledText(text: text),
+        ),
+      ],
     );
   }
 }
