@@ -215,8 +215,8 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               ),
               _verticalSpace,
               StyledText(
-                text:
-                    'Fertilize every ${_fertilizingFrequency.toString()} day(s)',
+                text: 'Fertilize every ${_fertilizingFrequency.toString()} '
+                    'day(s)',
               ),
               _verticalSpace,
               Row(
