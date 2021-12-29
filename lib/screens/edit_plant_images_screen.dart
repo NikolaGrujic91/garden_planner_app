@@ -34,52 +34,50 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
         backScreenID: EditPlantScreen.id,
         title: 'Edit plant images',
       ),
-      body: SafeArea(
-        child: Container(
-          color: kBackgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                Consumer<GardensStoreHive>(
-                  builder: (context, gardensStore, child) {
-                    final selectedPlant = gardensStore.getSelectedPlant();
-                    final images = selectedPlant.images;
+      body: Container(
+        color: kBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Consumer<GardensStoreHive>(
+                builder: (context, gardensStore, child) {
+                  final selectedPlant = gardensStore.getSelectedPlant();
+                  final images = selectedPlant.images;
 
-                    return images != null && images.isNotEmpty
-                        ? ImageCarouselSlider(images: images, height: 300)
-                        : const StyledText(text: 'No images');
-                  },
-                ),
-                _verticalSpace,
-                Row(
-                  children: [
-                    StyledOutlinedButton(
-                      text: 'Remove Current Photo',
-                      onPressed: _showDeleteDialog,
-                    ),
-                  ],
-                ),
-                _verticalSpace,
-                Row(
-                  children: [
-                    StyledOutlinedButton(
-                      text: 'Choose From Gallery',
-                      onPressed: _onPickImagesPressed,
-                    ),
-                  ],
-                ),
-                _verticalSpace,
-                Row(
-                  children: [
-                    StyledOutlinedButton(
-                      text: 'Take Photo',
-                      onPressed: _onCapturePhotoPressed,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  return images != null && images.isNotEmpty
+                      ? ImageCarouselSlider(images: images, height: 300)
+                      : const StyledText(text: 'No images');
+                },
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Remove Current Photo',
+                    onPressed: _showDeleteDialog,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Choose From Gallery',
+                    onPressed: _onPickImagesPressed,
+                  ),
+                ],
+              ),
+              _verticalSpace,
+              Row(
+                children: [
+                  StyledOutlinedButton(
+                    text: 'Take Photo',
+                    onPressed: _onCapturePhotoPressed,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

@@ -24,9 +24,7 @@ class TilesScreen extends StatelessWidget {
             title: gardensStore.getSelectedGarden().name,
             showCalendarButton: true,
           ),
-          body: const SafeArea(
-            child: TilesGrid(),
-          ),
+          body: const TilesGrid(),
           bottomNavigationBar: const TilesBottomBar(),
         );
       },

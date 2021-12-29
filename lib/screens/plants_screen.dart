@@ -18,9 +18,7 @@ class PlantsScreen extends StatelessWidget {
         backScreenID: TilesScreen.id,
         title: 'Plants',
       ),
-      body: SafeArea(
-        child: PlantsList(),
-      ),
+      body: PlantsList(),
     );
   }
 }
