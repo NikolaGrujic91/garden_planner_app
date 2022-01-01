@@ -92,3 +92,17 @@ SvgPicture plantTypeToSvgPicture(PlantType type) {
       return kFlowerIcon30;
   }
 }
+
+/// Convert PlantType enum to SvgPicture
+SvgPicture plantTypeToSvgPicture60(PlantType type) {
+  switch (type) {
+    case PlantType.tree:
+      return kTreeIcon60;
+    case PlantType.fruit:
+      return kFruitIcon60;
+    case PlantType.vegetable:
+      return kVegetableIcon60;
+    case PlantType.flower:
+      return kFlowerIcon60;
+  }
+}

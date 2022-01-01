@@ -147,7 +147,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     _setPlantedDate(newValue);
                   },
                   initialDate: _plantedDate,
-                  text: 'Edit Planted Date',
+                  text: 'Edit planted date',
                 ),
               ],
             ),
@@ -171,7 +171,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     _setWateringStartDate(newValue);
                   },
                   initialDate: _wateringStartDate,
-                  text: 'Edit Watering start date',
+                  text: 'Edit watering start date',
                 ),
               ],
             ),
@@ -183,7 +183,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 StyledOutlinedButton(
-                  text: 'Edit Watering frequency',
+                  text: 'Edit watering frequency',
                   onPressed: _showEditWateringFrequencyDialog,
                 ),
               ],
@@ -192,7 +192,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 const StyledText(
-                  text: 'Fertilizing start date:',
+                  text: 'Fertilization start date:',
                 ),
                 _horizontalSpace,
                 StyledText(
@@ -208,20 +208,20 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     _setFertilizingStartDate(newValue);
                   },
                   initialDate: _fertilizingStartDate,
-                  text: 'Edit Fertilizing start date',
+                  text: 'Edit fertilization start date',
                 ),
               ],
             ),
             _verticalSpace,
             StyledText(
-              text: 'Fertilize every ${_fertilizingFrequency.toString()} '
+              text: 'Fertilization every ${_fertilizingFrequency.toString()} '
                   'day(s)',
             ),
             _verticalSpace,
             Row(
               children: [
                 StyledOutlinedButton(
-                  text: 'Edit Fertilizing frequency',
+                  text: 'Edit fertilization frequency',
                   onPressed: _showEditFertilizingFrequencyDialog,
                 ),
               ],
@@ -230,7 +230,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 const StyledText(
-                  text: 'Pesticide start date:',
+                  text: 'Plant protection start date:',
                 ),
                 _horizontalSpace,
                 StyledText(
@@ -246,19 +246,20 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
                     _setPesticideStartDate(newValue);
                   },
                   initialDate: _pesticideStartDate,
-                  text: 'Edit Pesticide start date',
+                  text: 'Edit plant protection start date',
                 ),
               ],
             ),
             _verticalSpace,
             StyledText(
-              text: 'Pesticide every ${_pesticideFrequency.toString()} day(s)',
+              text: 'Apply plant protection every '
+                  '${_pesticideFrequency.toString()} day(s)',
             ),
             _verticalSpace,
             Row(
               children: [
                 StyledOutlinedButton(
-                  text: 'Edit Pesticide frequency',
+                  text: 'Edit plant protection frequency',
                   onPressed: _showEditPesticideFrequencyDialog,
                 ),
               ],
@@ -268,7 +269,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
               Row(
                 children: [
                   StyledOutlinedButton(
-                    text: 'Edit Images',
+                    text: 'Edit images',
                     onPressed: () async {
                       await Navigator.pushReplacementNamed(
                         context,
@@ -282,7 +283,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
             Row(
               children: [
                 StyledOutlinedButton(
-                  text: 'Delete Plant',
+                  text: 'Delete plant',
                   onPressed: _showDeleteDialog,
                 ),
               ],
@@ -396,7 +397,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   Future<void> _showEditWateringFrequencyDialog() async {
     return showEditFrequencyDialog(
       context,
-      'Edit Watering Frequency',
+      'Edit watering frequency',
       _setWateringFrequency,
       _wateringFrequency,
     );
@@ -405,7 +406,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   Future<void> _showEditFertilizingFrequencyDialog() async {
     return showEditFrequencyDialog(
       context,
-      'Edit Fertilizing Frequency',
+      'Edit fertilization frequency',
       _setFertilizingFrequency,
       _fertilizingFrequency,
     );
@@ -414,7 +415,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
   Future<void> _showEditPesticideFrequencyDialog() async {
     return showEditFrequencyDialog(
       context,
-      'Edit Pesticide Frequency',
+      'Edit plant protection frequency',
       _setPesticideFrequency,
       _pesticideFrequency,
     );

@@ -34,28 +34,23 @@ class PlantsList extends StatelessWidget {
           itemCount: plants.length,
           itemBuilder: (context, index) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    plantTypeToSvgPicture(plants[index].type),
-                    Text(plants[index].name),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        gardensStore.selectedPlantIndex = index;
-                        Navigator.pushReplacementNamed(
-                          context,
-                          EditPlantScreen.id,
-                        );
-                      },
-                      icon: Icon(kEditIcon),
-                      tooltip: 'Edit plant',
-                    ),
-                  ],
+                ListTile(
+                  leading: plantTypeToSvgPicture60(plants[index].type),
+                  title: Text(plants[index].name),
+                  trailing: IconButton(
+                    onPressed: () {
+                      gardensStore.selectedPlantIndex = index;
+                      Navigator.pushReplacementNamed(
+                        context,
+                        EditPlantScreen.id,
+                      );
+                    },
+                    icon: Icon(kEditIcon),
+                    tooltip: 'Edit plant',
+                  ),
+                  subtitle: StyledText(text: plants[index].description),
                 ),
-                SubtitleRow(text: plants[index].description),
-                SubtitleRow(text: plants[index].plantedDate),
                 Row(
                   children: [
                     if (plants[index].images != null &&
@@ -74,34 +69,6 @@ class PlantsList extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-/// This widget represents subtitle row
-class SubtitleRow extends StatelessWidget {
-  /// Creates a new instance
-  const SubtitleRow({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  /// Text to be displayed
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 10,
-            bottom: 10,
-          ),
-          child: StyledText(text: text),
-        ),
-      ],
     );
   }
 }

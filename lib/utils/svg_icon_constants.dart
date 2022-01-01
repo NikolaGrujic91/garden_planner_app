@@ -56,6 +56,34 @@ SvgPicture kFlowerIcon40 = SvgPicture.asset(
   height: 40,
 );
 
+/// Tree SVG Icon 60x60
+SvgPicture kTreeIcon60 = SvgPicture.asset(
+  'images/tree.svg',
+  width: 60,
+  height: 60,
+);
+
+/// Fruit SVG Icon 60x60
+SvgPicture kFruitIcon60 = SvgPicture.asset(
+  'images/strawberry.svg',
+  width: 60,
+  height: 60,
+);
+
+/// Vegetable SVG Icon 60x60
+SvgPicture kVegetableIcon60 = SvgPicture.asset(
+  'images/beetroot.svg',
+  width: 60,
+  height: 60,
+);
+
+/// Flower SVG Icon 60x60
+SvgPicture kFlowerIcon60 = SvgPicture.asset(
+  'images/flower.svg',
+  width: 60,
+  height: 60,
+);
+
 /// Application Logo SVG Icon 40x40
 SvgPicture kLogo40 = SvgPicture.asset(
   'images/logo.svg',
