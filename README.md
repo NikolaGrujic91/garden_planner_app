@@ -37,28 +37,28 @@ Implemented using Provider pattern.
 ## Usage
 ### Create garden
 
-![Create garden](./mov/01.create_garden.mov)
+![Create garden](./gifs/01.create_garden.mov.gif)
 
 ### Edit garden
 
-![Edit garden]()
+![Edit garden](./gifs/02.edit_garden.mov.gif)
 
 ### Drag and drop of plants on garden tiles
 
-![Drag and drop of plants on garden tiles]()
+![Drag and drop of plants on garden tiles](./gifs/03.drag_and_drop.mov.gif)
 
 ### Edit garden tile type - long press
 
-![Edit garden tile type]()
+![Edit garden tile type](./gifs/04.edit_garden_tile_type.mov.gif)
 
 ## Overview of plants on tile - short press
-![Overview of plants on tile]()
+![Overview of plants on tile](./gifs/05.overview_plants.mov.gif)
 
 ## Edit plant
-![Edit plant]()
+![Edit plant](./gifs/06.edit_plant.mov.gif)
 
 ## Overview of plant related activities in the calendar
-![Edit plant]()
+![Calnedar](./gifs/07.calendar.mov.gif)
 
 ## Technologies
 * Flutter 2.8.1
