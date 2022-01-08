@@ -1,3 +1,7 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'package:garden_planner_app/model/enums.dart';
 import 'package:garden_planner_app/model/tile.dart';
 import 'package:garden_planner_app/utils/hive_field_id.dart';
