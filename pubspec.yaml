@@ -9,7 +9,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
-  flutter: ">=2.10.2"
+  flutter: ">=2.10.3"
 
 dependencies:
   badges: ^2.0.2
