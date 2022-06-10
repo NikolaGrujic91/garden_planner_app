@@ -28,7 +28,7 @@ class _GardensListState extends State<GardensList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Scrollbar(
-        isAlwaysShown: true,
+        thumbVisibility: true,
         controller: _scrollController,
         child: Container(
           color: kBackgroundColor,

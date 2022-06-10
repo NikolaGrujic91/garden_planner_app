@@ -25,7 +25,7 @@ class PlantsList extends StatelessWidget {
     final plants = gardensStore.getSelectedTile().plants;
 
     return Scrollbar(
-      isAlwaysShown: true,
+      thumbVisibility: true,
       controller: _scrollController,
       child: Container(
         color: kBackgroundColor,
