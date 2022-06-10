@@ -8,7 +8,7 @@ import 'package:garden_planner_app/widgets/garden_editor.dart';
 /// Add Garden Screen Widget
 class AddGardenScreen extends StatelessWidget {
   /// Creates a new instance
-  const AddGardenScreen({Key? key}) : super(key: key);
+  const AddGardenScreen({super.key});
 
   /// Screen ID
   static const String id = 'add_garden_screen';

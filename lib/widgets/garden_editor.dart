@@ -19,13 +19,13 @@ import 'package:provider/provider.dart';
 class GardenEditor extends StatefulWidget {
   /// Creates a new instance
   const GardenEditor({
-    Key? key,
+    super.key,
     required this.name,
     required this.columns,
     required this.rows,
     required this.title,
     required this.isEditMode,
-  }) : super(key: key);
+  });
 
   /// Creates a new instance for adding new garden
   factory GardenEditor.add(String name, int columns, int rows) => GardenEditor(

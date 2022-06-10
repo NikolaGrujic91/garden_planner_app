@@ -10,10 +10,10 @@ import 'package:garden_planner_app/utils/style_constants.dart';
 class StyledOutlinedButton extends StatelessWidget {
   /// Creates a styled OutlinedButton widget
   const StyledOutlinedButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   /// The text to display.
   final String text;

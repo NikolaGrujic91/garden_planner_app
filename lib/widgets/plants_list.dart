@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 /// This widget represents tiles grid of a garden
 class PlantsList extends StatelessWidget {
   /// Creates a new instance
-  PlantsList({Key? key}) : super(key: key);
+  PlantsList({super.key});
 
   final _scrollController = ScrollController();
 

@@ -10,7 +10,7 @@ import 'package:garden_planner_app/widgets/plants_list.dart';
 /// Plants Screen Widget
 class PlantsScreen extends StatelessWidget {
   /// Creates a new instance
-  const PlantsScreen({Key? key}) : super(key: key);
+  const PlantsScreen({super.key});
 
   /// Screen ID
   static const String id = 'plants_screen';

@@ -9,11 +9,11 @@ import 'package:garden_planner_app/utils/style_constants.dart';
 class TextFieldBordered extends StatefulWidget {
   /// Creates a new instance
   TextFieldBordered({
-    Key? key,
+    super.key,
     required String text,
     required this.hintText,
     this.callback,
-  }) : super(key: key) {
+  }) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
       TextPosition(offset: _textEditingController.text.length),

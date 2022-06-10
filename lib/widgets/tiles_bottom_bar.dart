@@ -10,7 +10,7 @@ import 'package:garden_planner_app/utils/svg_icon_constants.dart';
 /// This widget represents bottom bar with draggable items
 class TilesBottomBar extends StatefulWidget {
   /// Creates a new instance
-  const TilesBottomBar({Key? key}) : super(key: key);
+  const TilesBottomBar({super.key});
 
   @override
   State<TilesBottomBar> createState() => _TilesBottomBarState();

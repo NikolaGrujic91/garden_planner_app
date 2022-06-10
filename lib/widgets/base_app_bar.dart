@@ -14,12 +14,12 @@ import 'package:garden_planner_app/widgets/styled_text.dart';
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Creates a new instance
   const BaseAppBar({
-    Key? key,
+    super.key,
     this.backScreenID,
     this.showCalendarButton,
     required this.title,
     this.saveCallback,
-  }) : super(key: key);
+  });
 
   /// Back button screen ID
   final String? backScreenID;

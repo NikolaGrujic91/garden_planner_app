@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 /// Edit Plant Images Screen
 class EditPlantImagesScreen extends StatefulWidget {
   /// Creates a new instance
-  const EditPlantImagesScreen({Key? key}) : super(key: key);
+  const EditPlantImagesScreen({super.key});
 
   /// Screen ID
   static const String id = 'edit_plant_images_screen';

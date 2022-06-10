@@ -22,7 +22,7 @@ Future<void> main() async {
 /// This widget is the root of the application.
 class GardenPlannerApp extends StatelessWidget {
   /// Creates a new instance
-  const GardenPlannerApp({Key? key}) : super(key: key);
+  const GardenPlannerApp({super.key});
 
   @override
   Widget build(BuildContext context) {

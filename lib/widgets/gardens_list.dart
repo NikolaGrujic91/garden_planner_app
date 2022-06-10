@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 /// This widget represents list of gardens
 class GardensList extends StatefulWidget {
   /// Creates a new instance
-  const GardensList({Key? key}) : super(key: key);
+  const GardensList({super.key});
 
   @override
   State<GardensList> createState() => _GardensListState();

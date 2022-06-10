@@ -26,7 +26,7 @@ import 'package:provider/provider.dart';
 /// Edit Plant Screen Widget
 class EditPlantScreen extends StatefulWidget {
   /// Creates a new instance
-  const EditPlantScreen({Key? key}) : super(key: key);
+  const EditPlantScreen({super.key});
 
   /// Screen ID
   static const String id = 'edit_plant_screen';

@@ -10,9 +10,9 @@ import 'package:garden_planner_app/utils/string_constants.dart';
 class SaveButton extends StatelessWidget {
   /// Creates a new instance
   const SaveButton({
-    Key? key,
+    super.key,
     required this.callback,
-  }) : super(key: key);
+  });
 
   /// Callback function
   final VoidCallback callback;

@@ -13,10 +13,10 @@ import 'package:provider/provider.dart';
 class ImageCarouselSlider extends StatelessWidget {
   /// Creates a new instance
   const ImageCarouselSlider({
-    Key? key,
+    super.key,
     required this.images,
     required this.height,
-  }) : super(key: key);
+  });
 
   /// Paths to images to be shown in the carousel
   final List<String> images;

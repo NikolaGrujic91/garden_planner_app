@@ -12,7 +12,7 @@ import 'package:garden_planner_app/widgets/gardens_list.dart';
 /// Main Screen Widget
 class GardensScreen extends StatelessWidget {
   /// Creates a new instance
-  const GardensScreen({Key? key}) : super(key: key);
+  const GardensScreen({super.key});
 
   /// Screen ID
   static const String id = 'gardens_screen';

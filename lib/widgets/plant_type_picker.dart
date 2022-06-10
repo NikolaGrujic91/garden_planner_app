@@ -11,11 +11,11 @@ import 'package:garden_planner_app/utils/utility.dart';
 class PlantTypePicker extends StatelessWidget {
   /// Creates a new instance
   const PlantTypePicker({
-    Key? key,
+    super.key,
     required this.dropdownValues,
     required this.value,
     required this.callback,
-  }) : super(key: key);
+  });
 
   /// List of values to display in the picker
   final List<String> dropdownValues;

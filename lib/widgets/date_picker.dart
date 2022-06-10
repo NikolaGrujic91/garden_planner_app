@@ -14,11 +14,11 @@ import 'package:garden_planner_app/widgets/styled_outlined_button.dart';
 class DatePicker extends StatefulWidget {
   /// Creates a new instance
   DatePicker({
-    Key? key,
+    super.key,
     required this.callback,
     required this.text,
     required String initialDate,
-  }) : super(key: key) {
+  }) {
     if (initialDate.isEmpty) {
       final now = DateTime.now();
       year = now.year;

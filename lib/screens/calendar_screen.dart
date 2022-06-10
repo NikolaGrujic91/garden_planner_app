@@ -15,7 +15,7 @@ import 'package:table_calendar/table_calendar.dart';
 /// Calendar Screen Widget
 class CalendarScreen extends StatefulWidget {
   /// Creates a new instance
-  const CalendarScreen({Key? key}) : super(key: key);
+  const CalendarScreen({super.key});
 
   /// Screen ID
   static const String id = 'calendar_screen';

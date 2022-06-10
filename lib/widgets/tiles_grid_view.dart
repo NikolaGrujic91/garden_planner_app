@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 /// This widget represents tiles grid of a garden
 class TilesGrid extends StatelessWidget {
   /// Creates a new instance
-  const TilesGrid({Key? key}) : super(key: key);
+  const TilesGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +117,11 @@ class TilesGrid extends StatelessWidget {
 class TileGridViewCellDragTarget extends StatelessWidget {
   /// Creates a new instance
   const TileGridViewCellDragTarget({
-    Key? key,
+    super.key,
     required this.tile,
     required this.tileIndex,
     required this.gardensStore,
-  }) : super(key: key);
+  });
 
   /// Tile
   final Tile tile;
@@ -160,11 +160,11 @@ class TileGridViewCellDragTarget extends StatelessWidget {
 class TileGridViewCell extends StatelessWidget {
   /// Creates a new instance
   const TileGridViewCell({
-    Key? key,
+    super.key,
     required this.tile,
     required this.tileIndex,
     required this.gardensStore,
-  }) : super(key: key);
+  });
 
   /// Tile
   final Tile tile;

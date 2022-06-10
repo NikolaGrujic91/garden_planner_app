@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 /// Edit Tile Type Screen Widget
 class EditTileTypeScreen extends StatefulWidget {
   /// Creates a new instance
-  const EditTileTypeScreen({Key? key}) : super(key: key);
+  const EditTileTypeScreen({super.key});
 
   /// Screen ID
   static const String id = 'edit_tile_type_screen';

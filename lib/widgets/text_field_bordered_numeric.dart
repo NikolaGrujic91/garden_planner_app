@@ -10,13 +10,13 @@ import 'package:garden_planner_app/utils/style_constants.dart';
 class TextFieldBorderedNumeric extends StatefulWidget {
   /// Creates a new instance
   TextFieldBorderedNumeric({
-    Key? key,
+    super.key,
     required this.text,
     required this.hintText,
     required this.callback,
     this.expanded = true,
     this.maxValue = 10,
-  }) : super(key: key) {
+  }) {
     _textEditingController = TextEditingController(text: text);
     _textEditingController.selection = TextSelection.fromPosition(
       TextPosition(

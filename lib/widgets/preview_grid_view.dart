@@ -9,10 +9,10 @@ import 'package:garden_planner_app/utils/color_constants.dart';
 class PreviewGridView extends StatelessWidget {
   /// Creates a new instance
   const PreviewGridView({
-    Key? key,
+    super.key,
     required this.columns,
     required this.rows,
-  }) : super(key: key);
+  });
 
   /// Number of columns
   final int columns;

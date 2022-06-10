@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 /// Edit Garden Screen Widget
 class EditGardenScreen extends StatelessWidget {
   /// Creates a new instance
-  const EditGardenScreen({Key? key}) : super(key: key);
+  const EditGardenScreen({super.key});
 
   /// Screen ID
   static const String id = 'edit_garden_screen';

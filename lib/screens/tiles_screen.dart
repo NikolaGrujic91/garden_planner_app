@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 /// Tiles Screen Widget
 class TilesScreen extends StatelessWidget {
   /// Creates a new instance
-  const TilesScreen({Key? key}) : super(key: key);
+  const TilesScreen({super.key});
 
   /// Screen ID
   static const String id = 'tiles_screen';
