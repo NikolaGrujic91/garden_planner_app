@@ -72,7 +72,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         backScreenID: TilesScreen.id,
         title: 'Calendar of ${_selectedGarden.name}',
       ),
-      body: Container(
+      body: ColoredBox(
         color: kBackgroundColor,
         child: Column(
           children: [

@@ -85,7 +85,7 @@ class _EditPlantScreenState extends State<EditPlantScreen> {
         title: 'Edit plant info',
         saveCallback: _save,
       ),
-      body: Container(
+      body: ColoredBox(
         color: kBackgroundColor,
         child: ListView(
           padding: const EdgeInsets.all(8),

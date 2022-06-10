@@ -27,7 +27,7 @@ class PlantsList extends StatelessWidget {
     return Scrollbar(
       thumbVisibility: true,
       controller: _scrollController,
-      child: Container(
+      child: ColoredBox(
         color: kBackgroundColor,
         child: ListView.separated(
           controller: _scrollController,

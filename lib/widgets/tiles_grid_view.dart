@@ -21,7 +21,7 @@ class TilesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: kBackgroundColor,
       child: Consumer<GardensStoreHive>(
         builder: (context, gardensStore, child) {
@@ -235,7 +235,7 @@ class TileGridViewCell extends StatelessWidget {
               );
             }
           },
-          child: Container(
+          child: ColoredBox(
             color: tileTypeToTileColor(tile.type),
             child: Wrap(
               spacing: 12, // space between two icons

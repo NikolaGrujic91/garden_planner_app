@@ -94,7 +94,7 @@ class _GardenEditorState extends State<GardenEditor> {
         title: widget.title,
         saveCallback: _save,
       ),
-      body: Container(
+      body: ColoredBox(
         color: kBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(16),

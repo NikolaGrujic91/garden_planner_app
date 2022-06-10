@@ -27,10 +27,10 @@ class PreviewGridView extends StatelessWidget {
         shrinkWrap: true,
         crossAxisCount: columns,
         children: List.generate(columns * rows, (index) {
-          return Padding(
-            padding: const EdgeInsets.all(0.5),
+          return const Padding(
+            padding: EdgeInsets.all(0.5),
             child: Material(
-              child: Container(
+              child: ColoredBox(
                 color: kTilePlantColor,
               ),
             ),

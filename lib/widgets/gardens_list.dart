@@ -30,7 +30,7 @@ class _GardensListState extends State<GardensList> {
       child: Scrollbar(
         thumbVisibility: true,
         controller: _scrollController,
-        child: Container(
+        child: ColoredBox(
           color: kBackgroundColor,
           child: Consumer<GardensStoreHive>(
             builder: (context, gardensStore, child) {

@@ -44,7 +44,7 @@ class _EditTileTypeScreenState extends State<EditTileTypeScreen> {
         title: 'Edit tile type',
         saveCallback: _save,
       ),
-      body: Container(
+      body: ColoredBox(
         color: kBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(16),

@@ -38,7 +38,7 @@ class _EditPlantImagesScreenState extends State<EditPlantImagesScreen> {
         backScreenID: EditPlantScreen.id,
         title: 'Edit plant images',
       ),
-      body: Container(
+      body: ColoredBox(
         color: kBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(8),
